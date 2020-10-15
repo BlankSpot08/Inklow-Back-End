@@ -1,9 +1,10 @@
 package com.example.inklow.model;
 
 import java.util.Date;
+import java.util.UUID;
 
 public class User {
-    private final String UUID;
+    private UUID id;
     private String firstName;
     private String lastName;
     private final String gender;
@@ -13,20 +14,24 @@ public class User {
     private String email;
     private String phoneNumber;
 
-    public User(String UUID, String firstName, String lastName, String gender, Date birthDate, String username, String password, String email,  String phoneNumber) {
-        this.UUID = UUID;
+    public User(UUID id, String firstName, String lastName, String gender, Date birthDate, String username, String password, String email,  String phoneNumber) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
-        this. birthDate = birthDate;
+        this.birthDate = birthDate;
         this.username = username;
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
 
-    public String getUUID() {
-        return UUID;
+    public UUID getUUID() {
+        return this.id;
+    }
+
+    public void setUUID(UUID id) {
+        this.id = id;
     }
 
     public String getFirstName() {

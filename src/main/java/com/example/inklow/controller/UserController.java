@@ -31,31 +31,74 @@ public class UserController {
         User tempUser = userDao.addUser(user);
 
         if (tempUser != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body("nice");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Operation Post Successfully");
         }
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("sad");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Operation Post Failed");
     }
 
-    @RequestMapping(value = "users", method = RequestMethod.DELETE)
-    public ResponseEntity<String> removeUser(@RequestBody User user) {
-        User tempUser = userDao.removeUser(user);
+    @RequestMapping(value = "users/{username}", method = RequestMethod.DELETE)
+    public ResponseEntity<String> removeUser(@PathVariable String username) {
+        User tempUser = userDao.removeUser(username);
 
         if (tempUser != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body("nice");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Operation Delete Successfully");
         }
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("sad");
+        return ResponseEntity.status(HttpStatus.OK).body("Operation Delete Failed");
     }
 
-    @RequestMapping(value = "users/{username}", method = RequestMethod.PATCH)
-    public ResponseEntity<String> updateUser(@PathVariable String username, @RequestBody User user) {
-        User tempUser = userDao.updateUser(username, user);
+    @RequestMapping(value = "users/updateLastname/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity<String> updateLastName(@PathVariable String id, @RequestBody String lastname) {
+        String tempLastName = userDao.updateLastName(id, lastname);
 
-        if (tempUser != null) {
-            return ResponseEntity.status(HttpStatus.CREATED).body("nice");
+        if (tempLastName != null) {
+            return ResponseEntity.status(HttpStatus.OK).body("Operation Update Successfully");
         }
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("sad");
+        return ResponseEntity.status(HttpStatus.OK).body("Operation Update Failed");
+    }
+
+    @RequestMapping(value = "users/updateUsername/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity<String> updateUsername(@PathVariable String id, @RequestBody String username) {
+        String tempUsername = userDao.updateUsername(id, username);
+
+        if (tempUsername != null) {
+            return ResponseEntity.status(HttpStatus.OK).body("Operation Update Successfully");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body("Operation Update Failed");
+    }
+
+    @RequestMapping(value = "users/updatePassword/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity<String> updatePassword(@PathVariable String id, @RequestBody String password) {
+        String tempPassword = userDao.updatePassword(id, password);
+
+        if (tempPassword != null) {
+            return ResponseEntity.status(HttpStatus.OK).body("Operation Update Successfully");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body("Operation Update Failed");
+    }
+
+    @RequestMapping(value = "users/updateEmail/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity<String> updateEmail(@PathVariable String id, @RequestBody String email) {
+        String tempEmail = userDao.updateEmail(id, email);
+
+        if (tempEmail != null) {
+            return ResponseEntity.status(HttpStatus.OK).body("Operation Update Successfully");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body("Operation Update Failed");
+    }
+
+    @RequestMapping(value = "users/updatePhoneNumber/{id}", method = RequestMethod.PATCH)
+    public ResponseEntity<String> updatePhoneNumber(@PathVariable String id, @RequestBody String phoneNumber) {
+        String tempPhoneNumber = userDao.updatePhoneNumber(id, phoneNumber);
+
+        if (tempPhoneNumber != null) {
+            return ResponseEntity.status(HttpStatus.OK).body("Operation Update Successfully");
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body("Operation Update Failed");
     }
 }
