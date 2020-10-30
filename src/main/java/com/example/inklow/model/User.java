@@ -1,18 +1,23 @@
 package com.example.inklow.model;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 import java.util.Date;
 import java.util.UUID;
 
+@EntityScan
 public class User {
     private UUID id;
     private String firstName;
     private String lastName;
-    private final String gender;
-    private final Date birthDate;
+    private String gender;
+    private Date birthDate;
     private String username;
     private String password;
     private String email;
     private String phoneNumber;
+
+    public User() {  }
 
     public User(UUID id, String firstName, String lastName, String gender, Date birthDate, String username, String password, String email,  String phoneNumber) {
         this.id = id;
@@ -26,11 +31,11 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public UUID getUUID() {
-        return this.id;
+    public UUID getId() {
+        return id;
     }
 
-    public void setUUID(UUID id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -54,8 +59,16 @@ public class User {
         return gender;
     }
 
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
     public Date getBirthDate() {
         return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getUsername() {
