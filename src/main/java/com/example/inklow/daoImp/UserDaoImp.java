@@ -1,7 +1,10 @@
 package com.example.inklow.daoImp;
 
+import com.example.inklow.dao.RoleDao;
 import com.example.inklow.dao.UserDao;
-import com.example.inklow.model.User;
+import com.example.inklow.dao.UserRoleDao;
+import com.example.inklow.entities.Role;
+import com.example.inklow.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,41 +17,42 @@ public class UserDaoImp implements UserDao {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    // Read
+    @Autowired
+    UserRoleDao userRoles;
+
     @Override
-    public List<User> getUsers() {
-        String query = "SELECT * FROM users";
+    public User findUserById(UUID id) {
+        String query = "SELECT * FROM users WHERE id = ?";
 
-        List<User> listOfUsers = jdbcTemplate.query(query, new BeanPropertyRowMapper<>(User.class));
+        System.out.println("jdbctemplate" + jdbcTemplate);
 
-        return listOfUsers;
+        return null;
     }
 
-    // Create
     @Override
-    public User addUser(User user) {
-        String query = "INSERT INTO users(firstName, lastName, gender, birthDate, username, password, email, phoneNumber) VALUES (?, ? , ?, ?, ?, ?, ?, ?)";
+    public User findUserByUsername(String username) {
+        String query = "SELECT * FROM users WHERE username = ?;";
 
-        jdbcTemplate.update(query, user.getFirstName(), user.getLastName(), user.getGender(), user.getBirthDate(), user.getUsername(), user.getPassword(), user.getEmail(), user.getPhoneNumber());
+        User user = jdbcTemplate.queryForObject(query, new Object[] {username}, (rs, rowNum) -> new User(
+                UUID.fromString(rs.getString("id")),
+                rs.getString("firstName"),
+                rs.getString("lastName"),
+                rs.getString("gender"),
+                rs.getDate("birthDate"),
+                rs.getString("username"),
+                rs.getString("password"),
+                rs.getString("email"),
+                rs.getString("phoneNumber"),
+                userRoles.getUserRolesById(UUID.fromString(rs.getString("id")))
+        ));
+
+        List<Role> set = userRoles.getUserRolesById(UUID.fromString("cee3a79a-5192-4b8d-9fec-00d44c1aaed9"));
 
         return user;
     }
 
     @Override
-    public User removeUser(User user) {
-        String query = "DELETE FROM users WHERE id = ?";
-
-        jdbcTemplate.update(query, user.getId());
-
-        return user;
-    }
-
-    @Override
-    public User updateUser(User user) {
-        String query = "UPDATE users SET firstName = ?, lastName = ?, username = ?, password = ?, email = ?, phoneNumber = ? WHERE id = ?";
-
-        jdbcTemplate.update(query, user.getFirstName(), user.getLastName(), user.getUsername(), user.getPassword(), user.getEmail(), user.getPhoneNumber(), user.getId());
-
-        return user;
+    public List<User> getListOfUsers() {
+        return null;
     }
 }

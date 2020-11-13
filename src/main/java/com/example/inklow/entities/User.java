@@ -1,11 +1,10 @@
-package com.example.inklow.model;
-
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+package com.example.inklow.entities;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
-@EntityScan
 public class User {
     private UUID id;
     private String firstName;
@@ -17,9 +16,11 @@ public class User {
     private String email;
     private String phoneNumber;
 
+    private List<Role> roles;
+
     public User() {  }
 
-    public User(UUID id, String firstName, String lastName, String gender, Date birthDate, String username, String password, String email,  String phoneNumber) {
+    public User(UUID id, String firstName, String lastName, String gender, Date birthDate, String username, String password, String email,  String phoneNumber, List<Role> roles) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,6 +30,7 @@ public class User {
         this.password = password;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.roles = roles;
     }
 
     public UUID getId() {
@@ -101,5 +103,13 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
