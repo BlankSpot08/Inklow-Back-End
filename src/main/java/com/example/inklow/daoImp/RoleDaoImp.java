@@ -4,6 +4,7 @@ import com.example.inklow.dao.RoleDao;
 import com.example.inklow.dao.RolePermissionsDao;
 import com.example.inklow.entities.Permission;
 import com.example.inklow.entities.Role;
+import com.example.inklow.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -29,12 +30,10 @@ public class RoleDaoImp implements RoleDao {
     public Role getRoleById(UUID id) {
         String query = "SELECT * FROM roles WHERE id = ?";
 
-        Role role = jdbcTemplate.queryForObject(query, new Object[]{id}, ((rs, rowNum) -> new Role(
-                UUID.fromString(rs.getString("id")),
-                rs.getString("name"),
-                rs.getString("description"),
-                rolePermissionsDao.getRolePermissionsById(UUID.fromString(rs.getString("id")))
-        )));
+        Role role = jdbcTemplate.queryForObject(query, new Object[]{id}, new RoleMapper());
+
+        List<Permission> permissions = rolePermissionsDao.getRolePermissionsById(role.getId());
+        role.setPermissions(permissions);
 
         return role;
     }

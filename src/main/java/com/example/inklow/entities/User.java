@@ -2,7 +2,6 @@ package com.example.inklow.entities;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 
 public class User {
@@ -18,7 +17,9 @@ public class User {
 
     private List<Role> roles;
 
-    public User() {  }
+    public User(UUID id) {
+        this.id = id;
+    }
 
     public User(UUID id, String firstName, String lastName, String gender, Date birthDate, String username, String password, String email,  String phoneNumber, List<Role> roles) {
         this.id = id;
@@ -113,3 +114,4 @@ public class User {
         this.roles = roles;
     }
 }
+

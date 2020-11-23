@@ -3,6 +3,7 @@ package com.example.inklow.daoImp;
 import com.example.inklow.dao.RoleDao;
 import com.example.inklow.dao.RolePermissionsDao;
 import com.example.inklow.entities.Permission;
+import com.example.inklow.mapper.PermissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,7 +23,7 @@ public class RolePermissionsDaoImp implements RolePermissionsDao {
                 "JOIN roles r on r.id = role_permissions.roleId\n" +
                 "WHERE r.id = ?";
 
-        List<Permission> roles = jdbcTemplate.query(query, new Object[] {id}, new BeanPropertyRowMapper<>(Permission.class));
+        List<Permission> roles = jdbcTemplate.query(query, new Object[] {id}, new PermissionMapper());
 
         return roles;
     }

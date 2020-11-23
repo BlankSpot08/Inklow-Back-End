@@ -1,12 +1,11 @@
 package com.example.inklow.daoImp;
 
-import com.example.inklow.dao.RoleDao;
 import com.example.inklow.dao.UserDao;
 import com.example.inklow.dao.UserRoleDao;
 import com.example.inklow.entities.Role;
 import com.example.inklow.entities.User;
+import com.example.inklow.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -15,10 +14,10 @@ import java.util.*;
 @Repository
 public class UserDaoImp implements UserDao {
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    UserRoleDao userRoles;
+    private UserRoleDao userRoles;
 
     @Override
     public User findUserById(UUID id) {
@@ -33,20 +32,10 @@ public class UserDaoImp implements UserDao {
     public User findUserByUsername(String username) {
         String query = "SELECT * FROM users WHERE username = ?;";
 
-        User user = jdbcTemplate.queryForObject(query, new Object[] {username}, (rs, rowNum) -> new User(
-                UUID.fromString(rs.getString("id")),
-                rs.getString("firstName"),
-                rs.getString("lastName"),
-                rs.getString("gender"),
-                rs.getDate("birthDate"),
-                rs.getString("username"),
-                rs.getString("password"),
-                rs.getString("email"),
-                rs.getString("phoneNumber"),
-                userRoles.getUserRolesById(UUID.fromString(rs.getString("id")))
-        ));
+        User user = jdbcTemplate.queryForObject(query, new Object[] {username}, new UserMapper());
 
-        List<Role> set = userRoles.getUserRolesById(UUID.fromString("cee3a79a-5192-4b8d-9fec-00d44c1aaed9"));
+        List<Role> roles = userRoles.getRolesByUserId(user.getId());
+        user.setRoles(roles);
 
         return user;
     }
@@ -54,5 +43,13 @@ public class UserDaoImp implements UserDao {
     @Override
     public List<User> getListOfUsers() {
         return null;
+    }
+
+    @Override
+    public User addUser(User user) {
+        String query = "INSERT INTO users";
+
+        jdbcTemplate.update(query);
+        return user;
     }
 }
