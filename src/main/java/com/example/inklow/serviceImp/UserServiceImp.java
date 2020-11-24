@@ -6,6 +6,9 @@ import com.example.inklow.model.AuthenticationRequest;
 import com.example.inklow.security.Authentication;
 import com.example.inklow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,6 +19,9 @@ public class UserServiceImp implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UserServiceImp() { }
 
@@ -43,6 +49,8 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User handleRegister(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         User tempUser = userDao.addUser(user);
 
         return tempUser;

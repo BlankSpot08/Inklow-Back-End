@@ -15,9 +15,6 @@ public class Authentication {
     @Autowired
     private MyUserDetailService userDetailsService;
 
-//    @Autowired
-//    private UserDao userDao;
-
     @Autowired
     private JwtUtil jwtUtil;
 

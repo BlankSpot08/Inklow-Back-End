@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class PermissionMapper implements RowMapper<Permission> {
+public final class PermissionMapper implements RowMapper<Permission> {
     @Override
     public Permission mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new PermissionBuilder(UUID.fromString(rs.getString("id")))

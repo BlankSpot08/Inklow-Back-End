@@ -1,16 +1,19 @@
 package com.example.inklow;
 
-import com.example.inklow.dao.RolePermissionsDao;
-import com.example.inklow.dao.UserDao;
-import com.example.inklow.dao.UserRoleDao;
+import com.example.inklow.dao.*;
 import com.example.inklow.daoImp.UserDaoImp;
 import com.example.inklow.entities.Permission;
 import com.example.inklow.entities.Role;
 import com.example.inklow.entities.User;
+import com.example.inklow.model.AuthenticationRequest;
+import com.example.inklow.security.Authentication;
+import com.example.inklow.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.parameters.P;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,6 +28,12 @@ class InklowApplicationTests {
 
 	@Autowired
 	private UserDao userDao;
+
+	@Autowired
+	private PermissionDao permissionDao;
+
+	@Autowired
+	private RoleDao roleDao;
 
 	@Test
 	void UserTest() {
@@ -49,5 +58,36 @@ class InklowApplicationTests {
 				System.out.println(user.getRoles().get(i).getPermissions().get(j).getName());
 			}
 		}
+	}
+
+	@Test
+	void PermissionTest() {
+		List<Role> roles = roleDao.getListOfRole();
+
+		for (Role role : roles) {
+			System.out.println(role.getName());
+			for (Permission permission : role.getPermissions()) {
+				System.out.println(permission.getName());
+			}
+		}
+	}
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	@Test
+	void bCrypt() {
+		System.out.println(passwordEncoder.encode("09194163795"));
+	}
+
+	@Autowired
+	Authentication authentication;
+
+	@Autowired
+	UserService userService;
+
+	@Test
+	void authentication() {
+		System.out.println("test");
+		System.out.println(passwordEncoder.encode("09194163795"));
 	}
 }

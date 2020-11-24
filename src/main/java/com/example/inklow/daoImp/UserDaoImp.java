@@ -7,9 +7,11 @@ import com.example.inklow.entities.User;
 import com.example.inklow.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class UserDaoImp implements UserDao {
@@ -19,13 +21,16 @@ public class UserDaoImp implements UserDao {
     @Autowired
     private UserRoleDao userRoles;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public User findUserById(UUID id) {
         String query = "SELECT * FROM users WHERE id = ?";
 
-        System.out.println("jdbctemplate" + jdbcTemplate);
+        User user = jdbcTemplate.queryForObject(query, new Object[] {id}, new UserMapper());
 
-        return null;
+        return user;
     }
 
     @Override
@@ -34,7 +39,7 @@ public class UserDaoImp implements UserDao {
 
         User user = jdbcTemplate.queryForObject(query, new Object[] {username}, new UserMapper());
 
-        List<Role> roles = userRoles.getRolesByUserId(user.getId());
+        List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
         user.setRoles(roles);
 
         return user;
@@ -42,14 +47,25 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public List<User> getListOfUsers() {
-        return null;
+        String query = "SELECT * FROM users";
+
+        List<User> users = jdbcTemplate.query(query, new UserMapper());
+
+        return users;
     }
 
     @Override
     public User addUser(User user) {
-        String query = "INSERT INTO users";
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-        jdbcTemplate.update(query);
+        String query = "INSERT INTO users " +
+                "(firstName, lastName, gender, birthDate, username, password, email, phoneNumber) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        jdbcTemplate.update(query,
+                user.getFirstName(), user.getLastName(), user.getGender(), user.getBirthDate(),
+                user.getUsername(), user.getPassword(), user.getEmail(), user.getPhoneNumber());
+
         return user;
     }
 }

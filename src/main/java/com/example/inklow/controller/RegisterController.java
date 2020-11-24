@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(name = "/inklow")
 public class RegisterController {
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
 
-    @RequestMapping(name = "/register", method = RequestMethod.POST)
+    @Autowired
+    public RegisterController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> register(@RequestBody User user) {
         User registerUser = userService.handleRegister(user);
 

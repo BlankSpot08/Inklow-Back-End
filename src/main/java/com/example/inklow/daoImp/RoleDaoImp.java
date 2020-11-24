@@ -8,6 +8,7 @@ import com.example.inklow.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,7 +24,16 @@ public class RoleDaoImp implements RoleDao {
 
     @Override
     public List<Role> getListOfRole() {
-        return null;
+        String query = "SELECT * FROM roles";
+
+        List<Role> roles = jdbcTemplate.query(query, new RoleMapper());
+
+        for (Role role : roles) {
+            List<Permission> permissions = rolePermissionsDao.getRolePermissionsById(role.getId());
+            role.setPermissions(permissions);
+        }
+
+        return roles;
     }
 
     @Override
@@ -39,7 +49,14 @@ public class RoleDaoImp implements RoleDao {
     }
 
     @Override
-    public Role getRoleByName(String authority) {
-        return null;
+    public Role getRoleByName(String name) {
+        String query = "SELECT * FROM roles WHERE name = ?";
+
+        Role role = jdbcTemplate.queryForObject(query, new Object[]{name}, new RoleMapper());
+
+        List<Permission> permissions = rolePermissionsDao.getRolePermissionsByName(role.getName());
+        role.setPermissions(permissions);
+
+        return role;
     }
 }

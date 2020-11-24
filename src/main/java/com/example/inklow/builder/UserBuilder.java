@@ -20,6 +20,8 @@ public class UserBuilder {
 
     private List<Role> roles;
 
+    public UserBuilder() { }
+
     public UserBuilder(UUID id) {
         this.id = id;
     }
