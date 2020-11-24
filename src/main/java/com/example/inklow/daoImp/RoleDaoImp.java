@@ -23,7 +23,16 @@ public class RoleDaoImp implements RoleDao {
 
     @Override
     public List<Role> getListOfRole() {
-        return null;
+        String query = "SELECT * FROM roles";
+
+        List<Role> roles = jdbcTemplate.query(query, new RoleMapper());
+
+        for (Role role : roles) {
+            List<Permission> permissions = rolePermissionsDao.getRolePermissionsById(role.getId());
+            role.setPermissions(permissions);
+        }
+
+        return roles;
     }
 
     @Override
@@ -39,7 +48,14 @@ public class RoleDaoImp implements RoleDao {
     }
 
     @Override
-    public Role getRoleByName(String authority) {
-        return null;
+    public Role getRoleByName(String name) {
+        String query = "SELECT * FROM roles WHERE name = ?";
+
+        Role role = jdbcTemplate.queryForObject(query, new Object[]{name}, new RoleMapper());
+
+        List<Permission> permissions = rolePermissionsDao.getRolePermissionsByName(role.getName());
+        role.setPermissions(permissions);
+
+        return role;
     }
 }

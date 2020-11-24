@@ -1,8 +1,6 @@
 package com.example.inklow;
 
-import com.example.inklow.dao.RolePermissionsDao;
-import com.example.inklow.dao.UserDao;
-import com.example.inklow.dao.UserRoleDao;
+import com.example.inklow.dao.*;
 import com.example.inklow.daoImp.UserDaoImp;
 import com.example.inklow.entities.Permission;
 import com.example.inklow.entities.Role;
@@ -26,6 +24,12 @@ class InklowApplicationTests {
 	@Autowired
 	private UserDao userDao;
 
+	@Autowired
+	private PermissionDao permissionDao;
+
+	@Autowired
+	private RoleDao roleDao;
+
 	@Test
 	void UserTest() {
 		User user = userDao.findUserByUsername("BlankSpot08");
@@ -47,6 +51,18 @@ class InklowApplicationTests {
 		for (int i = 0; i < user.getRoles().size(); i++) {
 			for (int j = 0; j < user.getRoles().get(i).getPermissions().size(); j++) {
 				System.out.println(user.getRoles().get(i).getPermissions().get(j).getName());
+			}
+		}
+	}
+
+	@Test
+	void PermissionTest() {
+		List<Role> roles = roleDao.getListOfRole();
+
+		for (Role role : roles) {
+			System.out.println(role.getName());
+			for (Permission permission : role.getPermissions()) {
+				System.out.println(permission.getName());
 			}
 		}
 	}

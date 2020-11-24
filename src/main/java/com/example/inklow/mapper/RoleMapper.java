@@ -14,7 +14,6 @@ public class RoleMapper implements RowMapper<Role> {
         return new RoleBuilder(UUID.fromString(rs.getString("id")))
                 .name(rs.getString("name"))
                 .description(rs.getString("description"))
-                .permissions(null)
                 .build();
     }
 }
