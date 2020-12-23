@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
-    public List<User> getUsers();
-    public User findUserById(UUID id);
-    public User findByUsername(String username);
+    List<User> getListOfUsers();
+    User findUserById(UUID id);
+    User findUserByUsername(String username);
 
-    public String handleLogin(AuthenticationRequest authenticationRequest);
-    public User handleRegister(User user);
+    String handleLogin(AuthenticationRequest authenticationRequest);
+    User handleRegister(User user);
 }

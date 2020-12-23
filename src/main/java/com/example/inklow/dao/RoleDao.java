@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.UUID;
 
 public interface RoleDao {
-    public List<Role> getListOfRole();
-    public Role getRoleById(UUID id);
-    public Role getRoleByName(String name);
+    List<Role> getListOfRole();
+    Role getRoleById(UUID id);
+    Role getRoleByName(String name);
 }

@@ -1,7 +1,5 @@
 package com.example.inklow.security;
 
-import com.example.inklow.dao.UserDao;
-import com.example.inklow.entities.User;
 import com.example.inklow.model.AuthenticationRequest;
 
 import com.example.inklow.security.util.JwtUtil;
@@ -21,6 +19,7 @@ public class Authentication {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @Autowired
     public Authentication() { }
 
     public String authenticate(AuthenticationRequest authenticationRequest) {

@@ -8,21 +8,23 @@ import com.example.inklow.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.UUID;
 
-@Repository
+//@Repository
 public class UserDaoImp implements UserDao {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+    private final UserRoleDao userRoles;
+    private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    private UserRoleDao userRoles;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public UserDaoImp(JdbcTemplate jdbcTemplate, UserRoleDao userRoles, PasswordEncoder passwordEncoder) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.userRoles = userRoles;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @Override
     public User findUserById(UUID id) {

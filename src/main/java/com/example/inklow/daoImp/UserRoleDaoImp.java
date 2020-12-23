@@ -7,15 +7,18 @@ import com.example.inklow.entities.Role;
 import com.example.inklow.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
 public class UserRoleDaoImp implements UserRoleDao {
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+    private final RolePermissionsDao rolePermissionsDao;
 
-    @Autowired
-    RolePermissionsDao rolePermissionsDao;
+    public UserRoleDaoImp(JdbcTemplate jdbcTemplate, RolePermissionsDao rolesPermissionsDao) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.rolePermissionsDao = rolesPermissionsDao;
+    }
 
     @Override
     public List<Role> getUserRolesByUserId(UUID id) {

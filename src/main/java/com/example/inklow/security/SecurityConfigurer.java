@@ -60,15 +60,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/register").permitAll()
-//                .antMatchers(HttpMethod.POST, "/user")
+                .antMatchers(HttpMethod.GET, "/users").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Bean
-    public Authentication authentication() {
-        return new Authentication();
     }
 
     @Bean
@@ -77,9 +72,15 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public Authentication authentication() {
+        return new Authentication();
     }
 
     @Bean

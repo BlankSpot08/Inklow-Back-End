@@ -5,13 +5,17 @@ import com.example.inklow.entities.Permission;
 import com.example.inklow.mapper.PermissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 
 public class RolePermissionsDaoImp implements RolePermissionsDao {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+
+    public RolePermissionsDaoImp(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Override
     public List<Permission> getRolePermissionsById(UUID id) {

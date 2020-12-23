@@ -19,31 +19,6 @@ public class InklowApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(InklowApplication.class, args);
 	}
-
-	@Bean
-	public UserService userService() {
-		return new UserServiceImp();
-	}
-
-	@Bean
-	public RoleDao roleDao() {
-		return new RoleDaoImp();
-	}
-
-	@Bean
-	public UserRoleDao UserRoleDao() {
-		return new UserRoleDaoImp();
-	}
-
-	@Bean
-	public RolePermissionsDao rolePermissionsDao() {
-		return new RolePermissionsDaoImp();
-	}
-
-	@Bean
-	public PermissionDao permissionDao() {
-		return new PermissionDaoImp();
-	}
 }
 
 

@@ -3,6 +3,7 @@ package com.example.inklow.controller;
 import com.example.inklow.dao.UserDao;
 import com.example.inklow.entities.User;
 import com.example.inklow.security.util.JwtUtil;
+import com.example.inklow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import java.util.UUID;
 @RestController
 public class UserController {
     @Autowired
-    private UserDao userDaoImp;
+    private UserService userService;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -26,7 +27,7 @@ public class UserController {
     public ResponseEntity<?> getUser(@RequestHeader(name = "Authorization") String authorizationHeader) {
         String jwt = authorizationHeader.split(" ")[1];
 
-        User user = userDaoImp.findUserByUsername(jwtUtil.extractUsername(jwt));
+        User user = userService.findUserByUsername(jwtUtil.extractUsername(jwt));
 
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
@@ -34,19 +35,19 @@ public class UserController {
     @PreAuthorize("hasAnyRole('admin')")
     @RequestMapping(value = "/admin", method = RequestMethod.POST)
     public ResponseEntity<?> testAdmin() {
-        return ResponseEntity.status(HttpStatus.OK).body(userDaoImp.getListOfUsers());
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getListOfUsers());
     }
 
 //    @PreAuthorize("permitAll()")
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<?> getUsers() {
-        return ResponseEntity.status(HttpStatus.OK).body(userDaoImp.getListOfUsers());
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getListOfUsers());
     }
 
     @RequestMapping(value = "getUserById", method = RequestMethod.POST)
     public ResponseEntity<?> getUserById() {
         UUID id = UUID.randomUUID();
-        User user = userDaoImp.findUserById(id);
+        User user = userService.findUserById(id);
 
         if (user == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("User not found");
