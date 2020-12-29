@@ -14,8 +14,12 @@ import java.util.Objects;
 @Configuration
 @PropertySource(value = "resources/application.properties", ignoreResourceNotFound = true)
 public class Database {
+    private final Environment environment;
+
     @Autowired
-    private Environment environment;
+    public Database(Environment environment) {
+        this.environment = environment;
+    }
 
     @Bean
     public DataSource dataSource() {

@@ -4,12 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class Role {
-    private UUID id;
+    private final UUID id;
     private String name;
     private String description;
     private List<Permission> permissions;
-
-    public Role() { }
 
     public Role(UUID id, String name, String description, List<Permission> permissions) {
         this.id = id;
@@ -20,10 +18,6 @@ public class Role {
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getName() {

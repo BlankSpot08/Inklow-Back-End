@@ -5,14 +5,20 @@ import com.example.inklow.daoImp.PermissionDaoImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class PermissionConfig {
+    private final JdbcTemplate jdbcTemplate;
+
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+    public PermissionConfig(final JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
     @Bean
+    @Primary
     public PermissionDao permissionDao() {
         return new PermissionDaoImp(jdbcTemplate);
     }

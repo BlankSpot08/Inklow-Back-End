@@ -10,19 +10,18 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class Authentication {
-    @Autowired
-    private MyUserDetailService userDetailsService;
+    private MyUserDetailService myUserDetailService;
+    private final JwtUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
 
     @Autowired
-    private JwtUtil jwtUtil;
+    public Authentication(final MyUserDetailService myUserDetailService, final JwtUtil jwtUtil, final AuthenticationManager authenticationManager) {
+        this.myUserDetailService = myUserDetailService;
+        this.jwtUtil = jwtUtil;
+        this.authenticationManager = authenticationManager;
+    }
 
-    @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
-    public Authentication() { }
-
-    public String authenticate(AuthenticationRequest authenticationRequest) {
+    public String authenticate(final AuthenticationRequest authenticationRequest) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
@@ -30,7 +29,7 @@ public class Authentication {
             return null;
         }
 
-        final UserDetails user = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+        final UserDetails user = myUserDetailService.loadUserByUsername(authenticationRequest.getUsername());
 
         final String jwt = jwtUtil.generateToken(user);
 

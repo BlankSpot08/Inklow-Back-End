@@ -3,22 +3,19 @@ package com.example.inklow.entities;
 import java.util.UUID;
 
 public class RolePermissions {
-    private UUID roleId;
-    private UUID permissionId;
+    private final UUID roleId;
+    private final UUID permissionId;
+
+    public RolePermissions(UUID roleId, UUID permissionId) {
+        this.roleId = roleId;
+        this.permissionId = permissionId;
+    }
 
     public UUID getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(UUID roleId) {
-        this.roleId = roleId;
-    }
-
     public UUID getPermissionId() {
         return permissionId;
-    }
-
-    public void setPermissionId(UUID permissionId) {
-        this.permissionId = permissionId;
     }
 }

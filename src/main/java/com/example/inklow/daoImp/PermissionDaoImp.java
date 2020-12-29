@@ -6,14 +6,17 @@ import com.example.inklow.mapper.PermissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Set;
 
+@Repository
 public class PermissionDaoImp implements PermissionDao {
     private final JdbcTemplate jdbcTemplate;
 
-    public PermissionDaoImp(JdbcTemplate jdbcTemplate) {
+    @Autowired
+    public PermissionDaoImp(final JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

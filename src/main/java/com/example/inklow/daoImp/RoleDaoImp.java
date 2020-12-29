@@ -9,16 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Repository
 public class RoleDaoImp implements RoleDao {
+//    private final JdbcTemplate jdbcTemplate;
+//    private final RolePermissionsDao rolePermissionsDao;
+
     private final JdbcTemplate jdbcTemplate;
     private final RolePermissionsDao rolePermissionsDao;
 
-    public RoleDaoImp(JdbcTemplate jdbcTemplate, RolePermissionsDao rolePermissionsDao) {
+    @Autowired
+    public RoleDaoImp(final JdbcTemplate jdbcTemplate, final RolePermissionsDao rolePermissionsDao) {
         this.jdbcTemplate = jdbcTemplate;
         this.rolePermissionsDao = rolePermissionsDao;
     }

@@ -7,24 +7,29 @@ import com.example.inklow.model.AuthenticationRequest;
 import com.example.inklow.security.Authentication;
 import com.example.inklow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class UserServiceImp implements UserService {
-    private final Authentication authentication;
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
+    private Authentication authentication;
 
-    @Autowired
     public UserServiceImp(Authentication authentication, UserDao userDao, PasswordEncoder passwordEncoder) {
         this.authentication = authentication;
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
     }
+
+//    public void setAuthentication(Authentication authentication) {
+//        this.authentication = authentication;
+//    }
 
     @Override
     public List<User> getListOfUsers() {
@@ -40,7 +45,20 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User findUserByUsername(String username) {
-        return userDao.findUserByUsername(username);
+        User test = new UserBuilder()
+                .id(UUID.randomUUID())
+                .username("BlankSpot08")
+                .password("09194163795")
+                .birthDate(new Date())
+                .gender("Male")
+                .email("arvinchu31@gmail.com")
+                .phoneNumber("09997874755")
+
+                .build();
+
+        return test;
+
+//        return userDao.findUserByUsername(username);
     }
 
     @Override

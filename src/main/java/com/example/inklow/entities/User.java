@@ -5,21 +5,17 @@ import java.util.List;
 import java.util.UUID;
 
 public class User {
-    private UUID id;
+    private final UUID id;
     private String firstName;
     private String lastName;
-    private String gender;
-    private Date birthDate;
+    private final String gender;
+    private final Date birthDate;
     private String username;
     private String password;
     private String email;
     private String phoneNumber;
 
     private List<Role> roles;
-
-    public User(UUID id) {
-        this.id = id;
-    }
 
     public User(UUID id, String firstName, String lastName, String gender, Date birthDate, String username, String password, String email,  String phoneNumber, List<Role> roles) {
         this.id = id;
@@ -36,10 +32,6 @@ public class User {
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getFirstName() {
@@ -62,16 +54,8 @@ public class User {
         return gender;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
     public Date getBirthDate() {
         return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
     }
 
     public String getUsername() {

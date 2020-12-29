@@ -3,6 +3,7 @@ package com.example.inklow.security;
 import com.example.inklow.entities.Permission;
 import com.example.inklow.entities.Role;
 import com.example.inklow.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import java.util.*;
 public class MyUserDetail implements UserDetails {
     private final User user;
 
+    @Autowired
     public MyUserDetail(User user) {
         this.user = user;
     }
@@ -25,10 +27,6 @@ public class MyUserDetail implements UserDetails {
 
     public UUID getId() {
         return user.getId();
-    }
-
-    public void setId(UUID id) {
-        user.setId(id);
     }
 
     @Override

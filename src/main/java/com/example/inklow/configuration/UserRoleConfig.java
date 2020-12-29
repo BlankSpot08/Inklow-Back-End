@@ -6,17 +6,22 @@ import com.example.inklow.daoImp.UserRoleDaoImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
 public class UserRoleConfig {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
+    private final RolePermissionsDao rolePermissionsDao;
 
     @Autowired
-    private RolePermissionsDao rolePermissionsDao;
+    public UserRoleConfig(final JdbcTemplate jdbcTemplate, final RolePermissionsDao rolePermissionsDao) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.rolePermissionsDao = rolePermissionsDao;
+    }
 
     @Bean
+    @Primary
     public UserRoleDao userRoleDao() {
         return new UserRoleDaoImp(jdbcTemplate, rolePermissionsDao);
     }

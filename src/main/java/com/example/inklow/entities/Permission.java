@@ -3,11 +3,9 @@ package com.example.inklow.entities;
 import java.util.UUID;
 
 public class Permission {
-    private UUID id;
+    private final UUID id;
     private String name;
     private String description;
-
-    public Permission() { }
 
     public Permission(UUID id, String name, String description) {
         this.id = id;
@@ -17,10 +15,6 @@ public class Permission {
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getName() {

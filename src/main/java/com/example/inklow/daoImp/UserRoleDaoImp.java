@@ -8,14 +8,17 @@ import com.example.inklow.mapper.RoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+@Repository
 public class UserRoleDaoImp implements UserRoleDao {
     private final JdbcTemplate jdbcTemplate;
     private final RolePermissionsDao rolePermissionsDao;
 
-    public UserRoleDaoImp(JdbcTemplate jdbcTemplate, RolePermissionsDao rolesPermissionsDao) {
+    @Autowired
+    public UserRoleDaoImp(final JdbcTemplate jdbcTemplate, final RolePermissionsDao rolesPermissionsDao) {
         this.jdbcTemplate = jdbcTemplate;
         this.rolePermissionsDao = rolesPermissionsDao;
     }
