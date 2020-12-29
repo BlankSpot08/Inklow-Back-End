@@ -10,7 +10,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class Authentication {
-    private MyUserDetailService myUserDetailService;
+    private final MyUserDetailService myUserDetailService;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 

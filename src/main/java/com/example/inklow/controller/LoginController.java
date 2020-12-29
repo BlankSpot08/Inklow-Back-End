@@ -6,6 +6,7 @@ import com.example.inklow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "/api")
 public class LoginController {
     private final UserService userServiceImp;
 
@@ -23,7 +25,7 @@ public class LoginController {
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<?> doLogin(@RequestBody AuthenticationRequest authenticationRequest) {
+    public ResponseEntity<?> doLogin(@RequestBody @NonNull AuthenticationRequest authenticationRequest) {
         String jwt = userServiceImp.handleLogin(authenticationRequest);
 
         if (jwt == null) {

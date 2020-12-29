@@ -19,7 +19,7 @@ import java.util.UUID;
 public class UserServiceImp implements UserService {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
-    private Authentication authentication;
+    private final Authentication authentication;
 
     public UserServiceImp(Authentication authentication, UserDao userDao, PasswordEncoder passwordEncoder) {
         this.authentication = authentication;
@@ -27,15 +27,11 @@ public class UserServiceImp implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
-//    public void setAuthentication(Authentication authentication) {
-//        this.authentication = authentication;
-//    }
-
     @Override
     public List<User> getListOfUsers() {
-        List<User> test = List.of(new UserBuilder().username("BlankSpot08").password("09194163795").build(), new UserBuilder().build());
-        return test;
-//        return userDao.getListOfUsers();
+//        List<User> test = List.of(new UserBuilder().username("BlankSpot08").password("09194163795").build(), new UserBuilder().build());
+//        return test;
+        return userDao.getListOfUsers();
     }
 
     @Override
@@ -45,20 +41,20 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User findUserByUsername(String username) {
-        User test = new UserBuilder()
-                .id(UUID.randomUUID())
-                .username("BlankSpot08")
-                .password("09194163795")
-                .birthDate(new Date())
-                .gender("Male")
-                .email("arvinchu31@gmail.com")
-                .phoneNumber("09997874755")
+//        User test = new UserBuilder()
+//                .id(UUID.randomUUID())
+//                .username("BlankSpot08")
+//                .password("09194163795")
+//                .birthDate(new Date())
+//                .gender("Male")
+//                .email("arvinchu31@gmail.com")
+//                .phoneNumber("09997874755")
+//
+//                .build();
+//
+//        return test;
 
-                .build();
-
-        return test;
-
-//        return userDao.findUserByUsername(username);
+        return userDao.findUserByUsername(username);
     }
 
     @Override

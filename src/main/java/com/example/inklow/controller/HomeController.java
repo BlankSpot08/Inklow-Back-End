@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping(value = "/api")
 public class HomeController {
-    @PreAuthorize("permitAll()")
-    @RequestMapping(value = "test", method = RequestMethod.POST)
-    public ResponseEntity<?> home() {
-        return ResponseEntity.status(HttpStatus.OK).body("nice");
-    }
 }
