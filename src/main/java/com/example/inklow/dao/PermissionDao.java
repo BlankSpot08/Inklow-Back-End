@@ -8,4 +8,6 @@ public interface PermissionDao {
     List<Permission> getListOfPermission();
     Permission getPermissionById(String id);
     Permission getPermissionByName(String name);
+
+    Permission addPermission(Permission permission);
 }

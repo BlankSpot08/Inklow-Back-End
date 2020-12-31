@@ -53,6 +53,11 @@ public class UserDaoImp implements UserDao {
 
         List<User> users = jdbcTemplate.query(query, new UserMapper());
 
+        for (User user : users) {
+            List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
+            user.setRoles(roles);
+        }
+
         return users;
     }
 

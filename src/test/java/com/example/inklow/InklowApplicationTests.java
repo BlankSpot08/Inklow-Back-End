@@ -23,10 +23,59 @@ import java.util.UUID;
 @SpringBootTest
 class InklowApplicationTests {
 	@Autowired
-	UserServiceImp serviceImp;
+	private UserDao userDao;
+
+	@Autowired
+	private RoleDao roleDao;
+
+	@Autowired
+	private PermissionDao permissionDao;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	@Test
 	void contextLoads() {
-		serviceImp.getListOfUsers();
+	}
+
+	@Test
+	void getUsers() {
+
+		List<User> getUsers = userDao.getListOfUsers();
+
+		getUsers.forEach(e -> {
+			System.out.println(e.getFirstName());
+			System.out.println(e.getLastName());
+			System.out.println(e.getGender());
+			System.out.println(e.getEmail());
+			System.out.println(e.getUsername());
+			System.out.println(e.getPassword());
+			System.out.println(e.getPhoneNumber());
+
+			System.out.println("Roles: ");
+			e.getRoles().forEach(j -> {
+				System.out.println(j.getId());
+				System.out.println(j.getName());
+				System.out.println(j.getDescription());
+
+				System.out.println("Permissions");
+				j.getPermissions().forEach(k -> {
+					System.out.println(k.getId());
+					System.out.println(k.getName());
+					System.out.println(k.getDescription());
+				});
+			});
+		});
+	}
+
+
+	@Test
+	void getPermissions() {
+		permissionDao.getListOfPermission().forEach(e -> {
+			System.out.println(e.getId());
+			System.out.println(e.getName());
+			System.out.println(e.getDescription());
+			System.out.println();
+		});
 	}
 }

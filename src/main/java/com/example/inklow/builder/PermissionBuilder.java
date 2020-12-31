@@ -9,6 +9,8 @@ public class PermissionBuilder {
     private String name;
     private String description;
 
+    public PermissionBuilder() {}
+
     public PermissionBuilder(UUID id) {
         this.id = id;
     }

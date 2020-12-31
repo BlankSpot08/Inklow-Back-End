@@ -2,12 +2,14 @@ package com.example.inklow.daoImp;
 
 import com.example.inklow.dao.RolePermissionsDao;
 import com.example.inklow.entities.Permission;
+import com.example.inklow.entities.RolePermissions;
 import com.example.inklow.mapper.PermissionMapper;
+import com.example.inklow.mapper.RolePermissionsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.security.Permissions;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,7 +37,6 @@ public class RolePermissionsDaoImp implements RolePermissionsDao {
 
     @Override
     public List<Permission> getRolePermissionsByName(String name) {
-
         String query = "SELECT p.id, p.name, p.description\n" +
                 "FROM role_permissions\n" +
                 "JOIN permissions p on p.id = role_permissions.permissionId\n" +
@@ -45,6 +46,15 @@ public class RolePermissionsDaoImp implements RolePermissionsDao {
         List<Permission> permissions = jdbcTemplate.query(query, new Object[] {name}, new PermissionMapper());
 
         return permissions;
+    }
+
+    @Override
+    public List<RolePermissions> getRolePermissions() {
+        String query = "SELECT * FROM role_permissions";
+
+        List<RolePermissions> permission = jdbcTemplate.query(query, new RolePermissionsMapper());
+
+        return permission;
     }
 }
 

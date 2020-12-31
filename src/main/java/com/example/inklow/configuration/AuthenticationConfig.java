@@ -12,13 +12,14 @@ import org.springframework.security.authentication.AuthenticationManager;
 
 @Configuration
 public class AuthenticationConfig {
-    private MyUserDetailService myUserDetailService;
+    private final MyUserDetailService myUserDetailService;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
     // I put the @Lazy to stop THE CIRCULAR DEPENDENCY
     @Autowired
-    public AuthenticationConfig(final JwtUtil jwtUtil, final @Lazy AuthenticationManager authenticationManager) {
+    public AuthenticationConfig(final @Lazy MyUserDetailService myUserDetailService, final JwtUtil jwtUtil, final @Lazy AuthenticationManager authenticationManager) {
+        this.myUserDetailService = myUserDetailService;
         this.jwtUtil = jwtUtil;
         this.authenticationManager = authenticationManager;
     }

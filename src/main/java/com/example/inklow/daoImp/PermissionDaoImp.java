@@ -46,4 +46,15 @@ public class PermissionDaoImp implements PermissionDao {
 
         return permission;
     }
+
+    @Override
+    public Permission addPermission(Permission permission) {
+        String query = "INSERT INTO permissions" +
+                "(name, description) " +
+                "VALUES (?, ?)";
+
+        jdbcTemplate.update(query, permission.getName(), permission.getDescription());
+
+        return permission;
+    }
 }

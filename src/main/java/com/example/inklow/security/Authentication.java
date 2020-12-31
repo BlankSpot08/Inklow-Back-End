@@ -15,7 +15,7 @@ public class Authentication {
     private final AuthenticationManager authenticationManager;
 
     @Autowired
-    public Authentication(final MyUserDetailService myUserDetailService, final JwtUtil jwtUtil, final AuthenticationManager authenticationManager) {
+    public Authentication(MyUserDetailService myUserDetailService, final JwtUtil jwtUtil, final AuthenticationManager authenticationManager) {
         this.myUserDetailService = myUserDetailService;
         this.jwtUtil = jwtUtil;
         this.authenticationManager = authenticationManager;

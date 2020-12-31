@@ -12,6 +12,8 @@ public class RoleBuilder {
     private String description;
     private List<Permission> permissions;
 
+    public RoleBuilder() { }
+
     public RoleBuilder(UUID id) {
         this.id = id;
     }

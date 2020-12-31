@@ -60,4 +60,15 @@ public class RoleDaoImp implements RoleDao {
 
         return role;
     }
+
+    @Override
+    public Role addRole(Role role) {
+        String query = "INSERT INTO roles" +
+                "(name, description) " +
+                "VALUES (?, ?)";
+
+        jdbcTemplate.update(query, role.getName(), role.getDescription());
+
+        return role;
+    }
 }

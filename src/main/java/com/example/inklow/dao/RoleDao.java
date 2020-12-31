@@ -10,4 +10,6 @@ public interface RoleDao {
     List<Role> getListOfRole();
     Role getRoleById(UUID id);
     Role getRoleByName(String name);
+
+    Role addRole(Role role);
 }
