@@ -71,4 +71,13 @@ public class RoleDaoImp implements RoleDao {
 
         return role;
     }
+
+    @Override
+    public Role removeRole(Role role) {
+        String query = "DELETE FROM roles WHERE id = ?";
+
+        jdbcTemplate.update(query, role.getId());
+
+        return role;
+    }
 }

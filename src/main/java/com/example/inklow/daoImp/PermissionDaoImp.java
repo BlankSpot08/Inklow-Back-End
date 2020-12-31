@@ -57,4 +57,13 @@ public class PermissionDaoImp implements PermissionDao {
 
         return permission;
     }
+
+    @Override
+    public Permission removePermission(Permission permission) {
+        String query = "DELETE FROM permission WHERE id = ?";
+
+        jdbcTemplate.update(query, permission.getId());
+
+        return permission;
+    }
 }

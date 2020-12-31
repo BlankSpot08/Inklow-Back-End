@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UserDao {
+    List<User> getListOfUsers();
     User findUserById(UUID id);
     User findUserByUsername(String username);
-    List<User> getListOfUsers();
+
 
     User addUser(User user);
+    User removeUser(User user);
 
 }
