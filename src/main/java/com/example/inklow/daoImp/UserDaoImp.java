@@ -32,6 +32,13 @@ public class UserDaoImp implements UserDao {
 
         User user = jdbcTemplate.queryForObject(query, new Object[] {id}, new UserMapper());
 
+        if (user == null) {
+            return null;
+        }
+
+        List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
+        user.setRoles(roles);
+
         return user;
     }
 
@@ -40,6 +47,10 @@ public class UserDaoImp implements UserDao {
         String query = "SELECT * FROM users WHERE username = ?;";
 
         User user = jdbcTemplate.queryForObject(query, new Object[] {username}, new UserMapper());
+
+        if (user == null) {
+            return null;
+        }
 
         List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
         user.setRoles(roles);
@@ -84,7 +95,11 @@ public class UserDaoImp implements UserDao {
     public User removeUser(User user) {
         String query = "DELETE FROM users WHERE id = ?";
 
-        jdbcTemplate.update(query, user.getId());
+        int statusCode = jdbcTemplate.update(query, user.getId());
+
+        if (statusCode == 0) {
+            return null;
+        }
 
         return user;
     }

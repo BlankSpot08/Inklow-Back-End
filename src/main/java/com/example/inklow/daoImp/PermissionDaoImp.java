@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class PermissionDaoImp implements PermissionDao {
@@ -28,10 +29,14 @@ public class PermissionDaoImp implements PermissionDao {
     }
 
     @Override
-    public Permission getPermissionById(String id) {
+    public Permission getPermissionById(UUID id) {
         String query = "SELECT * FROM permissions WHERE id = ?";
 
         Permission permission = jdbcTemplate.queryForObject(query, new Object[] {id}, new PermissionMapper());
+
+        if (permission == null) {
+            return null;
+        }
 
         return permission;
     }
@@ -41,6 +46,10 @@ public class PermissionDaoImp implements PermissionDao {
         String query = "SELECT * FROM permissions WHERE name = ?";
 
         Permission permission = jdbcTemplate.queryForObject(query, new Object[] {name}, new PermissionMapper());
+
+        if (permission == null) {
+            return null;
+        }
 
         return permission;
     }

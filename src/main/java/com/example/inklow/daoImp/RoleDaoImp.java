@@ -43,6 +43,10 @@ public class RoleDaoImp implements RoleDao {
 
         Role role = jdbcTemplate.queryForObject(query, new Object[]{id}, new RoleMapper());
 
+        if (role == null) {
+            return null;
+        }
+
         List<Permission> permissions = rolePermissionsDao.getRolePermissionsById(role.getId());
         role.setPermissions(permissions);
 
@@ -54,6 +58,10 @@ public class RoleDaoImp implements RoleDao {
         String query = "SELECT * FROM roles WHERE name = ?";
 
         Role role = jdbcTemplate.queryForObject(query, new Object[]{name}, new RoleMapper());
+
+        if (role == null) {
+            return null;
+        }
 
         List<Permission> permissions = rolePermissionsDao.getRolePermissionsByName(role.getName());
         role.setPermissions(permissions);
@@ -67,7 +75,11 @@ public class RoleDaoImp implements RoleDao {
                 "(name, description) " +
                 "VALUES (?, ?)";
 
-        jdbcTemplate.update(query, role.getName(), role.getDescription());
+        int statusCode = jdbcTemplate.update(query, role.getName(), role.getDescription());
+
+        if (statusCode == 0) {
+            return null;
+        };
 
         return role;
     }
@@ -76,7 +88,11 @@ public class RoleDaoImp implements RoleDao {
     public Role removeRole(Role role) {
         String query = "DELETE FROM roles WHERE id = ?";
 
-        jdbcTemplate.update(query, role.getId());
+        int statusCode = jdbcTemplate.update(query, role.getId());
+
+        if (statusCode == 0) {
+            return null;
+        }
 
         return role;
     }

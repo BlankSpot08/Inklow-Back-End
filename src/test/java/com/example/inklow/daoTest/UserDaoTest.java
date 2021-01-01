@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -23,6 +21,44 @@ public class UserDaoTest {
     @Autowired
     public UserDaoTest(final @Qualifier("testUserConfig") UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    @Test
+    void findUserById() {
+        UUID id = UUID.fromString("ce627f59-c377-4bfc-8d7b-8aded0c6ccd8");
+
+        User user = userDao.findUserById(id);
+
+        System.out.println(user.getId());
+        System.out.println(user.getFirstName());
+        System.out.println(user.getPassword());
+        System.out.println(user.getGender());
+        System.out.println(user.getBirthDate());
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
+        System.out.println(user.getEmail());
+        System.out.println(user.getPhoneNumber());
+
+        Assertions.assertNotNull(user);
+    }
+
+    @Test
+    void findUserByUsername() {
+        String username = "BlankSpot08";
+
+        User user = userDao.findUserByUsername(username);
+
+        System.out.println(user.getId());
+        System.out.println(user.getFirstName());
+        System.out.println(user.getPassword());
+        System.out.println(user.getGender());
+        System.out.println(user.getBirthDate());
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
+        System.out.println(user.getEmail());
+        System.out.println(user.getPhoneNumber());
+
+        Assertions.assertNotNull(user);
     }
 
     @Test
@@ -60,20 +96,29 @@ public class UserDaoTest {
 
     @Test
     void insertUser() {
-        String firstName = "Arvin";
-        String lastName = "Chu";
-        String gender = "Male";
-        LocalDate birthDate = LocalDate.parse("2000-12-30");
-        String username = "BlankSpot08";
-        String password = "09194163795";
-        String email = "arvinchu31@gmail.com";
-        String phoneNumber = "09997874755";
+        String firstName = "";
+        String lastName = "";
+        String gender = "";
+        Date birthDate = java.sql.Date.valueOf(LocalDate.parse(""));
+        String username = "";
+        String password = "";
+        String email = "";
+        String phoneNumber = "";
+
+//        String firstName = "Arvin";
+//        String lastName = "Chu";
+//        String gender = "Male";
+//        Date birthDate = java.sql.Date.valueOf(LocalDate.parse("2000-12-30"));
+//        String username = "BlankSpot08";
+//        String password = "09194163795";
+//        String email = "arvinchu31@gmail.com";
+//        String phoneNumber = "09997874755";
 
         User user = new UserBuilder()
                 .firstName(firstName)
                 .lastName(lastName)
                 .gender(gender)
-//                .birthDate(birthDate)
+                .birthDate(birthDate)
                 .username(username)
                 .password(password)
                 .email(email)
@@ -85,7 +130,7 @@ public class UserDaoTest {
 
     @Test
     void deleteUser() {
-        UUID id = UUID.fromString("2d81ef89-808e-4f91-83f9-841413828f54");
+        UUID id = UUID.fromString("66e22b03-97ba-47a8-a0b4-02f049b8db01");
 
         User user = new UserBuilder()
                 .id(id)

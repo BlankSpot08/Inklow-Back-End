@@ -1,6 +1,6 @@
 package com.example.inklow.builder;
 
-import com.example.inklow.entities.RolePermissions;
+import com.example.inklow.entities.RolePermission;
 
 import java.util.UUID;
 
@@ -25,7 +25,7 @@ public class RolePermissionsBuilder {
         return this;
     }
 
-    public RolePermissions build() {
-        return new RolePermissions(roleId, permissionId);
+    public RolePermission build() {
+        return new RolePermission(roleId, permissionId);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.inklow.security;
 
+import com.example.inklow.builder.UserBuilder;
 import com.example.inklow.entities.User;
 import com.example.inklow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,8 @@ public class MyUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userServiceImp.findUserByUsername(username);
+        User tempUser = userServiceImp.findUserByUsername(username);
 
-        return new MyUserDetail(user);
+        return new MyUserDetail(tempUser);
     }
 }

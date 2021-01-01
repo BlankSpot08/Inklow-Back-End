@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class RolePermissionsDaoTest {
+public class RolePermissionDaoTest {
     private final RolePermissionsDao rolePermissionsDao;
 
     @Autowired
-    public RolePermissionsDaoTest(@Qualifier("testRolePermissionConfig") RolePermissionsDao rolePermissionsDao) {
+    public RolePermissionDaoTest(@Qualifier("testRolePermissionConfig") RolePermissionsDao rolePermissionsDao) {
         this.rolePermissionsDao = rolePermissionsDao;
     }
 
