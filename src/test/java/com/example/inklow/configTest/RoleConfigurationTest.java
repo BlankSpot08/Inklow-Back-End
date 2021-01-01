@@ -2,7 +2,7 @@ package com.example.inklow.configTest;
 
 import com.example.inklow.dao.RoleDao;
 import com.example.inklow.dao.RolePermissionsDao;
-import com.example.inklow.daoImpTest.RoleDaoImpTest;
+import com.example.inklow.daoImp.RoleDaoImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -22,6 +22,6 @@ public class RoleConfigurationTest {
 
     @Bean(name = "testRoleConfig")
     public RoleDao roleDao() {
-        return new RoleDaoImpTest(jdbcTemplate, rolePermissionsDao);
+        return new RoleDaoImp(jdbcTemplate, rolePermissionsDao);
     }
 }

@@ -9,16 +9,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
-public class Users {
+public class UserDaoTest {
     private final UserDao userDao;
 
     @Autowired
-    public Users(final @Qualifier("testUserConfig") UserDao userDao) {
+    public UserDaoTest(final @Qualifier("testUserConfig") UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -51,24 +54,26 @@ public class Users {
             });
             System.out.println();
         });
+
+        Assertions.assertNotNull(getUsers);
     }
 
     @Test
     void insertUser() {
-        String firstName = "";
-        String lastName = "";
-        String gender = "";
-        Date birthDate = new Date();
-        String username = "";
-        String password = "";
-        String email = "";
-        String phoneNumber = "";
+        String firstName = "Arvin";
+        String lastName = "Chu";
+        String gender = "Male";
+        LocalDate birthDate = LocalDate.parse("2000-12-30");
+        String username = "BlankSpot08";
+        String password = "09194163795";
+        String email = "arvinchu31@gmail.com";
+        String phoneNumber = "09997874755";
 
         User user = new UserBuilder()
                 .firstName(firstName)
                 .lastName(lastName)
                 .gender(gender)
-                .birthDate(birthDate)
+//                .birthDate(birthDate)
                 .username(username)
                 .password(password)
                 .email(email)
@@ -80,13 +85,13 @@ public class Users {
 
     @Test
     void deleteUser() {
-        UUID id = UUID.fromString("");
+        UUID id = UUID.fromString("2d81ef89-808e-4f91-83f9-841413828f54");
 
         User user = new UserBuilder()
                 .id(id)
                 .build();
 
-        System.out.println(userDao.removeUser(user));
+        Assertions.assertNotNull(userDao.removeUser(user));
     }
 
 

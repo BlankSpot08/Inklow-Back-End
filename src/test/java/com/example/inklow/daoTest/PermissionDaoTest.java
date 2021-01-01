@@ -11,12 +11,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.List;
 
 @SpringBootTest
-public class Permissions {
+public class PermissionDaoTest {
     @Autowired
     private PermissionDao permissionDao;
 
     @Autowired
-    public Permissions(@Qualifier("testPermissionConfig") PermissionDao permissionDao) {
+    public PermissionDaoTest(@Qualifier("testPermissionConfig") PermissionDao permissionDao) {
         this.permissionDao = permissionDao;
     }
 

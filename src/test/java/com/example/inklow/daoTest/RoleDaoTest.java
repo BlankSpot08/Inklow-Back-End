@@ -11,11 +11,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.UUID;
 
 @SpringBootTest
-public class Roles {
+public class RoleDaoTest {
     private final RoleDao roleDao;
 
     @Autowired
-    public Roles(@Qualifier("testRoleConfig") RoleDao roleDao) {
+    public RoleDaoTest(@Qualifier("testRoleConfig") RoleDao roleDao) {
         this.roleDao = roleDao;
     }
 

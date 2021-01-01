@@ -82,7 +82,7 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User removeUser(User user) {
-        String query = "DELETE FROM users WHERE = ?";
+        String query = "DELETE FROM users WHERE id = ?";
 
         jdbcTemplate.update(query, user.getId());
 
