@@ -1,10 +1,12 @@
-package com.example.inklow.utils;
+package com.example.inklow.daoTest;
 
 import com.example.inklow.builder.UserBuilder;
 import com.example.inklow.dao.UserDao;
 import com.example.inklow.entities.User;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Date;
@@ -16,7 +18,7 @@ public class Users {
     private final UserDao userDao;
 
     @Autowired
-    public Users(UserDao userDao) {
+    public Users(final @Qualifier("testUserConfig") UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -56,7 +58,7 @@ public class Users {
         String firstName = "";
         String lastName = "";
         String gender = "";
-        Date birthDate = new Date("");
+        Date birthDate = new Date();
         String username = "";
         String password = "";
         String email = "";
@@ -73,7 +75,7 @@ public class Users {
                 .phoneNumber(phoneNumber)
                 .build();
 
-        System.out.println(userDao.addUser(user));
+        Assertions.assertNotNull(userDao.addUser(user));
     }
 
     @Test
@@ -86,4 +88,6 @@ public class Users {
 
         System.out.println(userDao.removeUser(user));
     }
+
+
 }

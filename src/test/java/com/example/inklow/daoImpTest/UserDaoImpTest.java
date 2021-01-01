@@ -1,4 +1,4 @@
-package com.example.inklow.daoImp;
+package com.example.inklow.daoImpTest;
 
 import com.example.inklow.dao.UserDao;
 import com.example.inklow.dao.UserRoleDao;
@@ -6,6 +6,7 @@ import com.example.inklow.entities.Role;
 import com.example.inklow.entities.User;
 import com.example.inklow.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
@@ -14,13 +15,13 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class UserDaoImp implements UserDao {
+public class UserDaoImpTest implements UserDao {
     private final JdbcTemplate jdbcTemplate;
     private final UserRoleDao userRoles;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserDaoImp(final JdbcTemplate jdbcTemplate, final UserRoleDao userRoles, final PasswordEncoder passwordEncoder) {
+    public UserDaoImpTest(final JdbcTemplate jdbcTemplate, final UserRoleDao userRoles, final PasswordEncoder passwordEncoder) {
         this.jdbcTemplate = jdbcTemplate;
         this.userRoles = userRoles;
         this.passwordEncoder = passwordEncoder;
@@ -69,13 +70,9 @@ public class UserDaoImp implements UserDao {
                 "(firstName, lastName, gender, birthDate, username, password, email, phoneNumber) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
-        int statusCode = jdbcTemplate.update(query,
+        jdbcTemplate.update(query,
                 user.getFirstName(), user.getLastName(), user.getGender(), user.getBirthDate(),
                 user.getUsername(), user.getPassword(), user.getEmail(), user.getPhoneNumber());
-
-        if (statusCode == 0) {
-            return null;
-        }
 
         return user;
     }

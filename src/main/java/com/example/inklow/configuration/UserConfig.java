@@ -1,10 +1,8 @@
 package com.example.inklow.configuration;
 
-import com.example.inklow.dao.RolePermissionsDao;
 import com.example.inklow.dao.UserDao;
 import com.example.inklow.dao.UserRoleDao;
 import com.example.inklow.daoImp.UserDaoImp;
-import com.example.inklow.security.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

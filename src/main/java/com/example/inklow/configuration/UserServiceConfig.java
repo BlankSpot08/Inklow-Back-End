@@ -24,7 +24,7 @@ public class UserServiceConfig {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @Bean
+    @Bean()
     @Primary
     public UserService userService() {
         return new UserServiceImp(authentication, userDao, passwordEncoder);

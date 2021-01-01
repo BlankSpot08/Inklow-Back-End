@@ -1,4 +1,4 @@
-package com.example.inklow.daoImp;
+package com.example.inklow.daoImpTest;
 
 import com.example.inklow.dao.PermissionDao;
 import com.example.inklow.entities.Permission;
@@ -10,11 +10,11 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class PermissionDaoImp implements PermissionDao {
+public class PermissionDaoImpTest implements PermissionDao {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public PermissionDaoImp(final JdbcTemplate jdbcTemplate) {
+    public PermissionDaoImpTest(final JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

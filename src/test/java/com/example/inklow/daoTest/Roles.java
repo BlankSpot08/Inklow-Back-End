@@ -1,10 +1,11 @@
-package com.example.inklow.utils;
+package com.example.inklow.daoTest;
 
 import com.example.inklow.builder.RoleBuilder;
 import com.example.inklow.dao.RoleDao;
 import com.example.inklow.entities.Role;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.UUID;
@@ -14,7 +15,7 @@ public class Roles {
     private final RoleDao roleDao;
 
     @Autowired
-    public Roles(RoleDao roleDao) {
+    public Roles(@Qualifier("testRoleConfig") RoleDao roleDao) {
         this.roleDao = roleDao;
     }
 

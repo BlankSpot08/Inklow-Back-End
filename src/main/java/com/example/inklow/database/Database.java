@@ -3,6 +3,7 @@ package com.example.inklow.database;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,7 +22,8 @@ public class Database {
         this.environment = environment;
     }
 
-    @Bean
+    @Bean(name = "mainDatabase")
+    @Primary
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
@@ -33,7 +35,8 @@ public class Database {
         return dataSource;
     }
 
-    @Bean
+    @Bean(name = "mainJdbc")
+    @Primary
     public JdbcTemplate jdbcTemplate() {
         JdbcTemplate template = new JdbcTemplate();
         template.setDataSource(dataSource());

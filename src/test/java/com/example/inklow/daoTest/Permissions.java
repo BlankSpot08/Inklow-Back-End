@@ -1,10 +1,11 @@
-package com.example.inklow.utils;
+package com.example.inklow.daoTest;
 
 import com.example.inklow.builder.PermissionBuilder;
 import com.example.inklow.dao.PermissionDao;
 import com.example.inklow.entities.Permission;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public class Permissions {
     private PermissionDao permissionDao;
 
     @Autowired
-    public Permissions(PermissionDao permissionDao) {
+    public Permissions(@Qualifier("testPermissionConfig") PermissionDao permissionDao) {
         this.permissionDao = permissionDao;
     }
 
