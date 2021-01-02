@@ -13,4 +13,6 @@ public interface UserDao {
 
     User addUser(User user);
     User removeUser(User user);
+
+    Boolean removeAllUser();
 }

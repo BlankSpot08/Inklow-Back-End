@@ -12,4 +12,6 @@ public interface PermissionDao {
 
     Permission addPermission(Permission permission);
     Permission removePermission(Permission permission);
+
+    Boolean removeAllPermission();
 }

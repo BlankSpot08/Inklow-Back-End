@@ -74,8 +74,6 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User addUser(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         String query = "INSERT INTO users " +
                 "(firstName, lastName, gender, birthDate, username, password, email, phoneNumber) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -102,5 +100,18 @@ public class UserDaoImp implements UserDao {
         }
 
         return user;
+    }
+
+    @Override
+    public Boolean removeAllUser() {
+        String query = "DELETE FROM users";
+
+        int statusCode = jdbcTemplate.update(query);
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return true;
     }
 }

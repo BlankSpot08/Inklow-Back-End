@@ -34,10 +34,6 @@ public class PermissionDaoImp implements PermissionDao {
 
         Permission permission = jdbcTemplate.queryForObject(query, new Object[] {id}, new PermissionMapper());
 
-        if (permission == null) {
-            return null;
-        }
-
         return permission;
     }
 
@@ -46,10 +42,6 @@ public class PermissionDaoImp implements PermissionDao {
         String query = "SELECT * FROM permissions WHERE name = ?";
 
         Permission permission = jdbcTemplate.queryForObject(query, new Object[] {name}, new PermissionMapper());
-
-        if (permission == null) {
-            return null;
-        }
 
         return permission;
     }
@@ -60,17 +52,38 @@ public class PermissionDaoImp implements PermissionDao {
                 "(name, description) " +
                 "VALUES (?, ?)";
 
-        jdbcTemplate.update(query, permission.getName(), permission.getDescription());
+        int statusCode = jdbcTemplate.update(query, permission.getName(), permission.getDescription());
+
+        if (statusCode == 0) {
+            return null;
+        }
 
         return permission;
     }
 
     @Override
     public Permission removePermission(Permission permission) {
-        String query = "DELETE FROM permission WHERE id = ?";
+        String query = "DELETE FROM permissions WHERE id = ?";
 
-        jdbcTemplate.update(query, permission.getId());
+        int statusCode = jdbcTemplate.update(query, permission.getId());
+
+        if (statusCode == 0) {
+            return null;
+        }
 
         return permission;
+    }
+
+    @Override
+    public Boolean removeAllPermission() {
+        String query = "DELETE FROM permissions";
+
+        int statusCode = jdbcTemplate.update(query);
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return true;
     }
 }

@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class RolePermissionsMapper implements RowMapper<RolePermission> {
+public final class RolePermissionsMapper implements RowMapper<RolePermission> {
     @Override
     public RolePermission mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new RolePermissionsBuilder()

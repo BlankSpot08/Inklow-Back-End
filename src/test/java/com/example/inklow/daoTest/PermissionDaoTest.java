@@ -52,6 +52,7 @@ public class PermissionDaoTest {
         List<Permission> getPermissions = permissionDao.getListOfPermission();
 
         getPermissions.forEach(e -> {
+            System.out.println(e.getId());
             System.out.println(e.getName());
             System.out.println(e.getDescription());
             System.out.println();
@@ -63,6 +64,9 @@ public class PermissionDaoTest {
         String name = "CAN_EDIT_USER";
         String description = "";
 
+//        String name = "CAN_VIEW_USER";
+//        String description = "";
+
         Permission permission = new PermissionBuilder()
                 .name(name)
                 .description(description)
@@ -73,6 +77,17 @@ public class PermissionDaoTest {
 
     @Test
     void deletePermission() {
+        UUID id = UUID.fromString("7e1f0712-a0f7-4801-bf55-1d1249caf08c");
 
+        Permission permission = new PermissionBuilder()
+                .id(id)
+                .build();
+
+        Assertions.assertNotNull(permissionDao.removePermission(permission));
+    }
+
+    @Test
+    void deleteAllPermission() {
+        Assertions.assertNotNull(permissionDao.removeAllPermission());
     }
 }

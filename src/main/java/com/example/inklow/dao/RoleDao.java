@@ -13,4 +13,6 @@ public interface RoleDao {
 
     Role addRole(Role role);
     Role removeRole(Role role);
+
+    Boolean removeAllRole();
 }

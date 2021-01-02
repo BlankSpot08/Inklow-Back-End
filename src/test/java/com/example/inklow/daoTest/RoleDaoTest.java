@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
@@ -51,7 +52,9 @@ public class RoleDaoTest {
 
     @Test
     void getRoles() {
-        roleDao.getListOfRole().forEach(e -> {
+        List<Role> getRoles = roleDao.getListOfRole();
+
+        getRoles.forEach(e -> {
             System.out.println(e.getId());
             System.out.println(e.getName());
             System.out.println(e.getDescription());
@@ -88,5 +91,10 @@ public class RoleDaoTest {
                 .build();
 
         Assertions.assertNotNull(roleDao.removeRole(role));
+    }
+
+    @Test
+    void deleteAllRole() {
+        Assertions.assertNotNull(roleDao.removeAllRole());
     }
 }

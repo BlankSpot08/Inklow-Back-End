@@ -63,7 +63,7 @@ public class RoleDaoImp implements RoleDao {
             return null;
         }
 
-        List<Permission> permissions = rolePermissionsDao.getRolePermissionsByName(role.getName());
+        List<Permission> permissions = rolePermissionsDao.getRolePermissionsById(role.getId());
         role.setPermissions(permissions);
 
         return role;
@@ -95,5 +95,18 @@ public class RoleDaoImp implements RoleDao {
         }
 
         return role;
+    }
+
+    @Override
+    public Boolean removeAllRole() {
+        String query = "DELETE FROM roles";
+
+        int statusCode = jdbcTemplate.update(query);
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return true;
     }
 }

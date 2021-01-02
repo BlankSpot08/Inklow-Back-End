@@ -23,7 +23,8 @@ public class RolePermissionsDaoImp implements RolePermissionsDao {
 
     @Override
     public List<Permission> getRolePermissionsById(UUID id) {
-        String query = "SELECT p.id, p.name, p.description\n" +
+        String query =
+                "SELECT p.id, p.name, p.description\n" +
                 "FROM role_permissions\n" +
                 "JOIN permissions p on p.id = role_permissions.permissionId\n" +
                 "JOIN roles r on r.id = role_permissions.roleId\n" +
@@ -35,30 +36,19 @@ public class RolePermissionsDaoImp implements RolePermissionsDao {
     }
 
     @Override
-    public List<Permission> getRolePermissionsByName(String name) {
-        String query = "SELECT p.id, p.name, p.description\n" +
-                "FROM role_permissions\n" +
-                "JOIN permissions p on p.id = role_permissions.permissionId\n" +
-                "JOIN roles r on r.id = role_permissions.roleId\n" +
-                "WHERE r.id = ?";
-
-        List<Permission> permissions = jdbcTemplate.query(query, new Object[] {name}, new PermissionMapper());
-
-        return permissions;
-    }
-
-    @Override
     public List<RolePermission> getRolePermissions() {
         String query = "SELECT * FROM role_permissions";
 
-        List<RolePermission> permission = jdbcTemplate.query(query, new RolePermissionsMapper());
+        List<RolePermission> rolePermissions = jdbcTemplate.query(query, new RolePermissionsMapper());
 
-        return permission;
+        return rolePermissions;
     }
 
     @Override
     public RolePermission addRolePermission(RolePermission rolePermission) {
-        String query = "";
+        String query = "INSERT INTO role_permissions " +
+                "(roleId, permissionId) " +
+                "VALUES(?, ?)";
 
         int statusCode = jdbcTemplate.update(query, rolePermission.getRoleId(), rolePermission.getPermissionId());
 
@@ -67,6 +57,11 @@ public class RolePermissionsDaoImp implements RolePermissionsDao {
         }
 
         return rolePermission;
+    }
+
+    @Override
+    public RolePermission removeRolePermission(RolePermission rolePermission) {
+        return null;
     }
 }
 

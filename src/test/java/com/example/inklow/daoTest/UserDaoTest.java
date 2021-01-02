@@ -96,14 +96,14 @@ public class UserDaoTest {
 
     @Test
     void insertUser() {
-        String firstName = "";
-        String lastName = "";
-        String gender = "";
-        Date birthDate = java.sql.Date.valueOf(LocalDate.parse(""));
-        String username = "";
-        String password = "";
-        String email = "";
-        String phoneNumber = "";
+        String firstName = "Blank";
+        String lastName = "Spot";
+        String gender = "Female";
+        Date birthDate = java.sql.Date.valueOf(LocalDate.parse("1998-12-01"));
+        String username = "Blanker";
+        String password = "09997874755";
+        String email = "arvinchu21@gmail.com";
+        String phoneNumber = "09958214987";
 
 //        String firstName = "Arvin";
 //        String lastName = "Chu";
@@ -139,5 +139,8 @@ public class UserDaoTest {
         Assertions.assertNotNull(userDao.removeUser(user));
     }
 
-
+    @Test
+    void deleteAllUser() {
+        Assertions.assertNotNull(userDao.removeAllUser());
+    }
 }
