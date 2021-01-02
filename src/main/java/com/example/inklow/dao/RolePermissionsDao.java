@@ -14,4 +14,6 @@ public interface RolePermissionsDao {
 
     RolePermission addRolePermission(RolePermission permission);
     RolePermission removeRolePermission(RolePermission rolePermission);
+
+    Boolean removeAllRolePermission();
 }

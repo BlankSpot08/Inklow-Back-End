@@ -2,8 +2,10 @@ package com.example.inklow.daoImp;
 
 import com.example.inklow.dao.RolePermissionsDao;
 import com.example.inklow.entities.Permission;
+import com.example.inklow.entities.Role;
 import com.example.inklow.entities.RolePermission;
 import com.example.inklow.mapper.PermissionMapper;
+import com.example.inklow.mapper.RoleMapper;
 import com.example.inklow.mapper.RolePermissionsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -23,12 +25,10 @@ public class RolePermissionsDaoImp implements RolePermissionsDao {
 
     @Override
     public List<Permission> getRolePermissionsById(UUID id) {
-        String query =
-                "SELECT p.id, p.name, p.description\n" +
-                "FROM role_permissions\n" +
-                "JOIN permissions p on p.id = role_permissions.permissionId\n" +
-                "JOIN roles r on r.id = role_permissions.roleId\n" +
-                "WHERE r.id = ?";
+        String query = "SELECT p.id, p.name, p.description " +
+                "FROM role_permissions " +
+                "JOIN permissions AS p ON role_permissions.permissionId = p.id " +
+                "WHERE role_permissions.roleId = ?";
 
         List<Permission> permissions = jdbcTemplate.query(query, new Object[] {id}, new PermissionMapper());
 
@@ -61,7 +61,29 @@ public class RolePermissionsDaoImp implements RolePermissionsDao {
 
     @Override
     public RolePermission removeRolePermission(RolePermission rolePermission) {
-        return null;
+        String query = "DELETE FROM role_permissions " +
+                "WHERE roleId = ? AND permissionId = ?";
+
+        int statusCode = jdbcTemplate.update(query, rolePermission.getRoleId(), rolePermission.getPermissionId());
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return rolePermission;
+    }
+
+    @Override
+    public Boolean removeAllRolePermission() {
+        String query = "DELETE FROM role_permissions";
+
+        int statusCode = jdbcTemplate.update(query);
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return true;
     }
 }
 

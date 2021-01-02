@@ -60,4 +60,22 @@ public class RolePermissionDaoTest {
 
         Assertions.assertNotNull(rolePermissionsDao.addRolePermission(rolePermission));
     }
+
+    @Test
+    void removeRolePermission() {
+        UUID roleId = UUID.fromString("675d197f-ec1d-4982-88c1-719e0324f5bd");
+        UUID permissionId = UUID.fromString("4a279c6f-cefd-4bfd-9302-1b6a2fae3dc9");
+
+        RolePermission rolePermission = new RolePermissionsBuilder()
+                .roleId(roleId)
+                .permissionId(permissionId)
+                .build();
+
+        Assertions.assertNotNull(rolePermissionsDao.removeRolePermission(rolePermission));
+    }
+
+    @Test
+    void RemoveAllPermissions() {
+        Assertions.assertNotNull(rolePermissionsDao.removeAllRolePermission());
+    }
 }
