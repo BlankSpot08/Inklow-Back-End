@@ -36,7 +36,7 @@ public class RolePermissionsDaoImp implements RolePermissionsDao {
     }
 
     @Override
-    public List<RolePermission> getRolePermissions() {
+    public List<RolePermission> getListOfRolePermissions() {
         String query = "SELECT * FROM role_permissions";
 
         List<RolePermission> rolePermissions = jdbcTemplate.query(query, new RolePermissionsMapper());

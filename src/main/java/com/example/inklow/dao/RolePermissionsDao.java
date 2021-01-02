@@ -10,7 +10,7 @@ import java.util.UUID;
 public interface RolePermissionsDao {
     List<Permission> getRolePermissionsById(UUID id);
 
-    List<RolePermission> getRolePermissions();
+    List<RolePermission> getListOfRolePermissions();
 
     RolePermission addRolePermission(RolePermission permission);
     RolePermission removeRolePermission(RolePermission rolePermission);

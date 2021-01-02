@@ -39,7 +39,7 @@ public class RolePermissionDaoTest {
 
     @Test
     void getRolePermissions() {
-        List<RolePermission> getRolePermissions = rolePermissionsDao.getRolePermissions();
+        List<RolePermission> getRolePermissions = rolePermissionsDao.getListOfRolePermissions();
 
         getRolePermissions.forEach(e -> {
             System.out.println("Role Id: " + e.getRoleId());

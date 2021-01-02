@@ -10,7 +10,6 @@ public interface UserDao {
     User findUserById(UUID id);
     User findUserByUsername(String username);
 
-
     User addUser(User user);
     User removeUser(User user);
 

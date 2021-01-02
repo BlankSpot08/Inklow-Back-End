@@ -7,6 +7,7 @@ import java.util.UUID;
 
 public interface PermissionDao {
     List<Permission> getListOfPermission();
+
     Permission getPermissionById(UUID id);
     Permission getPermissionByName(String name);
 
