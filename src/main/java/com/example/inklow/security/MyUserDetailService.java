@@ -1,6 +1,5 @@
 package com.example.inklow.security;
 
-import com.example.inklow.builder.UserBuilder;
 import com.example.inklow.entities.User;
 import com.example.inklow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

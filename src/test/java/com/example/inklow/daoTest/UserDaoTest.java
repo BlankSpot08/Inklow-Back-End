@@ -1,6 +1,5 @@
 package com.example.inklow.daoTest;
 
-import com.example.inklow.builder.UserBuilder;
 import com.example.inklow.dao.UserDao;
 import com.example.inklow.entities.User;
 import org.junit.jupiter.api.Assertions;
@@ -114,7 +113,7 @@ public class UserDaoTest {
 //        String email = "arvinchu31@gmail.com";
 //        String phoneNumber = "09997874755";
 
-        User user = new UserBuilder()
+        User user = new User.Builder()
                 .firstName(firstName)
                 .lastName(lastName)
                 .gender(gender)
@@ -132,7 +131,7 @@ public class UserDaoTest {
     void deleteUser() {
         UUID id = UUID.fromString("66e22b03-97ba-47a8-a0b4-02f049b8db01");
 
-        User user = new UserBuilder()
+        User user = new User.Builder()
                 .id(id)
                 .build();
 

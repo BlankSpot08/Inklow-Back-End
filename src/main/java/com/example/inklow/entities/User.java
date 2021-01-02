@@ -97,5 +97,91 @@ public class User {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
-}
 
+    public final static class Builder {
+        private UUID id;
+        private String firstName = "";
+        private String lastName = "";
+        private String gender = "";
+        private Date birthDate;
+        private String username = "";
+        private String password = "";
+        private String email = "";
+        private String phoneNumber = "";
+
+        private List<Role> roles;
+
+        public Builder() { }
+
+        public Builder(UUID id) {
+            this.id = id;
+        }
+
+        public Builder(UUID id, String firstName, String lastName, String gender, Date birthDate, String username, String password, String email, String phoneNumber, List<Role> roles) {
+            this.id = id;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.gender = gender;
+            this.birthDate = birthDate;
+            this.username = username;
+            this.password = password;
+            this.email = email;
+            this.phoneNumber = phoneNumber;
+            this.roles = roles;
+        }
+
+        public Builder id(UUID id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder firstName(String firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public Builder lastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Builder gender(String gender) {
+            this.gender = gender;
+            return this;
+        }
+
+        public Builder birthDate(Date birthDate) {
+            this.birthDate = birthDate;
+            return this;
+        }
+
+        public Builder username(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public Builder email(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder phoneNumber(String phoneNumber) {
+            this.phoneNumber = phoneNumber;
+            return this;
+        }
+
+        public Builder roles(List<Role> roles) {
+            this.roles = roles;
+            return this;
+        }
+
+        public User build() {
+            return new User(id, firstName, lastName, gender, birthDate, username, password, email, phoneNumber, roles);
+        }
+    }
+}

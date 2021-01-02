@@ -1,6 +1,5 @@
 package com.example.inklow.daoTest;
 
-import com.example.inklow.builder.PermissionBuilder;
 import com.example.inklow.dao.PermissionDao;
 import com.example.inklow.entities.Permission;
 import org.junit.jupiter.api.Assertions;
@@ -67,7 +66,7 @@ public class PermissionDaoTest {
 //        String name = "CAN_VIEW_USER";
 //        String description = "";
 
-        Permission permission = new PermissionBuilder()
+        Permission permission = new Permission.Builder()
                 .name(name)
                 .description(description)
                 .build();
@@ -79,7 +78,7 @@ public class PermissionDaoTest {
     void deletePermission() {
         UUID id = UUID.fromString("7e1f0712-a0f7-4801-bf55-1d1249caf08c");
 
-        Permission permission = new PermissionBuilder()
+        Permission permission = new Permission.Builder()
                 .id(id)
                 .build();
 

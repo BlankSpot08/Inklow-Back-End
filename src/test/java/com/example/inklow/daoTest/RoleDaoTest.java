@@ -1,6 +1,5 @@
 package com.example.inklow.daoTest;
 
-import com.example.inklow.builder.RoleBuilder;
 import com.example.inklow.dao.RoleDao;
 import com.example.inklow.entities.Role;
 import org.junit.jupiter.api.Assertions;
@@ -73,7 +72,7 @@ public class RoleDaoTest {
 //        String name = "Admin";
 //        String description = "";
 
-        Role role = new RoleBuilder()
+        Role role = new Role.Builder()
                 .name(name)
                 .description(description)
                 .build();
@@ -86,7 +85,7 @@ public class RoleDaoTest {
     void deleteRole() {
         UUID id = UUID.fromString("abbe02db-2b5f-4331-8c3d-0e059697ba7e");
 
-        Role role = new RoleBuilder()
+        Role role = new Role.Builder()
                 .id(id)
                 .build();
 

@@ -1,6 +1,5 @@
 package com.example.inklow.daoTest;
 
-import com.example.inklow.builder.UserRolesBuilder;
 import com.example.inklow.dao.UserRoleDao;
 import com.example.inklow.entities.UserRole;
 import org.junit.jupiter.api.Assertions;
@@ -37,7 +36,9 @@ public class UserRoleDaoTest {
         UUID userId = UUID.fromString("576b4a01-b907-457e-8540-82e41bfb97c6");
         UUID roleId = UUID.fromString("675d197f-ec1d-4982-88c1-719e0324f5bd");
 
-        UserRole userRole = new UserRolesBuilder(userId, roleId)
+        UserRole userRole = new UserRole.Builder()
+                .userId(userId)
+                .roleId(roleId)
                 .build();
 
         Assertions.assertNotNull(userRoleDao.addUserRole(userRole));

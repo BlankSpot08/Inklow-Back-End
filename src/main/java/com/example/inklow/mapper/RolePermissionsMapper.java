@@ -1,6 +1,5 @@
 package com.example.inklow.mapper;
 
-import com.example.inklow.builder.RolePermissionsBuilder;
 import com.example.inklow.entities.RolePermission;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -11,7 +10,7 @@ import java.util.UUID;
 public final class RolePermissionsMapper implements RowMapper<RolePermission> {
     @Override
     public RolePermission mapRow(ResultSet rs, int rowNum) throws SQLException {
-        return new RolePermissionsBuilder()
+        return new RolePermission.Builder()
                 .roleId(UUID.fromString(rs.getString("roleId")))
                 .permissionId(UUID.fromString(rs.getString("permissionId")))
                 .build();

@@ -18,4 +18,31 @@ public class UserRole {
     public UUID getRoleId() {
         return roleId;
     }
+
+    public static final class Builder {
+        private UUID userId;
+        private UUID roleId;
+
+        public Builder() {}
+
+        public Builder(UUID userId, UUID roleId) {
+            this.userId = userId;
+            this.roleId = roleId;
+        }
+
+        public Builder userId(UUID id) {
+            this.userId = id;
+            return this;
+        }
+
+        public Builder roleId(UUID id) {
+            this.roleId = id;
+            return this;
+        }
+
+        public UserRole build() {
+            return new UserRole(userId, roleId);
+        }
+    }
+
 }
