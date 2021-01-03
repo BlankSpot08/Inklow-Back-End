@@ -7,7 +7,7 @@ import com.example.inklow.entities.RolePermission;
 import java.util.List;
 import java.util.UUID;
 
-public interface RolePermissionsDao {
+public interface RolePermissionDao {
     List<Permission> getRolePermissionsById(UUID id);
 
     List<RolePermission> getListOfRolePermissions();

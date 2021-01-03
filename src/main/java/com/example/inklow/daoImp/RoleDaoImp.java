@@ -1,7 +1,7 @@
 package com.example.inklow.daoImp;
 
 import com.example.inklow.dao.RoleDao;
-import com.example.inklow.dao.RolePermissionsDao;
+import com.example.inklow.dao.RolePermissionDao;
 import com.example.inklow.entities.Permission;
 import com.example.inklow.entities.Role;
 import com.example.inklow.mapper.RoleMapper;
@@ -15,12 +15,12 @@ import java.util.UUID;
 @Repository
 public class RoleDaoImp implements RoleDao {
     private final JdbcTemplate jdbcTemplate;
-    private final RolePermissionsDao rolePermissionsDao;
+    private final RolePermissionDao rolePermissionDao;
 
     @Autowired
-    public RoleDaoImp(final JdbcTemplate jdbcTemplate, final RolePermissionsDao rolePermissionsDao) {
+    public RoleDaoImp(final JdbcTemplate jdbcTemplate, final RolePermissionDao rolePermissionDao) {
         this.jdbcTemplate = jdbcTemplate;
-        this.rolePermissionsDao = rolePermissionsDao;
+        this.rolePermissionDao = rolePermissionDao;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class RoleDaoImp implements RoleDao {
         List<Role> roles = jdbcTemplate.query(query, new RoleMapper());
 
         for (Role role : roles) {
-            List<Permission> permissions = rolePermissionsDao.getRolePermissionsById(role.getId());
+            List<Permission> permissions = rolePermissionDao.getRolePermissionsById(role.getId());
             role.setPermissions(permissions);
         }
 
@@ -47,7 +47,7 @@ public class RoleDaoImp implements RoleDao {
             return null;
         }
 
-        List<Permission> permissions = rolePermissionsDao.getRolePermissionsById(role.getId());
+        List<Permission> permissions = rolePermissionDao.getRolePermissionsById(role.getId());
         role.setPermissions(permissions);
 
         return role;
@@ -63,7 +63,7 @@ public class RoleDaoImp implements RoleDao {
             return null;
         }
 
-        List<Permission> permissions = rolePermissionsDao.getRolePermissionsById(role.getId());
+        List<Permission> permissions = rolePermissionDao.getRolePermissionsById(role.getId());
         role.setPermissions(permissions);
 
         return role;

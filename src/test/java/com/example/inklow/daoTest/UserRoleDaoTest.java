@@ -1,6 +1,7 @@
 package com.example.inklow.daoTest;
 
 import com.example.inklow.dao.UserRoleDao;
+import com.example.inklow.entities.Role;
 import com.example.inklow.entities.UserRole;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -19,6 +20,21 @@ public class UserRoleDaoTest {
     public UserRoleDaoTest(@Qualifier("testUserRoleConfig") UserRoleDao userRoleDao) {
         this.userRoleDao = userRoleDao;
     }
+
+    @Test
+    void getUserRolesById() {
+        UUID id = UUID.fromString("576b4a01-b907-457e-8540-82e41bfb97c6");
+
+        List<Role> roles = userRoleDao.getUserRolesByUserId(id);
+
+        roles.forEach(e -> {
+            System.out.println(e.getId());
+            System.out.println(e.getName());
+            System.out.println(e.getDescription());
+            System.out.println();
+        });
+    }
+
 
     @Test
     void getUserRole() {
@@ -42,5 +58,23 @@ public class UserRoleDaoTest {
                 .build();
 
         Assertions.assertNotNull(userRoleDao.addUserRole(userRole));
+    }
+
+    @Test
+    void deleteUserRole() {
+        UUID userId = UUID.fromString("");
+        UUID roleId = UUID.fromString("");
+
+        UserRole userRole = new UserRole.Builder()
+                .userId(userId)
+                .roleId(roleId)
+                .build();
+
+        Assertions.assertNotNull(userRoleDao.removeUserRole(userRole));
+    }
+
+    @Test
+    void deleteAllUserRole() {
+        Assertions.assertNotNull(userRoleDao.removeAllUserRole());
     }
 }

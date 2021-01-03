@@ -1,6 +1,6 @@
 package com.example.inklow.daoTest;
 
-import com.example.inklow.dao.RolePermissionsDao;
+import com.example.inklow.dao.RolePermissionDao;
 import com.example.inklow.entities.Permission;
 import com.example.inklow.entities.RolePermission;
 import org.junit.jupiter.api.Assertions;
@@ -14,11 +14,11 @@ import java.util.UUID;
 
 @SpringBootTest
 public class RolePermissionDaoTest {
-    private final RolePermissionsDao rolePermissionsDao;
+    private final RolePermissionDao rolePermissionDao;
 
     @Autowired
-    public RolePermissionDaoTest(@Qualifier("testRolePermissionConfig") RolePermissionsDao rolePermissionsDao) {
-        this.rolePermissionsDao = rolePermissionsDao;
+    public RolePermissionDaoTest(@Qualifier("testRolePermissionConfig") RolePermissionDao rolePermissionDao) {
+        this.rolePermissionDao = rolePermissionDao;
     }
 
     @Test
@@ -26,7 +26,7 @@ public class RolePermissionDaoTest {
         UUID id = UUID.fromString("675d197f-ec1d-4982-88c1-719e0324f5bd");
 //        UUID id = UUID.fromString("df6839e1-1afe-45e5-aaef-357600236f85");
 
-        List<Permission> permissions = rolePermissionsDao.getRolePermissionsById(id);
+        List<Permission> permissions = rolePermissionDao.getRolePermissionsById(id);
 
         permissions.forEach(e -> {
             System.out.println(e.getId());
@@ -38,7 +38,7 @@ public class RolePermissionDaoTest {
 
     @Test
     void getRolePermissions() {
-        List<RolePermission> getRolePermissions = rolePermissionsDao.getListOfRolePermissions();
+        List<RolePermission> getRolePermissions = rolePermissionDao.getListOfRolePermissions();
 
         getRolePermissions.forEach(e -> {
             System.out.println("Role Id: " + e.getRoleId());
@@ -57,7 +57,7 @@ public class RolePermissionDaoTest {
                 .permissionId(permissionId)
                 .build();
 
-        Assertions.assertNotNull(rolePermissionsDao.addRolePermission(rolePermission));
+        Assertions.assertNotNull(rolePermissionDao.addRolePermission(rolePermission));
     }
 
     @Test
@@ -70,11 +70,11 @@ public class RolePermissionDaoTest {
                 .permissionId(permissionId)
                 .build();
 
-        Assertions.assertNotNull(rolePermissionsDao.removeRolePermission(rolePermission));
+        Assertions.assertNotNull(rolePermissionDao.removeRolePermission(rolePermission));
     }
 
     @Test
     void RemoveAllPermissions() {
-        Assertions.assertNotNull(rolePermissionsDao.removeAllRolePermission());
+        Assertions.assertNotNull(rolePermissionDao.removeAllRolePermission());
     }
 }

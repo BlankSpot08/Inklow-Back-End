@@ -1,6 +1,6 @@
 package com.example.inklow.daoImp;
 
-import com.example.inklow.dao.RolePermissionsDao;
+import com.example.inklow.dao.RolePermissionDao;
 import com.example.inklow.dao.UserRoleDao;
 import com.example.inklow.entities.Permission;
 import com.example.inklow.entities.Role;
@@ -9,7 +9,6 @@ import com.example.inklow.mapper.RoleMapper;
 import com.example.inklow.mapper.UserRolesMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -17,12 +16,12 @@ import java.util.*;
 @Repository
 public class UserRoleDaoImp implements UserRoleDao {
     private final JdbcTemplate jdbcTemplate;
-    private final RolePermissionsDao rolePermissionsDao;
+    private final RolePermissionDao rolePermissionDao;
 
     @Autowired
-    public UserRoleDaoImp(final JdbcTemplate jdbcTemplate, final RolePermissionsDao rolesPermissionsDao) {
+    public UserRoleDaoImp(final JdbcTemplate jdbcTemplate, final RolePermissionDao rolesPermissionsDao) {
         this.jdbcTemplate = jdbcTemplate;
-        this.rolePermissionsDao = rolesPermissionsDao;
+        this.rolePermissionDao = rolesPermissionsDao;
     }
 
     @Override
@@ -31,16 +30,11 @@ public class UserRoleDaoImp implements UserRoleDao {
                 "FROM user_roles " +
                 "JOIN roles r ON r.id = user_roles.roleId " +
                 "WHERE user_roles.userId = ?";
-//        String query = "SELECT r.id, r.name, r.description\n" +
-//                "FROM user_roles\n" +
-//                "JOIN roles r on r.id = user_roles.roleId\n" +
-//                "JOIN users u on u.id = user_roles.userId\n" +
-//                "WHERE u.id = ?";
 
         List<Role> roles = jdbcTemplate.query(query, new Object[] {id}, new RoleMapper());
 
         for (Role role : roles) {
-            List<Permission> permissions = rolePermissionsDao.getRolePermissionsById(role.getId());
+            List<Permission> permissions = rolePermissionDao.getRolePermissionsById(role.getId());
             role.setPermissions(permissions);
         }
 
@@ -48,21 +42,13 @@ public class UserRoleDaoImp implements UserRoleDao {
     }
 
     @Override
-    public List<Role> getUserRolesByUserUsername(String username) {
-        String query = "SELECT r.id, r.name, r.description\n" +
-                "FROM user_roles\n" +
-                "JOIN roles r on r.id = user_roles.roleId\n" +
-                "JOIN users u on u.id = user_roles.userId\n" +
-                "WHERE u.id = ?";
+    public List<UserRole> getListOfUserRoles() {
+        String query = "SELECT * " +
+                "FROM user_roles";
 
-        List<Role> roles = jdbcTemplate.query(query, new Object[] {username}, new RoleMapper());
+        List<UserRole> userRoles = jdbcTemplate.query(query, new UserRolesMapper());
 
-        for (Role role : roles) {
-            List<Permission> permissions = rolePermissionsDao.getRolePermissionsById(role.getId());
-            role.setPermissions(permissions);
-        }
-
-        return roles;
+        return userRoles;
     }
 
     @Override
@@ -80,11 +66,29 @@ public class UserRoleDaoImp implements UserRoleDao {
     }
 
     @Override
-    public List<UserRole> getListOfUserRoles() {
-        String query = "SELECT * FROM user_roles";
+    public UserRole removeUserRole(UserRole userRole) {
+        String query = "DELETE FROM user_roles " +
+                "WHERE userId = ? AND roleId = ?";
 
-        List<UserRole> userRoles = jdbcTemplate.query(query, new UserRolesMapper());
+        int statusCode = jdbcTemplate.update(query, userRole.getUserId(), userRole.getRoleId());
 
-        return userRoles;
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return userRole;
+    }
+
+    @Override
+    public Boolean removeAllUserRole() {
+        String query = "DELETE FROM user_roles";
+
+        int statusCode = jdbcTemplate.update(query);
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return true;
     }
 }

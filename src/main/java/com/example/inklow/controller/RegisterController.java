@@ -22,7 +22,7 @@ public class RegisterController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ResponseEntity<?> register(@RequestBody User user) {
-        User registerUser = userService.handleRegister(user);
+        User registerUser = userService.handleAccountRegistration(user);
 
         if (registerUser == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Register Failed");

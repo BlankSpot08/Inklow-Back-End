@@ -1,11 +1,9 @@
 package com.example.inklow.daoImp;
 
-import com.example.inklow.dao.RolePermissionsDao;
+import com.example.inklow.dao.RolePermissionDao;
 import com.example.inklow.entities.Permission;
-import com.example.inklow.entities.Role;
 import com.example.inklow.entities.RolePermission;
 import com.example.inklow.mapper.PermissionMapper;
-import com.example.inklow.mapper.RoleMapper;
 import com.example.inklow.mapper.RolePermissionsMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,11 +13,11 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public class RolePermissionsDaoImp implements RolePermissionsDao {
+public class RolePermissionDaoImp implements RolePermissionDao {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public RolePermissionsDaoImp(final JdbcTemplate jdbcTemplate) {
+    public RolePermissionDaoImp(final JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

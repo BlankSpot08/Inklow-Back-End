@@ -48,11 +48,16 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User handleRegister(User user) {
+    public User handleAccountRegistration(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         User tempUser = userDao.addUser(user);
 
         return tempUser;
+    }
+
+    @Override
+    public User handleAccountDeletion(User user) {
+        return userDao.removeUser(user);
     }
 }

@@ -10,9 +10,12 @@ import java.util.UUID;
 @Service
 public interface UserService {
     List<User> getListOfUsers();
+
     User findUserById(UUID id);
     User findUserByUsername(String username);
 
     String handleLogin(AuthenticationRequest authenticationRequest);
-    User handleRegister(User user);
+    User handleAccountRegistration(User user);
+
+    User handleAccountDeletion(User user);
 }

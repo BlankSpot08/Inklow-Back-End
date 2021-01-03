@@ -11,13 +11,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-public class UserConfig {
+public class UserDaoConfig {
     private final JdbcTemplate jdbcTemplate;
     private final UserRoleDao userRoleDao;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserConfig(final JdbcTemplate jdbcTemplate, final UserRoleDao userRoleDao, final PasswordEncoder passwordEncoder) {
+    public UserDaoConfig(final JdbcTemplate jdbcTemplate, final UserRoleDao userRoleDao, final PasswordEncoder passwordEncoder) {
         this.jdbcTemplate = jdbcTemplate;
         this.userRoleDao = userRoleDao;
         this.passwordEncoder = passwordEncoder;
