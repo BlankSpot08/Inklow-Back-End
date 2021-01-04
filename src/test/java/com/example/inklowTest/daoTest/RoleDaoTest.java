@@ -1,4 +1,4 @@
-package com.example.inklow.daoTest;
+package com.example.inklowTest.daoTest;
 
 import com.example.inklow.dao.RoleDao;
 import com.example.inklow.entities.Role;

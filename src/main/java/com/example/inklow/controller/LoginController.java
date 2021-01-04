@@ -25,7 +25,7 @@ public class LoginController {
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ResponseEntity<?> doLogin(@RequestBody @NonNull AuthenticationRequest authenticationRequest) {
+    public ResponseEntity<?> handleLogin(@RequestBody @NonNull AuthenticationRequest authenticationRequest) {
         String jwt = userServiceImp.handleLogin(authenticationRequest);
 
         if (jwt == null) {

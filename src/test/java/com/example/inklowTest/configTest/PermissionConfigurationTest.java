@@ -1,4 +1,4 @@
-package com.example.inklow.configTest;
+package com.example.inklowTest.configTest;
 
 import com.example.inklow.dao.PermissionDao;
 import com.example.inklow.daoImp.PermissionDaoImp;

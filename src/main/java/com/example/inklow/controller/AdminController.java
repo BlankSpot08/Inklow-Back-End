@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api")
-@PreAuthorize("hasAnyAuthority(Admin)")
+@RequestMapping(value = "/api/admin")
+@PreAuthorize("hasAnyAuthority('Admin')")
 public class AdminController {
     private final UserDao userDao;
 

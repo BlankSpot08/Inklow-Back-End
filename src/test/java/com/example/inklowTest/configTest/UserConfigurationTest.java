@@ -1,4 +1,4 @@
-package com.example.inklow.configTest;
+package com.example.inklowTest.configTest;
 
 import com.example.inklow.dao.UserDao;
 import com.example.inklow.dao.UserRoleDao;

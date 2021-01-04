@@ -9,5 +9,3 @@ public class InklowApplication {
 		SpringApplication.run(InklowApplication.class, args);
 	}
 }
-
-

@@ -21,7 +21,7 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public ResponseEntity<?> register(@RequestBody User user) {
+    public ResponseEntity<?> handleRegistration(@RequestBody User user) {
         User registerUser = userService.handleAccountRegistration(user);
 
         if (registerUser == null) {

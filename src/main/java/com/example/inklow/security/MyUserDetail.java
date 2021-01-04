@@ -13,7 +13,6 @@ import java.util.*;
 public class MyUserDetail implements UserDetails {
     private final User user;
 
-    @Autowired
     public MyUserDetail(User user) {
         this.user = user;
     }

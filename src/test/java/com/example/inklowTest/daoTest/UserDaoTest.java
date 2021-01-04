@@ -1,4 +1,4 @@
-package com.example.inklow.daoTest;
+package com.example.inklowTest.daoTest;
 
 import com.example.inklow.dao.UserDao;
 import com.example.inklow.entities.User;
@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
@@ -14,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
+@SpringBootConfiguration
 public class UserDaoTest {
     private final UserDao userDao;
 
