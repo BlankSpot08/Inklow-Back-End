@@ -13,6 +13,9 @@ public interface RoleService {
     Role getListById(UUID id);
     Role getListByName(String name);
 
-    Role addRole(Role role);
-    Role removeRole(Role role);
+    Role handleRoleRegistration(Role role);
+
+    Role handleRoleDeletion(Role role);
+
+    int roleCount();
 }

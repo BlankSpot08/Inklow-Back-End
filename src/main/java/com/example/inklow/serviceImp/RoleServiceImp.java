@@ -34,12 +34,17 @@ public class RoleServiceImp implements RoleService {
     }
 
     @Override
-    public Role addRole(Role role) {
+    public Role handleRoleRegistration(Role role) {
         return roleDao.addRole(role);
     }
 
     @Override
-    public Role removeRole(Role role) {
+    public Role handleRoleDeletion(Role role) {
         return roleDao.removeRole(role);
+    }
+
+    @Override
+    public int roleCount() {
+        return getListOfRoles().size();
     }
 }

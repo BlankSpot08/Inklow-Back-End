@@ -15,5 +15,8 @@ public interface RolePermissionService {
     List<Permission> getRolePermissionsById(UUID id);
 
     RolePermission handleRolePermissionRegistration(RolePermission rolePermission);
+
     RolePermission handleRolePermissionDeletion(RolePermission rolePermission);
+
+    int rolePermissionCount();
 }

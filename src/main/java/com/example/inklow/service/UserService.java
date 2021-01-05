@@ -18,4 +18,6 @@ public interface UserService {
     User handleAccountRegistration(User user);
 
     User handleAccountDeletion(User user);
+
+    int userCount();
 }

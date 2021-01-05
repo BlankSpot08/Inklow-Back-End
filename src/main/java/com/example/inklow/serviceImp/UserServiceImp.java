@@ -60,4 +60,9 @@ public class UserServiceImp implements UserService {
     public User handleAccountDeletion(User user) {
         return userDao.removeUser(user);
     }
+
+    @Override
+    public int userCount() {
+        return getListOfUsers().size();
+    }
 }

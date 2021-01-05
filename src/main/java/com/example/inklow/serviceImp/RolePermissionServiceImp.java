@@ -38,4 +38,9 @@ public class RolePermissionServiceImp implements RolePermissionService {
     public RolePermission handleRolePermissionDeletion(RolePermission rolePermission) {
         return rolePermissionDao.removeRolePermission(rolePermission);
     }
+
+    @Override
+    public int rolePermissionCount() {
+        return getListOfUserRoles().size();
+    }
 }
