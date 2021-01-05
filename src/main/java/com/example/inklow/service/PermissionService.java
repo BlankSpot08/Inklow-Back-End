@@ -15,4 +15,6 @@ public interface PermissionService {
 
     Permission handlePermissionRegistration(Permission permission);
     Permission handlePermissionDeletion(Permission permission);
+
+    int permissionCount();
 }

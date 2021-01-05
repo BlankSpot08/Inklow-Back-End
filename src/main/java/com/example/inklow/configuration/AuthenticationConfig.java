@@ -23,7 +23,9 @@ public class AuthenticationConfig {
         this.jwtUtil = jwtUtil;
         this.authenticationManager = authenticationManager;
     }
-
+/**
+ * @return
+ */
     @Bean
     @Primary
     public Authentication authentication() {
