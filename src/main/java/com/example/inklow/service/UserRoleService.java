@@ -15,4 +15,6 @@ public interface UserRoleService {
 
     UserRole handleUserRoleRegistration(UserRole userRole);
     UserRole handleUserRoleDeletion(UserRole userRole);
+
+    int userRoleCount();
 }

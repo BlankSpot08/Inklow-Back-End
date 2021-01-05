@@ -38,4 +38,9 @@ public class UserRoleServiceImp implements UserRoleService {
     public UserRole handleUserRoleDeletion(UserRole userRole) {
         return userRoleDao.removeUserRole(userRole);
     }
+
+    @Override
+    public int userRoleCount() {
+        return getListOfUserRoles().size();
+    }
 }

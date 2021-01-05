@@ -5,9 +5,11 @@ import com.example.inklow.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(3)
 public class PermissionDataSeeds implements ApplicationRunner {
     private final PermissionService permissionService;
 
@@ -18,6 +20,7 @@ public class PermissionDataSeeds implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        System.out.println(3);
         loadPermissionDatabaseData();
     }
 

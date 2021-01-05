@@ -2,17 +2,17 @@ package com.example.inklow.dataSeeds;
 
 import com.example.inklow.entities.User;
 import com.example.inklow.service.UserService;
-import javafx.application.Application;
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
 
 @Service
+@Order(1)
 public class UserDataSeeds implements ApplicationRunner {
     private final UserService userService;
 
@@ -23,6 +23,7 @@ public class UserDataSeeds implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        System.out.println(1);
         loadUserDatabaseData();
     }
 
