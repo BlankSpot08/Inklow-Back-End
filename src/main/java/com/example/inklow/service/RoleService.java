@@ -16,6 +16,9 @@ public interface RoleService {
     Role handleRoleRegistration(Role role);
 
     Role handleRoleDeletion(Role role);
+    Boolean handleAllRoleDeletion();
+
+    Role handleRoleChanges(Role role);
 
     int roleCount();
 }

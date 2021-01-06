@@ -12,7 +12,9 @@ public interface RoleDao {
     Role getRoleByName(String name);
 
     Role addRole(Role role);
-    Role removeRole(Role role);
 
+    Role removeRole(Role role);
     Boolean removeAllRole();
+
+    Role updateRole(Role role);
 }

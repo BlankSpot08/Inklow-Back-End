@@ -56,11 +56,31 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/user/getUser").hasAuthority("CAN_VIEW_USER_PROFILE")
 
                 // GENERAL
-                .antMatchers(HttpMethod.GET, "/api/getAllUsers").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/getAllRoles").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/getAllPermissions").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/getAllRolePermissions").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/getAllUserRoles").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/home/getAllUsers").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/home/addUser").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/home/deleteUser").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/home/deleteAllUser").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/api/home/getAllRoles").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/home/addRole").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/home/deleteRole").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/home/deleteAllRoles").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/api/home/getAllPermissions").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/home/addPermission").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/home/deletePermission").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/home/deleteAllPermission").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/api/home/getAllRolePermissions").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/home/addRolePermission").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/home/deleteRolePermission").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/home/deleteAllRolePermission").permitAll()
+
+                .antMatchers(HttpMethod.GET, "/api/home/getAllUserRoles").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/home/addUserRole").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/home/deleteUserRole").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/home/deleteAllUserRole").permitAll()
+
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

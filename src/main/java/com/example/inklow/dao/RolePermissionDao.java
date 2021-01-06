@@ -13,7 +13,7 @@ public interface RolePermissionDao {
     List<RolePermission> getListOfRolePermissions();
 
     RolePermission addRolePermission(RolePermission permission);
-    RolePermission removeRolePermission(RolePermission rolePermission);
 
+    RolePermission removeRolePermission(RolePermission rolePermission);
     Boolean removeAllRolePermission();
 }

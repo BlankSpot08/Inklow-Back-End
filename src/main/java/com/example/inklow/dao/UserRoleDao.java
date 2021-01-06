@@ -12,7 +12,7 @@ public interface UserRoleDao {
     List<Role> getUserRolesByUserId(UUID id);
 
     UserRole addUserRole(UserRole userRole);
-    UserRole removeUserRole(UserRole userRole);
 
+    UserRole removeUserRole(UserRole userRole);
     Boolean removeAllUserRole();
 }

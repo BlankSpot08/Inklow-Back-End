@@ -17,6 +17,7 @@ public interface RolePermissionService {
     RolePermission handleRolePermissionRegistration(RolePermission rolePermission);
 
     RolePermission handleRolePermissionDeletion(RolePermission rolePermission);
+    Boolean handleAllRolePermissionDeletion();
 
     int rolePermissionCount();
 }

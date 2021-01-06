@@ -14,7 +14,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/admin")
-@PreAuthorize("hasAnyAuthority('Admin')")
 public class AdminController {
     private final UserDao userDao;
 
@@ -23,7 +22,7 @@ public class AdminController {
         this.userDao = userDao;
     }
 
-    @RequestMapping(value = "/api/adminGetUsers", method = RequestMethod.GET)
+    @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
     public ResponseEntity<?> getUsersAdminWay() {
         List<User> getUsers = userDao.getListOfUsers();
 

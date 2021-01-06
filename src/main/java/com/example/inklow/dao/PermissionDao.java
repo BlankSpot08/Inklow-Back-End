@@ -12,7 +12,9 @@ public interface PermissionDao {
     Permission getPermissionByName(String name);
 
     Permission addPermission(Permission permission);
-    Permission removePermission(Permission permission);
 
+    Permission removePermission(Permission permission);
     Boolean removeAllPermission();
+
+    Permission updatePermisison(Permission Permission);
 }

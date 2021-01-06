@@ -101,6 +101,26 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
+    public User updateUser(User user) {
+        String query = "UPDATE user " +
+                "SET firstName = ?, lastName = ?, username = ?, email = ?, phoneNumber = ? " +
+                "WHERE id = ?";
+
+        int statusCode = jdbcTemplate.update(query,
+                user.getFirstName(),
+                user.getLastName(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPhoneNumber());
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return user;
+    }
+
+    @Override
     public Boolean removeAllUser() {
         String query = "DELETE FROM users";
 

@@ -109,4 +109,19 @@ public class RoleDaoImp implements RoleDao {
 
         return true;
     }
+
+    @Override
+    public Role updateRole(Role role) {
+        String query = "UPDATE role " +
+                "SET name = ?, description = ? " +
+                "WHERE id = ?";
+
+        int statusQuery = jdbcTemplate.update(query, role.getName(), role.getDescription(), role.getId());
+
+        if (statusQuery == 0) {
+            return null;
+        }
+
+        return role;
+    }
 }

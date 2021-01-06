@@ -11,7 +11,10 @@ public interface UserDao {
     User findUserByUsername(String username);
 
     User addUser(User user);
-    User removeUser(User user);
 
+    User removeUser(User user);
     Boolean removeAllUser();
+
+    User updateUser(User user);
+
 }

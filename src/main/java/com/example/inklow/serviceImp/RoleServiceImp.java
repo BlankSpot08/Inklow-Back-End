@@ -44,6 +44,16 @@ public class RoleServiceImp implements RoleService {
     }
 
     @Override
+    public Boolean handleAllRoleDeletion() {
+        return roleDao.removeAllRole();
+    }
+
+    @Override
+    public Role handleRoleChanges(Role role) {
+        return roleDao.updateRole(role);
+    }
+
+    @Override
     public int roleCount() {
         return getListOfRoles().size();
     }

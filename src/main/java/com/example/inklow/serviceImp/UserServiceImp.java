@@ -62,6 +62,16 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public Boolean handleAllAccountDeletion() {
+        return userDao.removeAllUser();
+    }
+
+    @Override
+    public User handleAccountChanges(User user) {
+        return userDao.updateUser(user);
+    }
+
+    @Override
     public int userCount() {
         return getListOfUsers().size();
     }

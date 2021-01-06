@@ -86,4 +86,19 @@ public class PermissionDaoImp implements PermissionDao {
 
         return true;
     }
+
+    @Override
+    public Permission updatePermisison(Permission permission) {
+        String query = "UPDATE permission " +
+                "SET name = ?, description = ? " +
+                "WHERE id = ?";
+
+        int statusQuery = jdbcTemplate.update(query, permission.getName(), permission.getDescription(), permission.getId());
+
+        if (statusQuery == 0) {
+            return null;
+        }
+
+        return permission;
+    }
 }
