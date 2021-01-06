@@ -1,8 +1,6 @@
 package com.example.inklow.controller;
 
-import com.example.inklow.entities.Role;
-import com.example.inklow.entities.RolePermission;
-import com.example.inklow.entities.User;
+import com.example.inklow.entities.*;
 import com.example.inklow.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -110,8 +108,47 @@ public class HomeController {
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "deleteAllRole", method = RequestMethod.GET)
-    public ResponseEntity<?> getAllPermissions() {
+    public ResponseEntity<?> deleteAllRole() {
         Boolean deleteAll = roleService.handleAllRoleDeletion();
+
+        if (deleteAll == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(permissionService.getListOfPermission());
+    }
+
+    @PreAuthorize("permitAll()")
+    @RequestMapping(value = "getAllPermissions", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllPermission() {
+        return ResponseEntity.status(HttpStatus.OK).body(permissionService.getListOfPermission());
+    }
+
+    @PreAuthorize("permitAll()")
+    @RequestMapping(value = "addPermission", method = RequestMethod.POST)
+    public ResponseEntity<?> addPermission(@RequestBody Permission permission) {
+        Permission tempPermission = permissionService.handlePermissionRegistration(permission);
+
+        if (tempPermission == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(tempPermission);
+    }
+
+    @PreAuthorize("permitAll()")
+    @RequestMapping(value = "deletePermission", method = RequestMethod.POST)
+    public ResponseEntity<?> deletePermission(@RequestBody Permission permission) {
+        Permission tempPermission = permissionService.handlePermissionDeletion(permission);
+
+        if (tempPermission == null) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(tempPermission);
+    }
+
+    @PreAuthorize("permitAll()")
+    @RequestMapping(value = "deleteAllPermission", method = RequestMethod.GET)
+    public ResponseEntity<?> deleteAllPermission() {
+        Boolean deleteAll = permissionService.handleAllPermissionDeletion();
 
         if (deleteAll == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad");
@@ -169,32 +206,32 @@ public class HomeController {
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "addUserRole", method = RequestMethod.POST)
-    public ResponseEntity<?> addUserRole(@RequestBody RolePermission rolePermission) {
-        RolePermission tempRolePermission = rolePermissionService.handleRolePermissionRegistration(rolePermission);
+    public ResponseEntity<?> addUserRole(@RequestBody UserRole userRole) {
+        UserRole tempUserRole = userRoleService.handleUserRoleRegistration(userRole);
 
-        if (tempRolePermission == null) {
+        if (tempUserRole == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad");
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(tempRolePermission);
+        return ResponseEntity.status(HttpStatus.OK).body(tempUserRole);
     }
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "deleteUserRole", method = RequestMethod.POST)
-    public ResponseEntity<?> deleteUserRole(@RequestBody RolePermission rolePermission) {
-        RolePermission tempRolePermission = rolePermissionService.handleRolePermissionDeletion(rolePermission);
+    public ResponseEntity<?> deleteUserRole(@RequestBody UserRole userRole) {
+        UserRole tempUserRole = userRoleService.handleUserRoleDeletion(userRole);
 
-        if (tempRolePermission == null) {
+        if (tempUserRole == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad");
         }
 
-        return ResponseEntity.status(HttpStatus.OK).body(tempRolePermission);
+        return ResponseEntity.status(HttpStatus.OK).body(tempUserRole);
     }
 
     @PreAuthorize("permitAll()")
     @RequestMapping(value = "deleteAllUserRole", method = RequestMethod.GET)
     public ResponseEntity<?> deleteAllUserRole() {
-        Boolean tempRolePermission = rolePermissionService.handleAllRolePermissionDeletion();
+        Boolean tempRolePermission = userRoleService.handleAllUserRoleDeletion();
 
         if (tempRolePermission == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Bad");

@@ -64,7 +64,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/home/getAllRoles").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/home/addRole").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/home/deleteRole").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/home/deleteAllRoles").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/home/deleteAllRole").permitAll()
 
                 .antMatchers(HttpMethod.GET, "/api/home/getAllPermissions").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/home/addPermission").permitAll()

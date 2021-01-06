@@ -44,6 +44,11 @@ public class PermissionServiceImp implements PermissionService {
     }
 
     @Override
+    public Boolean handleAllPermissionDeletion() {
+        return permissionDao.removeAllPermission();
+    }
+
+    @Override
     public int permissionCount() {
         return getListOfPermission().size();
     }

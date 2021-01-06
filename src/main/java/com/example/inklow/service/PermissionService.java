@@ -14,7 +14,9 @@ public interface PermissionService {
     Permission getPermissionByName(String name);
 
     Permission handlePermissionRegistration(Permission permission);
+
     Permission handlePermissionDeletion(Permission permission);
+    Boolean handleAllPermissionDeletion();
 
     int permissionCount();
 }

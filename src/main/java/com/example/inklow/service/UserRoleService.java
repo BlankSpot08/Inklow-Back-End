@@ -14,7 +14,9 @@ public interface UserRoleService {
     List<Role> getUserRolesById(UUID id);
 
     UserRole handleUserRoleRegistration(UserRole userRole);
+
     UserRole handleUserRoleDeletion(UserRole userRole);
+    Boolean handleAllUserRoleDeletion();
 
     int userRoleCount();
 }
