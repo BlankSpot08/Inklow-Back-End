@@ -17,13 +17,11 @@ import java.util.UUID;
 public class UserDaoImp implements UserDao {
     private final JdbcTemplate jdbcTemplate;
     private final UserRoleDao userRoles;
-    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserDaoImp(final JdbcTemplate jdbcTemplate, final UserRoleDao userRoles, final PasswordEncoder passwordEncoder) {
+    public UserDaoImp(final JdbcTemplate jdbcTemplate, final UserRoleDao userRoles) {
         this.jdbcTemplate = jdbcTemplate;
         this.userRoles = userRoles;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override

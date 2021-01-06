@@ -20,122 +20,47 @@ public class PermissionDataSeeds implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println(3);
         loadPermissionDatabaseData();
     }
 
     private void loadPermissionDatabaseData() {
         if (permissionService.permissionCount() == 0) {
-            // User
-            Permission viewUserProfile = new Permission.Builder()
-                    .name("CAN_VIEW_USER_PROFILE")
-                    .description("")
-                    .build();
+            String[] permissions = {
+                    // User
+                    "CAN_VIEW_USER_PROFILE",
+                    "CAN_DELETE_USER_PROFILE",
+                    "CAN_EDIT_USER_PROFILE",
 
-            Permission deleteUserProfile = new Permission.Builder()
-                    .name("CAN_DELETE_USER_PROFILE")
-                    .description("")
-                    .build();
+                    // Forum
+                    "CAN_CREATE_THREAD",
+                    "CAN_VIEW_THREAD",
+                    "CAN_DELETE_THREAD",
+                    "CAN_UPDATE_THREAD",
 
-            Permission updateUserProfile = new Permission.Builder()
-                    .name("CAN_EDIT_USER_PROFILE")
-                    .description("")
-                    .build();
+                    // Permission
+                    "CAN_VIEW_PERMISSION",
 
-            // Forum
-            Permission createThread = new Permission.Builder()
-                    .name("CAN_CREATE_THREAD")
-                    .description("")
-                    .build();
+                    // Roles
+                    "CAN_CREATE_ROLE",
+                    "CAN_VIEW_ROLE",
+                    "CAN_DELETE_ROLE",
+                    "CAN_UPDATE_ROLE",
 
-            Permission viewThread = new Permission.Builder()
-                    .name("CAN_VIEW_THREAD")
-                    .description("")
-                    .build();
+                    // Role Permission
+                    "CAN_CREATE_ROLE_PERMISSION",
+                    "CAN_VIEW_ROLE_PERMISSION",
+                    "CAN_DELETE_ROLE_PERMISSION",
+                    "CAN_UPDATE_ROLE_PERMISSION"
+            };
 
-            Permission deleteThread = new Permission.Builder()
-                    .name("CAN_DELETE_THREAD")
-                    .description("")
-                    .build();
+            for (String s : permissions) {
+                Permission permission = new Permission.Builder()
+                        .name(s)
+                        .description("")
+                        .build();
 
-            Permission updateThread = new Permission.Builder()
-                    .name("CAN_UPDATE_THREAD")
-                    .description("")
-                    .build();
-
-            // Permission
-            Permission viewPermission = new Permission.Builder()
-                    .name("CAN_VIEW_PERMISSION")
-                    .description("")
-                    .build();
-
-            // Role
-            Permission createRole = new Permission.Builder()
-                    .name("CAN_CREATE_ROLE")
-                    .description("")
-                    .build();
-
-            Permission viewRole = new Permission.Builder()
-                    .name("CAN_VIEW_ROLE")
-                    .description("")
-                    .build();
-
-            Permission deleteRole = new Permission.Builder()
-                    .name("CAN_DELETE_ROLE")
-                    .description("")
-                    .build();
-
-            Permission updateRole = new Permission.Builder()
-                    .name("CAN_UPDATE_ROLE")
-                    .description("")
-                    .build();
-
-            // RolePermission
-            Permission createRolePermission = new Permission.Builder()
-                    .name("CAN_CREATE_ROLE_PERMISSION")
-                    .description("")
-                    .build();
-
-            Permission viewRolePermission = new Permission.Builder()
-                    .name("CAN_VIEW_ROLE_PERMISSION")
-                    .description("")
-                    .build();
-
-            Permission deleteRolePermission = new Permission.Builder()
-                    .name("CAN_DELETE_ROLE_PERMISSION")
-                    .description("")
-                    .build();
-
-            Permission updateRolePermission = new Permission.Builder()
-                    .name("CAN_UPDATE_ROLE_PERMISSION")
-                    .description("")
-                    .build();
-
-            // User Permissions
-            permissionService.handlePermissionRegistration(viewUserProfile);
-            permissionService.handlePermissionRegistration(deleteUserProfile);
-            permissionService.handlePermissionRegistration(updateUserProfile);
-
-            // Forum
-            permissionService.handlePermissionRegistration(createThread);
-            permissionService.handlePermissionRegistration(viewThread);
-            permissionService.handlePermissionRegistration(updateThread);
-            permissionService.handlePermissionRegistration(deleteThread);
-
-            // Permission
-            permissionService.handlePermissionRegistration(viewPermission);
-
-            // Role
-            permissionService.handlePermissionRegistration(createRole);
-            permissionService.handlePermissionRegistration(viewRole);
-            permissionService.handlePermissionRegistration(updateRole);
-            permissionService.handlePermissionRegistration(deleteRole);
-
-            // Role Permission
-            permissionService.handlePermissionRegistration(createRolePermission);
-            permissionService.handlePermissionRegistration(viewRolePermission);
-            permissionService.handlePermissionRegistration(updateRolePermission);
-            permissionService.handlePermissionRegistration(deleteRolePermission);
+                permissionService.handlePermissionRegistration(permission);
+            }
         }
     }
 }

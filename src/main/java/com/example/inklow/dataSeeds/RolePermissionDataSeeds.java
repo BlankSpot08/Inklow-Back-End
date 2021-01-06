@@ -27,37 +27,57 @@ public class RolePermissionDataSeeds implements ApplicationRunner {
     }
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println(4);
         loadRolePermissionDatabaseData();
     }
 
     private void loadRolePermissionDatabaseData() {
         if (rolePermissionService.rolePermissionCount() == 0) {
-            Role userRole = roleService.getListByName("User");
+            String[] userRoles = {
+                    "CAN_VIEW_USER_PROFILE",
+                    "CAN_DELETE_USER_PROFILE",
+                    "CAN_EDIT_USER_PROFILE"
+            };
 
-            Permission viewUserProfile = permissionService.getPermissionByName("CAN_VIEW_USER_PROFILE");
-            Permission deleteUserProfile = permissionService.getPermissionByName("CAN_DELETE_USER_PROFILE");
-            Permission editUserProfile = permissionService.getPermissionByName("CAN_EDIT_USER_PROFILE");
+            String[] user = loadRolePermissions("User", userRoles);
 
-            RolePermission userView = new RolePermission.Builder()
+            String[] adminRoles = {
+                    "CAN_VIEW_USER_PROFILE",
+                    "CAN_DELETE_USER_PROFILE",
+                    "CAN_EDIT_USER_PROFILE",
+                    "CAN_CREATE_THREAD",
+                    "CAN_VIEW_THREAD",
+                    "CAN_DELETE_THREAD",
+                    "CAN_UPDATE_THREAD",
+                    "CAN_VIEW_PERMISSION",
+                    "CAN_CREATE_ROLE",
+                    "CAN_VIEW_ROLE",
+                    "CAN_DELETE_ROLE",
+                    "CAN_UPDATE_ROLE",
+                    "CAN_CREATE_ROLE_PERMISSION",
+                    "CAN_VIEW_ROLE_PERMISSION",
+                    "CAN_DELETE_ROLE_PERMISSION",
+                    "CAN_UPDATE_ROLE_PERMISSION"
+            };
+
+            String[] admin = loadRolePermissions("Admin", adminRoles);
+        }
+    }
+
+    private String[] loadRolePermissions(String role, String[] args) {
+        Role userRole = roleService.getListByName(role);
+
+        String[] userRolesString = args;
+        for (String s : userRolesString) {
+            Permission permission = permissionService.getPermissionByName(s);
+
+            RolePermission rolePermission = new RolePermission.Builder()
                     .roleId(userRole.getId())
-                    .permissionId(viewUserProfile.getId())
+                    .permissionId(permission.getId())
                     .build();
 
-            RolePermission deleteView = new RolePermission.Builder()
-                    .roleId(userRole.getId())
-                    .permissionId(deleteUserProfile.getId())
-                    .build();
-
-            RolePermission editView = new RolePermission.Builder()
-                    .roleId(userRole.getId())
-                    .permissionId(editUserProfile.getId())
-                    .build();
-
-            rolePermissionService.handleRolePermissionRegistration(userView);
-            rolePermissionService.handleRolePermissionRegistration(deleteView);
-            rolePermissionService.handleRolePermissionRegistration(editView);
+            rolePermissionService.handleRolePermissionRegistration(rolePermission);
         }
 
+        return args;
     }
 }

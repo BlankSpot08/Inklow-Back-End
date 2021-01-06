@@ -54,6 +54,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user/getUser").hasAuthority("CAN_VIEW_USER_PROFILE")
+
+                // GENERAL
+                .antMatchers(HttpMethod.GET, "/api/getAllUsers").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/getAllRoles").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/getAllPermissions").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/getAllRolePermissions").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/getAllUserRoles").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

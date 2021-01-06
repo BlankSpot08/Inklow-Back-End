@@ -4,10 +4,11 @@ import com.example.inklow.dao.UserDao;
 import com.example.inklow.entities.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -15,12 +16,13 @@ import java.util.List;
 import java.util.UUID;
 
 @SpringBootTest
-@SpringBootConfiguration
+@ActiveProfiles("test")
+@RunWith(SpringRunner.class)
 public class UserDaoTest {
     private final UserDao userDao;
 
     @Autowired
-    public UserDaoTest(final @Qualifier("testUserConfig") UserDao userDao) {
+    public UserDaoTest(final UserDao userDao) {
         this.userDao = userDao;
     }
 

@@ -20,25 +20,24 @@ public class RoleDataSeeds implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println(2);
         loadRoleDatabaseData();
     }
 
     private void loadRoleDatabaseData() {
         if (roleService.roleCount() == 0) {
-            Role admin = new Role.Builder()
-                    .name("Admin")
-                    .description("")
-                    .build();
+            String[] roles = {
+                    "Admin",
+                    "User"
+            };
 
-            Role user = new Role.Builder()
-                    .name("User")
-                    .description("")
-                    .build();
+            for (int i = 0; i < roles.length; i++) {
+                Role role = new Role.Builder()
+                        .name(roles[i])
+                        .description("")
+                        .build();
 
-            roleService.handleRoleRegistration(admin);
-
-            roleService.handleRoleRegistration(user);
+                roleService.handleRoleRegistration(role);
+            }
         }
     }
 }
