@@ -17,8 +17,9 @@ import java.util.UUID;
 
 @RunWith(SpringRunner.class)
 @Import(PermissionDaoConfig.class)
+@SpringBootTest
 public class PermissionDaoTest {
-    private PermissionDao permissionDao;
+    private final PermissionDao permissionDao;
 
     @Autowired
     public PermissionDaoTest(@Qualifier("testPermissionConfig") PermissionDao permissionDao) {

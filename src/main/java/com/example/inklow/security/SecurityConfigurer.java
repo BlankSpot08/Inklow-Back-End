@@ -1,5 +1,6 @@
 package com.example.inklow.security;
 
+import com.example.inklow.controller.URL.URL;
 import com.example.inklow.security.filter.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -56,7 +57,23 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/user_registration").permitAll()
 
                 // User
-                .antMatchers(HttpMethod.POST, "/api/user/getUser").hasAuthority("CAN_VIEW_USER_PROFILE")
+                .antMatchers(HttpMethod.GET, URL.USER.GET_ALL_USER).hasAuthority(URL.USER.GET_ALL_USER_PERMISSION)
+                .antMatchers(HttpMethod.POST, URL.USER.GET_USER).hasAuthority(URL.USER.GET_USER_PERMISSION)
+                .antMatchers(HttpMethod.POST, URL.USER.UPDATE_USER).hasAuthority(URL.USER.UPDATE_USER_PERMISSION)
+                .antMatchers(HttpMethod.POST, URL.USER.DELETE_USER).hasAuthority(URL.USER.DELETE_USER_PERMISSION)
+
+                // Role
+                .antMatchers(HttpMethod.POST, URL.ADD_ROLE).hasAuthority(URL.ADD_ROLE_PERMISSION)
+                .antMatchers(HttpMethod.GET, URL.GET_ALL_ROLE).hasAuthority(URL.GET_ALL_ROLE_PERMISSION)
+                .antMatchers(HttpMethod.POST, URL.GET_ROLE).hasAuthority(URL.GET_ROLE_PERMISSION)
+                .antMatchers(HttpMethod.POST, URL.UPDATE_ROLE).hasAuthority(URL.UPDATE_ROLE_PERMISSION)
+                .antMatchers(HttpMethod.POST, URL.DELETE_ROLE).hasAuthority(URL.DELETE_ROLE_PERMISSION)
+
+                // Permission
+                .antMatchers(HttpMethod.GET, URL.GET_ALL_PERMISSION).hasAuthority(URL.GET_ALL_PERMISSION_PERMISSION)
+                .antMatchers(HttpMethod.POST, URL.GET_PERMISSION).hasAuthority(URL.GET_PERMISSION_PERMISSION)
+
+
 
                 // GENERAL
                 .antMatchers(HttpMethod.GET, "/api/home/getAllUsers").permitAll()

@@ -23,16 +23,16 @@ public class UserController {
         this.jwtUtil = jwtUtil;
     }
 
-    @PreAuthorize("hasAnyAuthority('CAN_VIEW_ALL_USER')")
-    @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
-    public ResponseEntity<?> getUsersAdminWay() {
+    @PreAuthorize(value = "hasAnyAuthority('{URL.USER.GET_ALL_USER_PERMISSION}')")
+    @RequestMapping(value = "{URL.USER.GET_ALL_USER}", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllUsers() {
         List<User> listOfUsers = userService.getListOfUsers();
 
         return ResponseEntity.status(HttpStatus.OK).body(listOfUsers);
     }
 
-    @PreAuthorize("hasAnyAuthority('CAN_VIEW_USER')")
-    @RequestMapping(value = "/getUser", method = RequestMethod.POST)
+    @PreAuthorize(value = "hasAnyAuthority('{URL.USER.GET_USER_PERMISSION}')")
+    @RequestMapping(value = "{URL.USER.GET_USER}", method = RequestMethod.POST)
     public ResponseEntity<?> getUser(@RequestHeader(name = "Authorization") String authorizationHeader) {
         String jwt = authorizationHeader.split(" ")[1];
 
@@ -41,8 +41,8 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
-    @PreAuthorize("hasAnyAuthority('CAN_EDIT_USER')")
-    @RequestMapping(value = "/updateUser", method = RequestMethod.POST)
+    @PreAuthorize(value = "hasAnyAuthority('{URL.USER.UPDATE_USER_PERMISSION}')")
+    @RequestMapping(value = "{URL.USER.UPDATE_USER}", method = RequestMethod.POST)
     public ResponseEntity<?> updateUser(@RequestBody User user) {
         User tempUser = userService.findUserByUsername(user.getUsername());
 
@@ -51,8 +51,8 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(tempUser);
     }
 
-    @PreAuthorize("hasAnyAuthority('CAN_DELETE_USER')")
-    @RequestMapping(value = "/deleteUser", method = RequestMethod.DELETE)
+    @PreAuthorize(value = "hasAnyAuthority('{URL.USER.DELETE_USER_PERMISSION}')")
+    @RequestMapping(value = "{URL.USER.DELETE_USER}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteUser(@RequestBody User user) {
         User tempUser = userService.findUserByUsername(user.getUsername());
 
