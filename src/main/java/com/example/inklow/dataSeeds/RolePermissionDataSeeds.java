@@ -42,18 +42,27 @@ public class RolePermissionDataSeeds implements ApplicationRunner {
 
             String[] adminRoles = {
                     "CAN_VIEW_USER_PROFILE",
+                    "CAN_VIEW_ALL_USER_PROFILE",
                     "CAN_DELETE_USER_PROFILE",
                     "CAN_EDIT_USER_PROFILE",
+
                     "CAN_CREATE_THREAD",
+                    "CAN_VIEW_ALL_THREAD",
                     "CAN_VIEW_THREAD",
                     "CAN_DELETE_THREAD",
                     "CAN_UPDATE_THREAD",
+
+                    "CAN_VIEW_ALL_PERMISSION",
                     "CAN_VIEW_PERMISSION",
+
                     "CAN_CREATE_ROLE",
+                    "CAN_VIEW_ALL_ROLE",
                     "CAN_VIEW_ROLE",
                     "CAN_DELETE_ROLE",
                     "CAN_UPDATE_ROLE",
+
                     "CAN_CREATE_ROLE_PERMISSION",
+                    "CAN_VIEW_ALL_ROLE_PERMISSION",
                     "CAN_VIEW_ROLE_PERMISSION",
                     "CAN_DELETE_ROLE_PERMISSION",
                     "CAN_UPDATE_ROLE_PERMISSION"
@@ -64,7 +73,7 @@ public class RolePermissionDataSeeds implements ApplicationRunner {
     }
 
     private String[] loadRolePermissions(String role, String[] args) {
-        Role userRole = roleService.getListByName(role);
+        Role userRole = roleService.getRoleByName(role);
 
         String[] userRolesString = args;
         for (String s : userRolesString) {

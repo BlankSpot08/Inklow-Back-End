@@ -39,7 +39,7 @@ public class UserRoleDataSeeds implements ApplicationRunner {
 
     private UserRole loadUserRole(String username, String roleName) {
         User user = userService.findUserByUsername(username);
-        Role role = roleService.getListByName(roleName);
+        Role role = roleService.getRoleByName(roleName);
 
         UserRole userRole = new UserRole.Builder()
                 .userId(user.getId())

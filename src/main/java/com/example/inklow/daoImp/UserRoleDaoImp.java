@@ -53,7 +53,7 @@ public class UserRoleDaoImp implements UserRoleDao {
 
     @Override
     public UserRole addUserRole(UserRole userRole) {
-        String query = "INSERT INTO user_roles(userId, roleId)" +
+        String query = "INSERT INTO user_roles(userId, roleId) " +
                 "VALUES(?, ?)";
 
         int statusCode = jdbcTemplate.update(query, userRole.getUserId(), userRole.getRoleId());

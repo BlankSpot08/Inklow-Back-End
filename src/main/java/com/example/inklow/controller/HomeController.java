@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/home")
 public class HomeController {
@@ -238,5 +241,19 @@ public class HomeController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(tempRolePermission);
+    }
+
+    @PreAuthorize("permitAll()")
+    @RequestMapping(value = "deleteEverything", method = RequestMethod.GET)
+    public ResponseEntity<?> deleteEverything() {
+        List<Boolean> temp = new LinkedList<>();
+
+        temp.add(userService.handleAllAccountDeletion());
+        temp.add(roleService.handleAllRoleDeletion());
+        temp.add(permissionService.handleAllPermissionDeletion());
+        temp.add(rolePermissionService.handleAllRolePermissionDeletion());
+        temp.add(userRoleService.handleAllUserRoleDeletion());
+
+        return ResponseEntity.status(HttpStatus.OK).body(temp);
     }
 }

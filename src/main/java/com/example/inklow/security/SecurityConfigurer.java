@@ -52,7 +52,10 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .and();
 
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/user_authentication").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/user_registration").permitAll()
+
+                // User
                 .antMatchers(HttpMethod.POST, "/api/user/getUser").hasAuthority("CAN_VIEW_USER_PROFILE")
 
                 // GENERAL

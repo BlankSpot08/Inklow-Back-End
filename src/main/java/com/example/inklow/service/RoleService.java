@@ -10,8 +10,8 @@ import java.util.UUID;
 public interface RoleService {
     List<Role> getListOfRoles();
 
-    Role getListById(UUID id);
-    Role getListByName(String name);
+    Role getRoleById(UUID id);
+    Role getRoleByName(String name);
 
     Role handleRoleRegistration(Role role);
 

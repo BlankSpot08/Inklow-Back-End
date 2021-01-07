@@ -20,7 +20,7 @@ public class RegisterController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    @RequestMapping(value = "/user_registration", method = RequestMethod.POST)
     public ResponseEntity<?> handleRegistration(@RequestBody User user) {
         User registerUser = userService.handleAccountRegistration(user);
 

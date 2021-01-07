@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/api/user")
 public class UserController {
@@ -19,6 +21,14 @@ public class UserController {
     public UserController(final UserService userService, final JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
+    }
+
+    @PreAuthorize("hasAnyAuthority('CAN_VIEW_ALL_USER')")
+    @RequestMapping(value = "/getUsers", method = RequestMethod.GET)
+    public ResponseEntity<?> getUsersAdminWay() {
+        List<User> listOfUsers = userService.getListOfUsers();
+
+        return ResponseEntity.status(HttpStatus.OK).body(listOfUsers);
     }
 
     @PreAuthorize("hasAnyAuthority('CAN_VIEW_USER')")

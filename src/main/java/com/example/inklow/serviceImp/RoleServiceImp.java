@@ -24,12 +24,12 @@ public class RoleServiceImp implements RoleService {
     }
 
     @Override
-    public Role getListById(UUID id) {
+    public Role getRoleById(UUID id) {
         return roleDao.getRoleById(id);
     }
 
     @Override
-    public Role getListByName(String name) {
+    public Role getRoleByName(String name) {
         return roleDao.getRoleByName(name);
     }
 

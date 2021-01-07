@@ -1,9 +1,13 @@
 package com.example.inklow.serviceImp;
 
 import com.example.inklow.dao.UserDao;
+import com.example.inklow.entities.Role;
 import com.example.inklow.entities.User;
+import com.example.inklow.entities.UserRole;
 import com.example.inklow.model.AuthenticationRequest;
 import com.example.inklow.security.Authentication;
+import com.example.inklow.service.RoleService;
+import com.example.inklow.service.UserRoleService;
 import com.example.inklow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,12 +21,16 @@ public class UserServiceImp implements UserService {
     private final UserDao userDao;
     private final PasswordEncoder passwordEncoder;
     private final Authentication authentication;
+    private final UserRoleService userRoleService;
+    private final RoleService roleService;
 
     @Autowired
-    public UserServiceImp(Authentication authentication, UserDao userDao, PasswordEncoder passwordEncoder) {
+    public UserServiceImp(Authentication authentication, UserDao userDao, PasswordEncoder passwordEncoder, UserRoleService userRoleService, RoleService roleService) {
         this.authentication = authentication;
         this.userDao = userDao;
         this.passwordEncoder = passwordEncoder;
+        this.userRoleService = userRoleService;
+        this.roleService = roleService;
     }
 
     @Override
@@ -52,6 +60,16 @@ public class UserServiceImp implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         User tempUser = userDao.addUser(user);
+        tempUser = userDao.findUserByUsername(tempUser.getUsername());
+
+        Role role = roleService.getRoleByName("User");
+
+        UserRole userRole = new UserRole.Builder()
+                .userId(tempUser.getId())
+                .roleId(role.getId())
+                .build();
+
+        userRoleService.handleUserRoleRegistration(userRole);
 
         return tempUser;
     }

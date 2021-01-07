@@ -27,6 +27,7 @@ public class PermissionDataSeeds implements ApplicationRunner {
         if (permissionService.permissionCount() == 0) {
             String[] permissions = {
                     // User
+                    "CAN_VIEW_ALL_USER_PROFILE",
                     "CAN_VIEW_USER_PROFILE",
                     "CAN_DELETE_USER_PROFILE",
                     "CAN_EDIT_USER_PROFILE",
@@ -34,20 +35,24 @@ public class PermissionDataSeeds implements ApplicationRunner {
                     // Forum
                     "CAN_CREATE_THREAD",
                     "CAN_VIEW_THREAD",
+                    "CAN_VIEW_ALL_THREAD",
                     "CAN_DELETE_THREAD",
                     "CAN_UPDATE_THREAD",
 
                     // Permission
+                    "CAN_VIEW_ALL_PERMISSION",
                     "CAN_VIEW_PERMISSION",
 
                     // Roles
                     "CAN_CREATE_ROLE",
+                    "CAN_VIEW_ALL_ROLE",
                     "CAN_VIEW_ROLE",
                     "CAN_DELETE_ROLE",
                     "CAN_UPDATE_ROLE",
 
                     // Role Permission
                     "CAN_CREATE_ROLE_PERMISSION",
+                    "CAN_VIEW_ALL_ROLE_PERMISSION",
                     "CAN_VIEW_ROLE_PERMISSION",
                     "CAN_DELETE_ROLE_PERMISSION",
                     "CAN_UPDATE_ROLE_PERMISSION"
