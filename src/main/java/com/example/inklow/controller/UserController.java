@@ -28,7 +28,8 @@ public class UserController {
         this.jwtUtil = jwtUtil;
     }
 
-    @PreAuthorize(value = "hasAnyAuthority(#ENDPOINTS.GET_ALL_PERMISSION)")
+//    @PreAuthorize(value = "hasAnyAuthority(#ENDPOINTS.GET_ALL_PERMISSION)")
+    @PreAuthorize(value = "hasAnyAuthority('peke')")
     @RequestMapping(value = ENDPOINTS.GET_ALL, method = RequestMethod.GET)
     public ResponseEntity<?> getAllUsers() {
         List<User> listOfUsers = userService.getListOfUsers();
@@ -36,7 +37,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(listOfUsers);
     }
 
-    @PreAuthorize(value = "hasAnyAuthority(#ENDPOINTS.GET)")
+    @PreAuthorize(value = "hasAnyAuthority(#ENDPOINTS.GET_PERMISSION)")
     @RequestMapping(value = ENDPOINTS.GET, method = RequestMethod.POST)
     public ResponseEntity<?> getUser(@RequestHeader(name = "Authorization") String authorizationHeader) {
         String jwt = authorizationHeader.split(" ")[1];

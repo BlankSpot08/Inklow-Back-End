@@ -59,7 +59,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/user_registration").permitAll()
 
                 // User
-                .antMatchers(HttpMethod.GET, UserController.ENDPOINTS.GET_ALL).hasAuthority(UserController.ENDPOINTS.GET_ALL_PERMISSION)
+                .antMatchers(HttpMethod.GET, UserController.ENDPOINTS.GET_ALL).hasAuthority("asdasd")
                 .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.GET).hasAuthority(UserController.ENDPOINTS.GET_PERMISSION)
                 .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.UPDATE).hasAuthority(UserController.ENDPOINTS.UPDATE_PERMISSION)
                 .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.DELETE).hasAuthority(UserController.ENDPOINTS.DELETE_PERMISSION)
@@ -74,8 +74,6 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 // Permission
                 .antMatchers(HttpMethod.GET, URL.PERMISSION.GET_ALL).hasAuthority(URL.PERMISSION.GET_ALL_PERMISSION)
                 .antMatchers(HttpMethod.POST, URL.PERMISSION.GET).hasAuthority(URL.PERMISSION.GET_PERMISSION)
-
-
 
                 // GENERAL
                 .antMatchers(HttpMethod.GET, "/api/home/getAllUsers").permitAll()
