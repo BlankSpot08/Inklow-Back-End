@@ -78,7 +78,7 @@ public class MyUserDetail implements UserDetails {
         return stringPermissions;
     }
 
-    private List<GrantedAuthority>  getGrantedAuthorities(List<String> permissions) {
+    private List<GrantedAuthority> getGrantedAuthorities(List<String> permissions) {
         List<GrantedAuthority> authorities = new ArrayList<>();
 
         for (String permission : permissions) {

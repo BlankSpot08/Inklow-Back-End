@@ -24,15 +24,15 @@ public class PermissionController {
         this.permissionService = permissionService;
     }
 
-    @PreAuthorize("hasAnyAuthority('{URL.GET_PERMISSION_PERMISSION}')")
-    @RequestMapping(value = "{URL.GET_PERMISSION}", method = RequestMethod.POST)
+    @PreAuthorize("hasAnyAuthority('{URL.PERMISSION.GET_PERMISSION_PERMISSION}')")
+    @RequestMapping(value = "{URL.PERMISSION.GET_PERMISSION}", method = RequestMethod.POST)
     public ResponseEntity<?> getPermission(@RequestBody Permission permission) {
         Permission tempPermission = permissionService.getPermissionByName(permission.getName());
 
         return ResponseEntity.status(HttpStatus.OK).body(tempPermission);
     }
 
-    @PreAuthorize("hasAnyAuthority('{URL.GET_ALL_PERMISSION_PERMISSION}')")
+    @PreAuthorize("hasAnyAuthority('{URL.PERMISSION.GET_ALL_PERMISSION_PERMISSION}')")
     @RequestMapping(value = "{URL.GET_ALL_PERMISSION}", method = RequestMethod.GET)
     public ResponseEntity<?> getAllPermission() {
         List<Permission> listOfRole = permissionService.getListOfPermission();

@@ -1,6 +1,8 @@
 package com.example.inklow.security;
 
+import com.example.inklow.controller.RoleController;
 import com.example.inklow.controller.URL.URL;
+import com.example.inklow.controller.UserController;
 import com.example.inklow.security.filter.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,21 +59,21 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.POST, "/api/user_registration").permitAll()
 
                 // User
-                .antMatchers(HttpMethod.GET, URL.USER.GET_ALL_USER).hasAuthority(URL.USER.GET_ALL_USER_PERMISSION)
-                .antMatchers(HttpMethod.POST, URL.USER.GET_USER).hasAuthority(URL.USER.GET_USER_PERMISSION)
-                .antMatchers(HttpMethod.POST, URL.USER.UPDATE_USER).hasAuthority(URL.USER.UPDATE_USER_PERMISSION)
-                .antMatchers(HttpMethod.POST, URL.USER.DELETE_USER).hasAuthority(URL.USER.DELETE_USER_PERMISSION)
+                .antMatchers(HttpMethod.GET, UserController.ENDPOINTS.GET_ALL).hasAuthority(UserController.ENDPOINTS.GET_ALL_PERMISSION)
+                .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.GET).hasAuthority(UserController.ENDPOINTS.GET_PERMISSION)
+                .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.UPDATE).hasAuthority(UserController.ENDPOINTS.UPDATE_PERMISSION)
+                .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.DELETE).hasAuthority(UserController.ENDPOINTS.DELETE_PERMISSION)
 
                 // Role
-                .antMatchers(HttpMethod.POST, URL.ADD_ROLE).hasAuthority(URL.ADD_ROLE_PERMISSION)
-                .antMatchers(HttpMethod.GET, URL.GET_ALL_ROLE).hasAuthority(URL.GET_ALL_ROLE_PERMISSION)
-                .antMatchers(HttpMethod.POST, URL.GET_ROLE).hasAuthority(URL.GET_ROLE_PERMISSION)
-                .antMatchers(HttpMethod.POST, URL.UPDATE_ROLE).hasAuthority(URL.UPDATE_ROLE_PERMISSION)
-                .antMatchers(HttpMethod.POST, URL.DELETE_ROLE).hasAuthority(URL.DELETE_ROLE_PERMISSION)
+                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.ADD).hasAuthority(RoleController.ROLE_ENDPOINTS.ADD_PERMISSION)
+                .antMatchers(HttpMethod.GET, RoleController.ROLE_ENDPOINTS.GET_ALL).hasAuthority(RoleController.ROLE_ENDPOINTS.GET_ALL_PERMISSION)
+                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.GET).hasAuthority(RoleController.ROLE_ENDPOINTS.GET_PERMISSION)
+                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.UPDATE).hasAuthority(RoleController.ROLE_ENDPOINTS.UPDATE_PERMISSION)
+                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.DELETE).hasAuthority(RoleController.ROLE_ENDPOINTS.DELETE_PERMISSION)
 
                 // Permission
-                .antMatchers(HttpMethod.GET, URL.GET_ALL_PERMISSION).hasAuthority(URL.GET_ALL_PERMISSION_PERMISSION)
-                .antMatchers(HttpMethod.POST, URL.GET_PERMISSION).hasAuthority(URL.GET_PERMISSION_PERMISSION)
+                .antMatchers(HttpMethod.GET, URL.PERMISSION.GET_ALL).hasAuthority(URL.PERMISSION.GET_ALL_PERMISSION)
+                .antMatchers(HttpMethod.POST, URL.PERMISSION.GET).hasAuthority(URL.PERMISSION.GET_PERMISSION)
 
 
 
