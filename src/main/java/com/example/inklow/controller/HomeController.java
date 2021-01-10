@@ -248,8 +248,8 @@ public class HomeController {
     public ResponseEntity<?> deleteEverything() {
         List<Boolean> temp = new LinkedList<>();
 
-        temp.add(userRoleService.handleAllUserRoleDeletion());
         temp.add(rolePermissionService.handleAllRolePermissionDeletion());
+        temp.add(userRoleService.handleAllUserRoleDeletion());
         temp.add(userService.handleAllAccountDeletion());
         temp.add(roleService.handleAllRoleDeletion());
         temp.add(permissionService.handleAllPermissionDeletion());

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,11 +22,11 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 @EnableWebSecurity
 @Component
-//@EnableGlobalMethodSecurity(
+@EnableGlobalMethodSecurity(
 //        securedEnabled = true,
 //        jsr250Enabled = true,
-//        prePostEnabled = true
-//)
+        prePostEnabled = true
+)
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     private final MyUserDetailService myUserDetailService;
     private final JwtRequestFilter jwtRequestFilter;
@@ -51,15 +52,15 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.exceptionHandling()
-                .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage()))
-                .and();
+                .authenticationEntryPoint((request, response, authException) ->
+                        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage()));
 
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/user_authentication").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/user_registration").permitAll()
 
                 // User
-                .antMatchers(HttpMethod.GET, UserController.ENDPOINTS.GET_ALL).hasAuthority("asdasd")
+                .antMatchers(HttpMethod.GET, UserController.ENDPOINTS.GET_ALL).hasAuthority(UserController.ENDPOINTS.GET_ALL_PERMISSION)
                 .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.GET).hasAuthority(UserController.ENDPOINTS.GET_PERMISSION)
                 .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.UPDATE).hasAuthority(UserController.ENDPOINTS.UPDATE_PERMISSION)
                 .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.DELETE).hasAuthority(UserController.ENDPOINTS.DELETE_PERMISSION)

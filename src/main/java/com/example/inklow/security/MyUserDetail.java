@@ -3,12 +3,14 @@ package com.example.inklow.security;
 import com.example.inklow.entities.Permission;
 import com.example.inklow.entities.Role;
 import com.example.inklow.entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 public class MyUserDetail implements UserDetails {
     private final User user;
@@ -59,11 +61,12 @@ public class MyUserDetail implements UserDetails {
     }
 
     private List<? extends GrantedAuthority> getPermissions(List<Role> roles) {
-        return getGrantedAuthorities(getStringPermissions (roles));
+        return getGrantedAuthorities(getStringPermissions(roles));
     }
 
     private List<String> getStringPermissions(List<Role> roles) {
         List<Permission> setOfPermissions = new ArrayList<>();
+
 
         for (Role role : roles) {
             setOfPermissions.addAll(role.getPermissions());

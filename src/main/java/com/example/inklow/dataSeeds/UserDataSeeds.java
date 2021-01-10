@@ -12,7 +12,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 
 @Service
-@Order(1)
+@Order(3)
 public class UserDataSeeds implements ApplicationRunner {
     private final UserService userService;
 
@@ -39,6 +39,18 @@ public class UserDataSeeds implements ApplicationRunner {
                     .build();
 
             userService.handleAccountRegistration(defaultUser);
+
+            User anotherUser = new User.Builder()
+                    .firstName("Spal")
+                    .lastName("Ak")
+                    .birthDate(Date.valueOf(LocalDate.parse("1990-12-30")))
+                    .gender("Male")
+                    .username("Blanker08")
+                    .password("09194163795")
+                    .email("arvinchu21@gmail.com")
+                    .build();
+
+            userService.handleAccountRegistration(anotherUser);
         }
     }
 }

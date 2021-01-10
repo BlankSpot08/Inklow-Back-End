@@ -1,13 +1,9 @@
 package com.example.inklow.controller;
 
-import com.example.inklow.controller.URL.API;
 import com.example.inklow.entities.User;
 import com.example.inklow.security.util.JwtUtil;
 import com.example.inklow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnNotWebApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -28,8 +24,7 @@ public class UserController {
         this.jwtUtil = jwtUtil;
     }
 
-//    @PreAuthorize(value = "hasAnyAuthority(#ENDPOINTS.GET_ALL_PERMISSION)")
-    @PreAuthorize(value = "hasAnyAuthority('peke')")
+    @PreAuthorize(value = "hasAuthority('CAN_VIEW_ALL_USER_PROFILE')")
     @RequestMapping(value = ENDPOINTS.GET_ALL, method = RequestMethod.GET)
     public ResponseEntity<?> getAllUsers() {
         List<User> listOfUsers = userService.getListOfUsers();
