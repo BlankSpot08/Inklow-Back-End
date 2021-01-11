@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("")
+@RequestMapping(value = "/api" + PermissionController.ENDPOINTS.PERMISSION)
 public class PermissionController {
     private final PermissionService permissionService;
 
@@ -38,5 +38,15 @@ public class PermissionController {
         List<Permission> listOfRole = permissionService.getListOfPermission();
 
         return ResponseEntity.status(HttpStatus.OK).body(listOfRole);
+    }
+
+    protected static final class ENDPOINTS {
+        protected static final String PERMISSION = "/permission";
+
+        protected static final String GET = PERMISSION + "/get";
+        protected static final String GET_PERMISSION = "CAN_PERMISSiON_ROLE";
+
+        protected static final String GET_ALL = PERMISSION + "/getAll";
+        protected static final String GET_ALL_PERMISSION = "CAN_VIEW_ALL_PERMISSION";
     }
 }

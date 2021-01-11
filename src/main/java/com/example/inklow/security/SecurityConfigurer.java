@@ -55,54 +55,54 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint((request, response, authException) ->
                         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage()));
 
-        http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/user_authentication").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/user_registration").permitAll()
-
-                // User
-                .antMatchers(HttpMethod.GET, UserController.ENDPOINTS.GET_ALL).hasAuthority(UserController.ENDPOINTS.GET_ALL_PERMISSION)
-                .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.GET).hasAuthority(UserController.ENDPOINTS.GET_PERMISSION)
-                .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.UPDATE).hasAuthority(UserController.ENDPOINTS.UPDATE_PERMISSION)
-                .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.DELETE).hasAuthority(UserController.ENDPOINTS.DELETE_PERMISSION)
-
-                // Role
-                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.ADD).hasAuthority(RoleController.ROLE_ENDPOINTS.ADD_PERMISSION)
-                .antMatchers(HttpMethod.GET, RoleController.ROLE_ENDPOINTS.GET_ALL).hasAuthority(RoleController.ROLE_ENDPOINTS.GET_ALL_PERMISSION)
-                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.GET).hasAuthority(RoleController.ROLE_ENDPOINTS.GET_PERMISSION)
-                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.UPDATE).hasAuthority(RoleController.ROLE_ENDPOINTS.UPDATE_PERMISSION)
-                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.DELETE).hasAuthority(RoleController.ROLE_ENDPOINTS.DELETE_PERMISSION)
-
-                // Permission
-                .antMatchers(HttpMethod.GET, URL.PERMISSION.GET_ALL).hasAuthority(URL.PERMISSION.GET_ALL_PERMISSION)
-                .antMatchers(HttpMethod.POST, URL.PERMISSION.GET).hasAuthority(URL.PERMISSION.GET_PERMISSION)
-
-                // GENERAL
-                .antMatchers(HttpMethod.GET, "/api/home/getAllUsers").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/home/addUser").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/home/deleteUser").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/home/deleteAllUser").permitAll()
-
-                .antMatchers(HttpMethod.GET, "/api/home/getAllRoles").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/home/addRole").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/home/deleteRole").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/home/deleteAllRole").permitAll()
-
-                .antMatchers(HttpMethod.GET, "/api/home/getAllPermissions").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/home/addPermission").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/home/deletePermission").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/home/deleteAllPermission").permitAll()
-
-                .antMatchers(HttpMethod.GET, "/api/home/getAllRolePermissions").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/home/addRolePermission").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/home/deleteRolePermission").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/home/deleteAllRolePermission").permitAll()
-
-                .antMatchers(HttpMethod.GET, "/api/home/getAllUserRoles").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/home/addUserRole").permitAll()
-                .antMatchers(HttpMethod.POST, "/api/home/deleteUserRole").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/home/deleteAllUserRole").permitAll()
-
-                .anyRequest().authenticated();
+//        http.authorizeRequests()
+//                .antMatchers(HttpMethod.POST, "/api/user_authentication").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/user_registration").permitAll()
+//
+//                // User
+//                .antMatchers(HttpMethod.GET, UserController.ENDPOINTS.GET_ALL).hasAuthority(UserController.ENDPOINTS.GET_ALL_PERMISSION)
+//                .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.GET).hasAuthority(UserController.ENDPOINTS.GET_PERMISSION)
+//                .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.UPDATE).hasAuthority(UserController.ENDPOINTS.UPDATE_PERMISSION)
+//                .antMatchers(HttpMethod.POST, UserController.ENDPOINTS.DELETE).hasAuthority(UserController.ENDPOINTS.DELETE_PERMISSION)
+//
+//                // Role
+//                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.ADD).hasAuthority(RoleController.ROLE_ENDPOINTS.ADD_PERMISSION)
+//                .antMatchers(HttpMethod.GET, RoleController.ROLE_ENDPOINTS.GET_ALL).hasAuthority(RoleController.ROLE_ENDPOINTS.GET_ALL_PERMISSION)
+//                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.GET).hasAuthority(RoleController.ROLE_ENDPOINTS.GET_PERMISSION)
+//                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.UPDATE).hasAuthority(RoleController.ROLE_ENDPOINTS.UPDATE_PERMISSION)
+//                .antMatchers(HttpMethod.POST, RoleController.ROLE_ENDPOINTS.DELETE).hasAuthority(RoleController.ROLE_ENDPOINTS.DELETE_PERMISSION)
+//
+//                // Permission
+//                .antMatchers(HttpMethod.GET, URL.PERMISSION.GET_ALL).hasAuthority(URL.PERMISSION.GET_ALL_PERMISSION)
+//                .antMatchers(HttpMethod.POST, URL.PERMISSION.GET).hasAuthority(URL.PERMISSION.GET_PERMISSION)
+//
+//                // GENERAL
+//                .antMatchers(HttpMethod.GET, "/api/home/getAllUsers").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/home/addUser").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/home/deleteUser").permitAll()
+//                .antMatchers(HttpMethod.GET, "/api/home/deleteAllUser").permitAll()
+//
+//                .antMatchers(HttpMethod.GET, "/api/home/getAllRoles").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/home/addRole").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/home/deleteRole").permitAll()
+//                .antMatchers(HttpMethod.GET, "/api/home/deleteAllRole").permitAll()
+//
+//                .antMatchers(HttpMethod.GET, "/api/home/getAllPermissions").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/home/addPermission").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/home/deletePermission").permitAll()
+//                .antMatchers(HttpMethod.GET, "/api/home/deleteAllPermission").permitAll()
+//
+//                .antMatchers(HttpMethod.GET, "/api/home/getAllRolePermissions").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/home/addRolePermission").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/home/deleteRolePermission").permitAll()
+//                .antMatchers(HttpMethod.GET, "/api/home/deleteAllRolePermission").permitAll()
+//
+//                .antMatchers(HttpMethod.GET, "/api/home/getAllUserRoles").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/home/addUserRole").permitAll()
+//                .antMatchers(HttpMethod.POST, "/api/home/deleteUserRole").permitAll()
+//                .antMatchers(HttpMethod.GET, "/api/home/deleteAllUserRole").permitAll()
+//
+//                .anyRequest().authenticated();
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }

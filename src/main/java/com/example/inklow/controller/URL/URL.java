@@ -9,16 +9,6 @@ public final class URL {
 
     //PERMISSION END POINTS
 
-    public static final class PERMISSION {
-        private static final String PERMISSION = API + "/permission";
-
-        public static final String GET = PERMISSION + "/get";
-        public static final String GET_PERMISSION = "CAN_PERMISSiON_ROLE";
-
-        public static final String GET_ALL = PERMISSION + "/getAll";
-        public static final String GET_ALL_PERMISSION = "CAN_VIEW_ALL_PERMISSION";
-    }
-
     // ROLE PERMISSION END POINTS
     public static final class ROLE_PERMISSION {
         private static final String ROLE_PERMISSION = API + "/role_permission";
