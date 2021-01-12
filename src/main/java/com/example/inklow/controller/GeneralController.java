@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/home")
-public class HomeController {
+public class GeneralController {
     private final UserService userService;
     private final RoleService roleService;
     private final PermissionService permissionService;
@@ -25,11 +25,11 @@ public class HomeController {
     private final RolePermissionService rolePermissionService;
 
     @Autowired
-    public HomeController(UserService userService,
-                          RoleService roleService,
-                          PermissionService permissionService,
-                          UserRoleService userRoleService,
-                          RolePermissionService rolePermissionService) {
+    public GeneralController(UserService userService,
+                             RoleService roleService,
+                             PermissionService permissionService,
+                             UserRoleService userRoleService,
+                             RolePermissionService rolePermissionService) {
         this.userService = userService;
         this.roleService = roleService;
         this.permissionService = permissionService;

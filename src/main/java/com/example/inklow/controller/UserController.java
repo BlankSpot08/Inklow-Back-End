@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api" + UserController.ENDPOINTS.USER)
+@RequestMapping(value = "/api" + UserController.USER_ENDPOINTS.USER)
 public class UserController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @PreAuthorize(value = "hasAuthority('CAN_VIEW_ALL_USER_PROFILE')")
-    @RequestMapping(value = ENDPOINTS.GET_ALL, method = RequestMethod.GET)
+    @RequestMapping(value = USER_ENDPOINTS.GET_ALL, method = RequestMethod.GET)
     public ResponseEntity<?> getAllUsers() {
         List<User> listOfUsers = userService.getListOfUsers();
 
@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @PreAuthorize(value = "hasAnyAuthority('CAN_VIEW_USER_PROFILE')")
-    @RequestMapping(value = ENDPOINTS.GET, method = RequestMethod.POST)
+    @RequestMapping(value = USER_ENDPOINTS.GET, method = RequestMethod.POST)
     public ResponseEntity<?> getUser(@RequestHeader(name = "Authorization") String authorizationHeader) {
         String jwt = authorizationHeader.split(" ")[1];
 
@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PreAuthorize(value = "hasAnyAuthority('CAN_UPDATE_USER_PROFILE')")
-    @RequestMapping(value = ENDPOINTS.UPDATE, method = RequestMethod.POST)
+    @RequestMapping(value = USER_ENDPOINTS.UPDATE, method = RequestMethod.POST)
     public ResponseEntity<?> updateUser(@RequestBody User user) {
         User tempUser = userService.findUserByUsername(user.getUsername());
 
@@ -52,7 +52,7 @@ public class UserController {
     }
 
     @PreAuthorize(value = "hasAnyAuthority('CAN_DELETE_USER_PROFILE')")
-    @RequestMapping(value = ENDPOINTS.DELETE, method = RequestMethod.DELETE)
+    @RequestMapping(value = USER_ENDPOINTS.DELETE, method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteUser(@RequestBody User user) {
         User tempUser = userService.findUserByUsername(user.getUsername());
 
@@ -61,7 +61,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(tempUser);
     }
 
-    protected final class ENDPOINTS {
+    protected static final class USER_ENDPOINTS {
         protected static final String USER = "/user";
 
         protected static final String GET = "/get";

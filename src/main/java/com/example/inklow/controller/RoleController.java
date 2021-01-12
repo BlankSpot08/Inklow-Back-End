@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api" + RoleController.ENDPOINTS.ROLE)
+@RequestMapping(value = "/api" + RoleController.ROLE_ENDPOINTS.ROLE)
 public class RoleController {
     private final RoleService roleService;
 
@@ -26,7 +26,7 @@ public class RoleController {
     }
 
     @PreAuthorize("hasAnyAuthority('CAN_CREATE_ROLE')")
-    @RequestMapping(value = ENDPOINTS.ADD, method = RequestMethod.GET)
+    @RequestMapping(value = ROLE_ENDPOINTS.ADD, method = RequestMethod.GET)
     public ResponseEntity<?> addRole() {
         List<Role> listOfRole = roleService.getListOfRoles();
 
@@ -34,7 +34,7 @@ public class RoleController {
     }
 
     @PreAuthorize("hasAnyAuthority('CAN_VIEW_ROLE')")
-    @RequestMapping(value = ENDPOINTS.GET, method = RequestMethod.POST)
+    @RequestMapping(value = ROLE_ENDPOINTS.GET, method = RequestMethod.POST)
     public ResponseEntity<?> getRoles(@RequestBody Role role) {
         Role tempRole = roleService.getRoleByName(role.getName());
 
@@ -42,7 +42,7 @@ public class RoleController {
     }
 
     @PreAuthorize("hasAnyAuthority('CAN_VIEW_ALL_ROLE')")
-    @RequestMapping(value = ENDPOINTS.GET_ALL, method = RequestMethod.GET)
+    @RequestMapping(value = ROLE_ENDPOINTS.GET_ALL, method = RequestMethod.GET)
     public ResponseEntity<?> getAllRoles() {
         List<Role> listOfRole = roleService.getListOfRoles();
 
@@ -50,7 +50,7 @@ public class RoleController {
     }
 
     @PreAuthorize("hasAnyAuthority('CAN_UPDATE_ROLE')")
-    @RequestMapping(value = ENDPOINTS.UPDATE, method = RequestMethod.POST)
+    @RequestMapping(value = ROLE_ENDPOINTS.UPDATE, method = RequestMethod.POST)
     public ResponseEntity<?> updateRole(@RequestBody Role role) {
         Role tempRole = roleService.handleRoleChanges(role);
 
@@ -58,14 +58,14 @@ public class RoleController {
     }
 
     @PreAuthorize("hasAnyAuthority('CAN_DELETE_ROLE')")
-    @RequestMapping(value = ENDPOINTS.DELETE, method = RequestMethod.POST)
+    @RequestMapping(value = ROLE_ENDPOINTS.DELETE, method = RequestMethod.POST)
     public ResponseEntity<?> deleteRole(@RequestBody Role role) {
         Role tempRole = roleService.handleRoleDeletion(role);
 
         return ResponseEntity.status(HttpStatus.OK).body(tempRole);
     }
 
-    protected static final class ENDPOINTS {
+    protected static final class ROLE_ENDPOINTS {
         protected static final String ROLE = "/role";
 
         private static final String ADD = "/add";

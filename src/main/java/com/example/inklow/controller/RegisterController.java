@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api" + RegisterController.REGISTER_ENDPOINTS.REGISTER)
 public class RegisterController {
     private final UserService userService;
 
@@ -20,7 +20,7 @@ public class RegisterController {
         this.userService = userService;
     }
 
-    @RequestMapping(value = "/user_registration", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> handleRegistration(@RequestBody User user) {
         User registerUser = userService.handleAccountRegistration(user);
 
@@ -29,5 +29,9 @@ public class RegisterController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body("Registered Successfully");
+    }
+
+    protected static final class REGISTER_ENDPOINTS {
+        protected static final String REGISTER = "/user_registration";
     }
 }

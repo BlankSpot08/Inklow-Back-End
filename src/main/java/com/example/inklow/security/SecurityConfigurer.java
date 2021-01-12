@@ -1,7 +1,6 @@
 package com.example.inklow.security;
 
 import com.example.inklow.controller.RoleController;
-import com.example.inklow.controller.URL.URL;
 import com.example.inklow.controller.UserController;
 import com.example.inklow.security.filter.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
@@ -16,12 +15,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import javax.servlet.http.HttpServletResponse;
 
+@Component
 @Configuration
 @EnableWebSecurity
-@Component
 @EnableGlobalMethodSecurity(
 //        securedEnabled = true,
 //        jsr250Enabled = true,
@@ -55,7 +58,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .authenticationEntryPoint((request, response, authException) ->
                         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage()));
 
-//        http.authorizeRequests()
+        http.authorizeRequests()
 //                .antMatchers(HttpMethod.POST, "/api/user_authentication").permitAll()
 //                .antMatchers(HttpMethod.POST, "/api/user_registration").permitAll()
 //
@@ -102,9 +105,23 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.POST, "/api/home/deleteUserRole").permitAll()
 //                .antMatchers(HttpMethod.GET, "/api/home/deleteAllUserRole").permitAll()
 //
-//                .anyRequest().authenticated();
+                .anyRequest().authenticated();
 
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedMethod(HttpMethod.DELETE);
+        config.addAllowedMethod(HttpMethod.GET);
+        config.addAllowedMethod(HttpMethod.OPTIONS);
+        config.addAllowedMethod(HttpMethod.PUT);
+        config.addAllowedMethod(HttpMethod.POST);
+        ((UrlBasedCorsConfigurationSource) source).registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
     }
 
     @Bean
