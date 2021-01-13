@@ -6,6 +6,7 @@ import com.example.inklow.security.filter.JwtRequestFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -19,6 +20,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -27,7 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
 //        securedEnabled = true,
-//        jsr250Enabled = true,
+        jsr250Enabled = true,
         prePostEnabled = true
 )
 public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
@@ -59,8 +63,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
                         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage()));
 
         http.authorizeRequests()
-//                .antMatchers(HttpMethod.POST, "/api/user_authentication").permitAll()
-//                .antMatchers(HttpMethod.POST, "/api/user_registration").permitAll()
+                .antMatchers(HttpMethod.GET, "/test").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/user_authentication").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/user_registration").permitAll()
 //
 //                // User
 //                .antMatchers(HttpMethod.GET, UserController.ENDPOINTS.GET_ALL).hasAuthority(UserController.ENDPOINTS.GET_ALL_PERMISSION)
@@ -111,17 +116,14 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public CorsFilter corsFilter() {
-        CorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:3000");
-        config.addAllowedMethod(HttpMethod.DELETE);
-        config.addAllowedMethod(HttpMethod.GET);
-        config.addAllowedMethod(HttpMethod.OPTIONS);
-        config.addAllowedMethod(HttpMethod.PUT);
-        config.addAllowedMethod(HttpMethod.POST);
-        ((UrlBasedCorsConfigurationSource) source).registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(@NonNull CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
+            }
+        };
     }
 
     @Bean
