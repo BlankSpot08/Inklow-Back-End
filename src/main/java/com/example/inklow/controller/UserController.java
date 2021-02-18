@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@PreAuthorize("isAuthenticated()")
 @RequestMapping(value = "/api" + UserController.USER_ENDPOINTS.USER)
 public class UserController {
     private final UserService userService;

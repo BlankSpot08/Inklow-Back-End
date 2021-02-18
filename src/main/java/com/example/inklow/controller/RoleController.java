@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@PreAuthorize("isAuthenticated()")
 @RequestMapping(value = "/api" + RoleController.ROLE_ENDPOINTS.ROLE)
 public class RoleController {
     private final RoleService roleService;

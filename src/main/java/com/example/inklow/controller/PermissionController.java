@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@PreAuthorize("isAuthenticated()")
 @RequestMapping(value = "/api" + PermissionController.PERMISSION_ENDPOINTS.PERMISSION)
 public class PermissionController {
     private final PermissionService permissionService;

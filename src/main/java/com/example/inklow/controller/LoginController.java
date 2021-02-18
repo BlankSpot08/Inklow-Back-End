@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@PreAuthorize("permitAll()")
 public class LoginController {
     private final UserService userServiceImp;
 
@@ -23,7 +24,6 @@ public class LoginController {
         this.userServiceImp = userService;
     }
 
-    @PreAuthorize("permitAll()")
     @RequestMapping(value = "/api" + LoginController.LOGIN_ENDPOINTS.LOGIN, method = RequestMethod.POST)
     public ResponseEntity<?> handleLogin(@RequestBody @NonNull AuthenticationRequest authenticationRequest) {
         String jwt = userServiceImp.handleLogin(authenticationRequest);
@@ -35,7 +35,10 @@ public class LoginController {
         return ResponseEntity.status(HttpStatus.OK).body(new AuthenticationResponse(jwt));
     }
 
-    protected static final class LOGIN_ENDPOINTS {
+    public static final class LOGIN_ENDPOINTS {
         protected static final String LOGIN = "/user_authentication";
     }
 }
+
+
+
