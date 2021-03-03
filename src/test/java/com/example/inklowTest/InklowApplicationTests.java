@@ -5,7 +5,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootTest
-class InklowApplicationTests {
+class nklowApplicationTests {
     @Test
     void BCrypt() {
         System.out.println(new BCryptPasswordEncoder().encode("Register08"));

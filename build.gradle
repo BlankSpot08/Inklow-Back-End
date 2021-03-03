@@ -15,8 +15,9 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.testng:testng:7.1.0'
 
-	runtimeOnly 'org.postgresql:postgresql'
+    runtimeOnly 'org.postgresql:postgresql'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
@@ -27,6 +28,11 @@ dependencies {
 	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.9.1'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '2.3.4.RELEASE'
 	compile group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.11'
+
+//	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.4.0-M3'
+	compile 'org.springframework.boot:spring-boot-starter-mail:2.4.3'
+	implementation group: 'javax.mail', name: 'javax.mail-api', version: '1.6.0'
+
 }
 
 test {
