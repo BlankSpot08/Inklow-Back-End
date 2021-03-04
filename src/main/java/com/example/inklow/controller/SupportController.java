@@ -2,6 +2,7 @@ package com.example.inklow.controller;
 
 import com.example.inklow.entities.Question;
 import com.example.inklow.service.QuestionService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,15 +14,16 @@ import java.util.List;
 
 @RestController
 @PreAuthorize("permitAll()")
-@RequestMapping(value = "/api" + SupportController.SUPPORT_ENDPOINTS.QUESTION)
+@RequestMapping(value = "/api" + SupportController.SUPPORT_ENDPOINTS.SUPPORT)
 public class SupportController {
     private final QuestionService questionService;
 
+    @Autowired
     public SupportController(QuestionService questionService) {
         this.questionService = questionService;
     }
 
-    @RequestMapping(value = SUPPORT_ENDPOINTS.GET_ALL, method = RequestMethod.GET)
+    @RequestMapping(value = SUPPORT_ENDPOINTS.QUESTION_ENDPOINTS.GET_ALL, method = RequestMethod.GET)
     public ResponseEntity<?> getAllQuestions() {
         List<Question> listOfQuestions = questionService.getListOfQuestion();
 
@@ -29,11 +31,23 @@ public class SupportController {
     }
 
     protected static final class SUPPORT_ENDPOINTS {
-        protected static final String QUESTION = "/support";
+        protected static final String SUPPORT = "/support";
 
-        protected static final String GET_ALL = "/getAll";
+        protected static final class QUESTION_ENDPOINTS {
+            private static final String QUESTION = "/question";
 
-        protected static final String DELETE_ALL = "/deleteAll";
+            protected static final String GET_ALL = QUESTION + "/getAll";
+
+            protected static final String DELETE_ALL = QUESTION + "/deleteAll";
+        }
+
+        protected static final class INQUIRY_ENDPOINTS {
+            private static final String INQUIRY = "/inquiry";
+
+            protected static final String GET_ALL = INQUIRY + "/getAll";
+
+            protected static final String DELETE_ALL = INQUIRY + "/deleteAll";
+        }
     }
 }
 
