@@ -6,6 +6,4 @@ public class Support {
     private String email;
     private String title;
     private String details;
-
-
 }

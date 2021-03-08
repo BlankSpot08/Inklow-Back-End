@@ -12,6 +12,7 @@ public final class QuestionMapper implements RowMapper<Question> {
     public Question mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Question.Builder()
                 .id(UUID.fromString(rs.getString("id")))
+                .category(rs.getString("category"))
                 .question(rs.getString("question"))
                 .answer(rs.getString("answer"))
                 .build();
