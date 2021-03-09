@@ -28,6 +28,20 @@ public class QuestionDaoImp implements QuestionDao {
     }
 
     @Override
+    public Question handleQuestionRegistration(Question question) {
+        String query = "INSERT INTO support_questions(category, question, answer) " +
+                "VALUES(?, ?, ?)";
+
+        int statusCode = jdbcTemplate.update(query, question.getCategory(), question.getQuestion(), question.getAnswer());
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return question;
+    }
+
+    @Override
     public Boolean removeAllQuestions() {
         String query = "DELETE FROM support_questions";
 

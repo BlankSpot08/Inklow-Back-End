@@ -61,11 +61,32 @@ public class QuestionServiceImp implements QuestionService {
     public List<Question> getListOfFAQ() {
         List<Question> listOfQuestion = questionDao.getListOfQuestions();
 
+        if (listOfQuestion.size() < 5) {
+            return listOfQuestion;
+        }
+
         return listOfQuestion.subList(0, 5);
+    }
+
+    @Override
+    public Question handleQuestionRegistration(Question question) {
+        Question tempQuestion = questionDao.handleQuestionRegistration(question);
+
+        if (tempQuestion == null) {
+            return null;
+        }
+        return tempQuestion;
     }
 
     @Override
     public Boolean handleAllQuestionDeletion() {
         return questionDao.removeAllQuestions();
+    }
+
+    @Override
+    public int questionCount() {
+        List<Question> listOfQuestion = questionDao.getListOfQuestions();
+
+        return listOfQuestion.size();
     }
 }

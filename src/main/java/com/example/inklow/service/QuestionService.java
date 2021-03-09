@@ -10,5 +10,9 @@ public interface QuestionService {
     List<Question> getListOfQuestionCategorizedBy(String category);
     List<Question> getListOfFAQ();
 
+    Question handleQuestionRegistration(Question question);
+
     Boolean handleAllQuestionDeletion();
+
+    int questionCount();
 }
