@@ -183,5 +183,6 @@ public class User {
         public User build() {
             return new User(id, firstName, lastName, gender, birthDate, username, password, email, phoneNumber, roles);
         }
+
     }
 }

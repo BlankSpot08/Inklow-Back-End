@@ -1,5 +1,6 @@
 package com.example.inklow.daoImp;
 
+import com.example.inklow.dao.QuestionCategoryDao;
 import com.example.inklow.dao.QuestionDao;
 import com.example.inklow.entities.Question;
 import com.example.inklow.mapper.QuestionMapper;
@@ -12,10 +13,12 @@ import java.util.List;
 @Repository
 public class QuestionDaoImp implements QuestionDao {
     private final JdbcTemplate jdbcTemplate;
+    private final QuestionCategoryDao questionCategoryDao;
 
     @Autowired
-    public QuestionDaoImp(final JdbcTemplate jdbcTemplate) {
+    public QuestionDaoImp(final JdbcTemplate jdbcTemplate, final QuestionCategoryDao questionCategoryDao) {
         this.jdbcTemplate = jdbcTemplate;
+        this.questionCategoryDao = questionCategoryDao;
     }
 
     @Override
