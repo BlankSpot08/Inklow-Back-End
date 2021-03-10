@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class InquiryMapper implements RowMapper<Inquiry> {
+public final class InquiryMapper implements RowMapper<Inquiry> {
     @Override
     public Inquiry mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new Inquiry.Builder()

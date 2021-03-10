@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
-public class CategoryInquiryMapper implements RowMapper<CategoryInquiry> {
+public final class CategoryInquiryMapper implements RowMapper<CategoryInquiry> {
     @Override
     public CategoryInquiry mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new CategoryInquiry.Builder()
