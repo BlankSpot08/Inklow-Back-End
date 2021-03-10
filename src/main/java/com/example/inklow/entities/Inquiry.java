@@ -1,64 +1,44 @@
 package com.example.inklow.entities;
 
-import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 public class Inquiry {
     private final UUID id;
-    private final String category;
-    private final String email;
-    private final String title;
-    private String details;
-    private final File[] files;
+    private final String name;
 
-    public String getCategory() {
-        return category;
+    private List<CategoryInquiry> categories;
+
+    public UUID getId() {
+        return id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getName() {
+        return name;
     }
 
-    public String getTitle() {
-        return title;
+    public List<CategoryInquiry> getCategories() {
+        return categories;
     }
 
-    public String getDetails() {
-        return details;
-    }
-
-    public void setDetails(String details) {
-        this.details = details;
-    }
-
-    public File[] getFiles() {
-        return files;
-    }
-
-    public Inquiry(UUID id, String category, String email, String title, String details, File[] files) {
+    public Inquiry(UUID id, String name, List<CategoryInquiry> categories) {
         this.id = id;
-        this.category = category;
-        this.email = email;
-        this.title = title;
-        this.details = details;
-        this.files = files;
+        this.name = name;
+        this.categories = categories;
     }
 
     public final static class Builder {
         private UUID id;
-        private String category = "";
-        private String email = "";
-        private String title = "";
-        private String details = "";
-        private File[] files = new File[4];
+        private String name = "";
 
-        public Builder(UUID id, String category, String email, String title, String details, File[] files) {
+        private List<CategoryInquiry> categories;
+
+        public Builder() {}
+
+        public Builder(UUID id, String name, List<CategoryInquiry> categories) {
             this.id = id;
-            this.category = category;
-            this.email = email;
-            this.title = title;
-            this.details = details;
-            this.files = files;
+            this.name = name;
+            this.categories = categories;
         }
 
         public Builder id(UUID id) {
@@ -66,33 +46,18 @@ public class Inquiry {
             return this;
         }
 
-        public Builder category(String category) {
-            this.category = category;
+        public Builder name(String name) {
+            this.name = name;
             return this;
         }
 
-        public Builder email(String email) {
-            this.email = email;
+        public Builder categories(List<CategoryInquiry> categories) {
+            this.categories = categories;
             return this;
         }
 
-        public Builder title(String title) {
-            this.title = title;
-            return this;
-        }
-
-        public Builder details(String details)  {
-            this.details = details;
-            return this;
-        }
-
-        public Builder files(File[] files) {
-            this.files = files;
-            return this;
-        }
-
-        public Inquiry build()  {
-            return new Inquiry(id, category, email, title, details, files);
+        public Inquiry build() {
+            return new Inquiry(id, name, categories);
         }
     }
 }

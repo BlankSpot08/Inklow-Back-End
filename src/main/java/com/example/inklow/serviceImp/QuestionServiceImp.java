@@ -1,25 +1,23 @@
 package com.example.inklow.serviceImp;
 
-import com.example.inklow.dao.QuestionCategoryDao;
+import com.example.inklow.dao.CategoryQuestionDao;
 import com.example.inklow.dao.QuestionDao;
 import com.example.inklow.entities.Question;
-import com.example.inklow.entities.QuestionCategory;
 import com.example.inklow.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class QuestionServiceImp implements QuestionService {
     private final QuestionDao questionDao;
-    private final QuestionCategoryDao questionCategoryDao;
+    private final CategoryQuestionDao categoryQuestionDao;
 
     @Autowired
-    public QuestionServiceImp(final QuestionDao questionDao, final QuestionCategoryDao questionCategoryDao) {
+    public QuestionServiceImp(final QuestionDao questionDao, final CategoryQuestionDao categoryQuestionDao) {
         this.questionDao = questionDao;
-        this.questionCategoryDao = questionCategoryDao;
+        this.categoryQuestionDao = categoryQuestionDao;
     }
 
     @Override
@@ -49,11 +47,10 @@ public class QuestionServiceImp implements QuestionService {
     public List<Question> getListOfQuestionCategorizedBy(String category) {
         List<Question> listOfQuestion = questionDao.getListOfQuestions();
 
-        String tempCategory = category.toLowerCase();
         for (int i = 0; i < listOfQuestion.size(); i++) {
             final String question = listOfQuestion.get(i).getCategory();
 
-            if (!question.equals(tempCategory)) {
+            if (!question.equalsIgnoreCase(category)) {
                 listOfQuestion.remove(i);
                 i--;
             }

@@ -25,12 +25,6 @@ public class SupportController {
     public ResponseEntity<?> getAllQuestions() {
         List<Question> listOfQuestions = questionService.getListOfQuestion();
 
-        for (int i = 0; i < listOfQuestions.size(); i++) {
-            System.out.println(listOfQuestions.get(i).getQuestion());
-            System.out.println(listOfQuestions.get(i).getAnswer());
-            System.out.println(listOfQuestions.get(i).getCategory());
-        }
-
         return ResponseEntity.status(HttpStatus.OK).body(listOfQuestions);
     }
 

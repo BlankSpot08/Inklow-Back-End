@@ -8,16 +8,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class QuestionCategoryServiceConfig {
+public class CategoryQuestionServiceConfig {
     private final CategoryQuestionDao categoryQuestionDao;
 
     @Autowired
-    public QuestionCategoryServiceConfig(CategoryQuestionDao categoryQuestionDao) {
+    public CategoryQuestionServiceConfig(CategoryQuestionDao categoryQuestionDao) {
         this.categoryQuestionDao = categoryQuestionDao;
     }
 
-    @Bean()
-    public CategoryQuestionService questionCategoryService() {
+    @Bean
+    public CategoryQuestionService categoryQuestionService() {
         return new CategoryQuestionServiceImp(categoryQuestionDao);
     }
 }

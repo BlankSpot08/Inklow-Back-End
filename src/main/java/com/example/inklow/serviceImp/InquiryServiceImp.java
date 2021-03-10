@@ -17,21 +17,29 @@ public class InquiryServiceImp implements InquiryService {
 
     @Override
     public List<Inquiry> getListOfInquiry() {
-        return null;
+        List<Inquiry> listOfInquiry = inquiryDao.listOfInquiries();
+
+        return listOfInquiry;
     }
 
     @Override
-    public Inquiry handleInquiryRegistration() {
-        return null;
+    public Inquiry handleInquiryRegistration(Inquiry inquiry) {
+        Inquiry temp = inquiryDao.addInquiry(inquiry);
+
+        return temp;
     }
 
     @Override
-    public Inquiry handleInquiryDeletion() {
-        return null;
+    public Inquiry handleInquiryDeletion(Inquiry inquiry) {
+        Inquiry temp = inquiryDao.deleteInquiry(inquiry);
+
+        return temp;
     }
 
     @Override
     public int inquiryCount() {
-        return 0;
+        List<Inquiry> listOfInquiry = inquiryDao.listOfInquiries();
+
+        return listOfInquiry.size();
     }
 }

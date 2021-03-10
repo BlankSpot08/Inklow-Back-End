@@ -1,6 +1,6 @@
 package com.example.inklow.configuration;
 
-import com.example.inklow.dao.QuestionCategoryDao;
+import com.example.inklow.dao.CategoryQuestionDao;
 import com.example.inklow.dao.QuestionDao;
 import com.example.inklow.service.QuestionService;
 import com.example.inklow.serviceImp.QuestionServiceImp;
@@ -12,18 +12,18 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class QuestionServiceConfig {
     private final QuestionDao questionDao;
-    private final QuestionCategoryDao questionCategoryDao;
+    private final CategoryQuestionDao categoryQuestionDao;
 
     @Autowired
-    public QuestionServiceConfig(final QuestionDao questionDao, final QuestionCategoryDao questionCategoryDao) {
+    public QuestionServiceConfig(final QuestionDao questionDao, final CategoryQuestionDao categoryQuestionDao) {
         this.questionDao =  questionDao;
-        this.questionCategoryDao = questionCategoryDao;
+        this.categoryQuestionDao = categoryQuestionDao;
     }
 
     @Bean
     @Primary
     public QuestionService questionService() {
-        return new QuestionServiceImp(questionDao, questionCategoryDao);
+        return new QuestionServiceImp(questionDao, categoryQuestionDao);
     }
 
 }

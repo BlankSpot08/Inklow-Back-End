@@ -7,7 +7,7 @@ import java.util.List;
 public interface InquiryDao {
     List<Inquiry> listOfInquiries();
 
-    Inquiry findInquiryById();
+    Inquiry findInquiryById(Inquiry inquiry);
 
     Inquiry addInquiry(Inquiry inquiry);
     Inquiry deleteInquiry(Inquiry inquiry);

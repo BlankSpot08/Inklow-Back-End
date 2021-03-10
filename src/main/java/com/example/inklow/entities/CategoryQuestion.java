@@ -2,7 +2,7 @@ package com.example.inklow.entities;
 
 import java.util.UUID;
 
-public class QuestionCategory {
+public class CategoryQuestion {
     private final UUID id;
     private final String name;
 
@@ -14,7 +14,7 @@ public class QuestionCategory {
         return name;
     }
 
-    public QuestionCategory(UUID id, String name) {
+    public CategoryQuestion(UUID id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -40,8 +40,8 @@ public class QuestionCategory {
             return this;
         }
 
-        public QuestionCategory build() {
-            return new QuestionCategory(id, name);
+        public CategoryQuestion build() {
+            return new CategoryQuestion(id, name);
         }
     }
 }

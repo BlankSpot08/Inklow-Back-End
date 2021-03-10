@@ -1,7 +1,7 @@
 package com.example.inklow.dataSeeds;
 
 import com.example.inklow.entities.Question;
-import com.example.inklow.service.QuestionCategoryService;
+import com.example.inklow.service.CategoryQuestionService;
 import com.example.inklow.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -9,18 +9,16 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 @Order(7)
 public class QuestionDataSeeds implements ApplicationRunner {
     private final QuestionService questionService;
-    private final QuestionCategoryService questionCategoryService;
+    private final CategoryQuestionService categoryQuestionService;
 
     @Autowired
-    public QuestionDataSeeds(QuestionService questionService, QuestionCategoryService questionCategoryService) {
+    public QuestionDataSeeds(QuestionService questionService, CategoryQuestionService categoryQuestionService) {
         this.questionService = questionService;
-        this.questionCategoryService = questionCategoryService;
+        this.categoryQuestionService = categoryQuestionService;
     }
 
     @Override
@@ -28,7 +26,7 @@ public class QuestionDataSeeds implements ApplicationRunner {
         if (questionService.questionCount() == 0) {
 
             String question1Category = "Id/Sign-up";
-            String question1CategoryId = questionCategoryService.findQuestionCategoryByName(question1Category).getName();
+            String question1CategoryId = categoryQuestionService.findQuestionCategoryByName(question1Category).getName();
 
             System.out.println(question1CategoryId);
             Question question1 = new Question.Builder()
@@ -38,7 +36,7 @@ public class QuestionDataSeeds implements ApplicationRunner {
                     .build();
 
             String question2Category = "Website";
-            String question2CategoryId = questionCategoryService.findQuestionCategoryByName(question2Category).getName();
+            String question2CategoryId = categoryQuestionService.findQuestionCategoryByName(question2Category).getName();
 
             System.out.println(question2CategoryId);
             Question question2 = new Question.Builder()
@@ -50,7 +48,7 @@ public class QuestionDataSeeds implements ApplicationRunner {
                     .build();
 
             String question3Category = "Bugs/Errors";
-            String question3CategoryId = questionCategoryService.findQuestionCategoryByName(question3Category).getName();
+            String question3CategoryId = categoryQuestionService.findQuestionCategoryByName(question3Category).getName();
 
             System.out.println(question3CategoryId);
             Question question3 = new Question.Builder()

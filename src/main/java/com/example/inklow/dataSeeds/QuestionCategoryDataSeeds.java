@@ -1,7 +1,7 @@
 package com.example.inklow.dataSeeds;
 
-import com.example.inklow.entities.QuestionCategory;
-import com.example.inklow.service.QuestionCategoryService;
+import com.example.inklow.entities.CategoryQuestion;
+import com.example.inklow.service.CategoryQuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -11,41 +11,41 @@ import org.springframework.stereotype.Service;
 @Service
 @Order(6)
 public class QuestionCategoryDataSeeds implements ApplicationRunner {
-    private final QuestionCategoryService questionCategoryService;
+    private final CategoryQuestionService categoryQuestionService;
 
     @Autowired
-    public QuestionCategoryDataSeeds(QuestionCategoryService questionCategoryService) {
-        this.questionCategoryService = questionCategoryService;
+    public QuestionCategoryDataSeeds(CategoryQuestionService categoryQuestionService) {
+        this.categoryQuestionService = categoryQuestionService;
     }
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        if (questionCategoryService.questionCategoryCount() == 0) {
-            QuestionCategory idCategory = new QuestionCategory.Builder()
+        if (categoryQuestionService.questionCategoryCount() == 0) {
+            CategoryQuestion idCategory = new CategoryQuestion.Builder()
                     .name("Id/Sign-up")
                     .build();
 
-            QuestionCategory gameRelatedCategory = new QuestionCategory.Builder()
+            CategoryQuestion gameRelatedCategory = new CategoryQuestion.Builder()
                     .name("Game Related")
                     .build();
 
-            QuestionCategory bugsErrorsCategory = new QuestionCategory.Builder()
+            CategoryQuestion bugsErrorsCategory = new CategoryQuestion.Builder()
                     .name("Bugs/Errors")
                     .build();
 
-            QuestionCategory websiteCategory = new QuestionCategory.Builder()
+            CategoryQuestion websiteCategory = new CategoryQuestion.Builder()
                     .name("Website")
                     .build();
 
-            QuestionCategory billingCategory = new QuestionCategory.Builder()
+            CategoryQuestion billingCategory = new CategoryQuestion.Builder()
                     .name("Billing")
                     .build();
 
-            questionCategoryService.handleQuestionCategoryRegistration(idCategory);
-            questionCategoryService.handleQuestionCategoryRegistration(gameRelatedCategory);
-            questionCategoryService.handleQuestionCategoryRegistration(bugsErrorsCategory);
-            questionCategoryService.handleQuestionCategoryRegistration(websiteCategory);
-            questionCategoryService.handleQuestionCategoryRegistration(billingCategory);
+            categoryQuestionService.handleQuestionCategoryRegistration(idCategory);
+            categoryQuestionService.handleQuestionCategoryRegistration(gameRelatedCategory);
+            categoryQuestionService.handleQuestionCategoryRegistration(bugsErrorsCategory);
+            categoryQuestionService.handleQuestionCategoryRegistration(websiteCategory);
+            categoryQuestionService.handleQuestionCategoryRegistration(billingCategory);
         }
     }
 }

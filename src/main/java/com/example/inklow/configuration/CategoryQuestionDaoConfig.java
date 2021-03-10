@@ -8,16 +8,16 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 @Configuration
-public class QuestionCategoryDaoConfig {
+public class CategoryQuestionDaoConfig {
     private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public QuestionCategoryDaoConfig(JdbcTemplate jdbcTemplate) {
+    public CategoryQuestionDaoConfig(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Bean()
-    public CategoryQuestionDao questionCategory() {
+    @Bean
+    public CategoryQuestionDao categoryQuestionDao() {
         return new CategoryQuestionDaoImp(jdbcTemplate);
     }
 }
