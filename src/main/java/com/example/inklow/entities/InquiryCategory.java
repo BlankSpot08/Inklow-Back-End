@@ -6,6 +6,14 @@ public class InquiryCategory {
     private final UUID inquiryId;
     private final UUID categoryId;
 
+    public UUID getInquiryId() {
+        return inquiryId;
+    }
+
+    public UUID getCategoryId() {
+        return categoryId;
+    }
+
     public InquiryCategory(UUID inquiryId, UUID categoryId) {
         this.inquiryId = inquiryId;
         this.categoryId = categoryId;

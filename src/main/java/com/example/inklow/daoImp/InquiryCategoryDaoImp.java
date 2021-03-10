@@ -4,6 +4,7 @@ import com.example.inklow.dao.InquiryCategoryDao;
 import com.example.inklow.dao.InquiryDao;
 import com.example.inklow.entities.Inquiry;
 import com.example.inklow.entities.InquiryCategory;
+import com.example.inklow.mapper.InquiryCategoryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -21,27 +22,84 @@ public class InquiryCategoryDaoImp implements InquiryCategoryDao {
     }
 
     @Override
-    public List<InquiryCategory> getInquiryCategoryById(UUID id) {
-        return null;
+    public List<InquiryCategory> getListOfInquiryCategory() {
+        String query = "" +
+                "SELECT * FROM inquiry_categories;";
+
+        List<InquiryCategory> listOfInquiryCategory = jdbcTemplate.query(query, new InquiryCategoryMapper());
+
+        return listOfInquiryCategory;
     }
 
     @Override
-    public List<InquiryCategory> getListOfInquiryCategory() {
-        return null;
+    public List<InquiryCategory> getInquiryCategoriesById(InquiryCategory inquiryCategory) {
+        String query = "" +
+                "SELECT * FROM inquiry_categories AS ic " +
+                "JOIN category_inquiry AS ci " +
+                "ON ci.id = ic.inquiry_categoryId " +
+                "WHERE ic.inquiryId = ?;";
+
+        List<InquiryCategory> listOfInquiryCategory = jdbcTemplate.query(query, new InquiryCategoryMapper());
+
+        return listOfInquiryCategory;
+    }
+
+    @Override
+    public InquiryCategory getInquiryCategoryById(InquiryCategory inquiryCategory) {
+        String query = "" +
+                "SELECT * FROM inquiry_categories AS ic " +
+                "WHERE ic.inquiryId = ? AND ic.inquiry_categoryId = ?;";
+
+        InquiryCategory temp = jdbcTemplate.queryForObject(
+                query,
+                new Object[] {inquiryCategory.getInquiryId(), inquiryCategory.getCategoryId()},
+                new InquiryCategoryMapper());
+
+        return temp;
     }
 
     @Override
     public InquiryCategory addInquiryCategory(InquiryCategory inquiryCategory) {
-        return null;
+        String query = "" +
+                "INSERT INTO inquiry_categories(inquiryId, inquiry_categoryId) " +
+                "VALUES(?, ?);";
+
+        int statusCode = jdbcTemplate.update(query, inquiryCategory.getInquiryId(), inquiryCategory.getCategoryId());
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return inquiryCategory;
     }
 
     @Override
     public InquiryCategory removeInquiryCategory(InquiryCategory inquiryCategory) {
-        return null;
+        String query = "" +
+                "DELETE FROM inquiry_categories " +
+                "WHERE inquiryId = ? AND inquiry_categoryId = ?;";
+
+        int statusCode = jdbcTemplate.update(query, inquiryCategory.getInquiryId(), inquiryCategory.getCategoryId());
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return inquiryCategory;
+
     }
 
     @Override
     public Boolean removeAllInquiryCategory() {
-        return null;
+        String query = "" +
+                "DELETE FROM inquiry_categories";
+
+        int statusCode = jdbcTemplate.update(query);
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return true;
     }
 }

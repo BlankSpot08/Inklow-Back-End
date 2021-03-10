@@ -7,6 +7,9 @@ import java.util.List;
 public interface InquiryService {
     List<Inquiry> getListOfInquiry();
 
+    Inquiry getInquiryByName(Inquiry inquiry);
+    Inquiry getInquiryById(Inquiry inquiry);
+
     Inquiry handleInquiryRegistration(Inquiry inquiry);
     Inquiry handleInquiryDeletion(Inquiry inquiry);
 

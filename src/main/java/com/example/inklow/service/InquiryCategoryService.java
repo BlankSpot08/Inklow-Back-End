@@ -1,20 +1,22 @@
 package com.example.inklow.service;
 
 import com.example.inklow.configuration.InquiryCategoryDaoConfig;
+import com.example.inklow.entities.InquiryCategory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public interface InquiryCategoryService {
-    List<InquiryCategoryDaoConfig> getListOfInquiryCategory();
+    List<InquiryCategory> getListOfInquiryCategory();
+    List<InquiryCategory> getInquiryCategoriesById(InquiryCategory inquiryCategoryDaoConfig);
 
-    List<InquiryCategoryDaoConfig> getInquiryCategoryById(InquiryCategoryDaoConfig inquiryCategoryDaoConfig);
+    InquiryCategory getInquiryCategoryById(InquiryCategory inquiryCategoryDaoConfig);
 
-    InquiryCategoryDaoConfig handleInquiryCategoryRegistration(InquiryCategoryDaoConfig inquiryCategoryDaoConfig);
+    InquiryCategory handleInquiryCategoryRegistration(InquiryCategory inquiryCategoryDaoConfig);
+    InquiryCategory handleAllInquiryCategoryDeletion(InquiryCategory inquiryCategoryDaoConfig);
 
-    InquiryCategoryDaoConfig handleInquiryCategoryDeletion(InquiryCategoryDaoConfig inquiryCategoryDaoConfig);
-    Boolean handleInquiryCategoryDeletion();
+    Boolean handleAllInquiryCategoryDeletion();
 
     int inquiryCategoryCount();
 }

@@ -25,6 +25,20 @@ public class InquiryServiceImp implements InquiryService {
     }
 
     @Override
+    public Inquiry getInquiryByName(Inquiry inquiry) {
+        Inquiry temp = inquiryDao.findInquiryByName(inquiry);
+
+        return temp;
+    }
+
+    @Override
+    public Inquiry getInquiryById(Inquiry inquiry) {
+        Inquiry temp = inquiryDao.findInquiryById(inquiry);
+
+        return temp;
+    }
+
+    @Override
     public Inquiry handleInquiryRegistration(Inquiry inquiry) {
         Inquiry temp = inquiryDao.addInquiry(inquiry);
 

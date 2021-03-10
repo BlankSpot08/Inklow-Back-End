@@ -2,6 +2,7 @@ package com.example.inklow.serviceImp;
 
 import com.example.inklow.configuration.InquiryCategoryDaoConfig;
 import com.example.inklow.dao.InquiryCategoryDao;
+import com.example.inklow.entities.InquiryCategory;
 import com.example.inklow.service.InquiryCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,32 +17,49 @@ public class InquiryCategoryServiceImp implements InquiryCategoryService {
     }
 
     @Override
-    public List<InquiryCategoryDaoConfig> getListOfInquiryCategory() {
+    public List<InquiryCategory> getListOfInquiryCategory() {
+        List<InquiryCategory> listOfInquiryCategory = inquiryCategoryDao.getListOfInquiryCategory();
+
+        return listOfInquiryCategory;
+    }
+
+    @Override
+    public List<InquiryCategory> getInquiryCategoriesById(InquiryCategory inquiryCategory) {
+        List<InquiryCategory> listOfInquiryCategory = inquiryCategoryDao.getInquiryCategoriesById(inquiryCategory);
+
+        return listOfInquiryCategory;
+    }
+
+    @Override
+    public InquiryCategory getInquiryCategoryById(InquiryCategory inquiryCategoryDaoConfig) {
         return null;
     }
 
     @Override
-    public List<InquiryCategoryDaoConfig> getInquiryCategoryById(InquiryCategoryDaoConfig inquiryCategoryDaoConfig) {
-        return null;
+    public InquiryCategory handleInquiryCategoryRegistration(InquiryCategory inquiryCategory) {
+        InquiryCategory temp = inquiryCategoryDao.addInquiryCategory(inquiryCategory);
+
+        return temp;
     }
 
     @Override
-    public InquiryCategoryDaoConfig handleInquiryCategoryRegistration(InquiryCategoryDaoConfig inquiryCategoryDaoConfig) {
-        return null;
+    public InquiryCategory handleAllInquiryCategoryDeletion(InquiryCategory inquiryCategory) {
+        InquiryCategory temp = inquiryCategoryDao.removeInquiryCategory(inquiryCategory);
+
+        return temp;
     }
 
     @Override
-    public InquiryCategoryDaoConfig handleInquiryCategoryDeletion(InquiryCategoryDaoConfig inquiryCategoryDaoConfig) {
-        return null;
-    }
+    public Boolean handleAllInquiryCategoryDeletion() {
+        Boolean temp = inquiryCategoryDao.removeAllInquiryCategory();
 
-    @Override
-    public Boolean handleInquiryCategoryDeletion() {
-        return null;
+        return temp;
     }
 
     @Override
     public int inquiryCategoryCount() {
-        return 0;
+        List<InquiryCategory> listOfInquiryCategory = inquiryCategoryDao.getListOfInquiryCategory();
+
+        return listOfInquiryCategory.size();
     }
 }

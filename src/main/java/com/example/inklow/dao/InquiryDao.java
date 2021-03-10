@@ -8,6 +8,7 @@ public interface InquiryDao {
     List<Inquiry> listOfInquiries();
 
     Inquiry findInquiryById(Inquiry inquiry);
+    Inquiry findInquiryByName(Inquiry inquiry);
 
     Inquiry addInquiry(Inquiry inquiry);
     Inquiry deleteInquiry(Inquiry inquiry);

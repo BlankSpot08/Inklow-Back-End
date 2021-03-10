@@ -26,7 +26,8 @@ public class UserRoleDaoImp implements UserRoleDao {
 
     @Override
     public List<Role> getUserRolesByUserId(UUID id) {
-        String query = "SELECT * " +
+        String query = "" +
+                "SELECT * " +
                 "FROM user_roles " +
                 "JOIN roles r ON r.id = user_roles.roleId " +
                 "WHERE user_roles.userId = ?";
@@ -43,7 +44,8 @@ public class UserRoleDaoImp implements UserRoleDao {
 
     @Override
     public List<UserRole> getListOfUserRoles() {
-        String query = "SELECT * " +
+        String query = "" +
+                "SELECT * " +
                 "FROM user_roles";
 
         List<UserRole> userRoles = jdbcTemplate.query(query, new UserRolesMapper());
@@ -53,7 +55,8 @@ public class UserRoleDaoImp implements UserRoleDao {
 
     @Override
     public UserRole addUserRole(UserRole userRole) {
-        String query = "INSERT INTO user_roles(userId, roleId) " +
+        String query = "" +
+                "INSERT INTO user_roles(userId, roleId) " +
                 "VALUES(?, ?)";
 
         int statusCode = jdbcTemplate.update(query, userRole.getUserId(), userRole.getRoleId());
@@ -67,7 +70,8 @@ public class UserRoleDaoImp implements UserRoleDao {
 
     @Override
     public UserRole removeUserRole(UserRole userRole) {
-        String query = "DELETE FROM user_roles " +
+        String query = "" +
+                "DELETE FROM user_roles " +
                 "WHERE userId = ? AND roleId = ?";
 
         int statusCode = jdbcTemplate.update(query, userRole.getUserId(), userRole.getRoleId());
@@ -81,7 +85,8 @@ public class UserRoleDaoImp implements UserRoleDao {
 
     @Override
     public Boolean removeAllUserRole() {
-        String query = "DELETE FROM user_roles";
+        String query = "" +
+                "DELETE FROM user_roles";
 
         int statusCode = jdbcTemplate.update(query);
 

@@ -41,8 +41,23 @@ public class InquiryDaoImp implements InquiryDao {
     }
 
     @Override
+    public Inquiry findInquiryByName(Inquiry inquiry) {
+        String query = "" +
+                "SELECT * FROM inquiries WHERE name = ?;";
+
+        Inquiry temp = jdbcTemplate.queryForObject(query, new Object[] { inquiry.getName() }, new InquiryMapper());
+
+        if (temp == null) {
+            return null;
+        }
+
+        return temp;
+    }
+
+    @Override
     public Inquiry addInquiry(Inquiry inquiry) {
-        String query = "INSERT INTO inquiries(name) VALUES(?);";
+        String query = "" +
+                "INSERT INTO inquiries(name) VALUES(?);";
 
         int statusCode = jdbcTemplate.update(query, inquiry.getName());
 

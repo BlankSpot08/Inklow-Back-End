@@ -8,12 +8,13 @@ import java.util.List;
 import java.util.UUID;
 
 public interface InquiryCategoryDao {
-    List<InquiryCategory> getInquiryCategoryById(UUID id);
-
     List<InquiryCategory> getListOfInquiryCategory();
+    List<InquiryCategory> getInquiryCategoriesById(InquiryCategory inquiryCategory);
+
+    InquiryCategory getInquiryCategoryById(InquiryCategory inquiryCategory);
 
     InquiryCategory addInquiryCategory(InquiryCategory inquiryCategory);
-
     InquiryCategory removeInquiryCategory(InquiryCategory inquiryCategory);
+
     Boolean removeAllInquiryCategory();
 }
