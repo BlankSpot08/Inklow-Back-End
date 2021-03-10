@@ -9,7 +9,7 @@ public interface CategoryQuestionService {
 
     CategoryQuestion handleQuestionCategoryRegistration(CategoryQuestion categoryQuestion);
 
-    CategoryQuestion findQuestionCategoryByName(String name);
+    CategoryQuestion findQuestionCategoryByName(CategoryQuestion categoryQuestion);
 
     int questionCategoryCount();
 }

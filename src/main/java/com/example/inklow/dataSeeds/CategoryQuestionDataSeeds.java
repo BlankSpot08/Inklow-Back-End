@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Order(6)
-public class QuestionCategoryDataSeeds implements ApplicationRunner {
+public class CategoryQuestionDataSeeds implements ApplicationRunner {
     private final CategoryQuestionService categoryQuestionService;
 
     @Autowired
-    public QuestionCategoryDataSeeds(CategoryQuestionService categoryQuestionService) {
+    public CategoryQuestionDataSeeds(CategoryQuestionService categoryQuestionService) {
         this.categoryQuestionService = categoryQuestionService;
     }
 

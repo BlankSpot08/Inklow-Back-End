@@ -2,6 +2,8 @@ package com.example.inklow.configuration;
 
 import com.example.inklow.dao.InquiryDao;
 import com.example.inklow.entities.Inquiry;
+import com.example.inklow.service.InquiryService;
+import com.example.inklow.serviceImp.InquiryServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +18,7 @@ public class InquiryServiceConfig {
     }
 
     @Bean
-    public InquiryServiceConfig inquiryServiceConfig(InquiryDao inquiryDao) {
-        return new InquiryServiceConfig(inquiryDao);
+    public InquiryService inquiryService(InquiryDao inquiryDao) {
+        return new InquiryServiceImp(inquiryDao);
     }
 }

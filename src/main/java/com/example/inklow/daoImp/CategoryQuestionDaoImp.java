@@ -2,13 +2,12 @@ package com.example.inklow.daoImp;
 
 import com.example.inklow.dao.CategoryQuestionDao;
 import com.example.inklow.entities.CategoryQuestion;
-import com.example.inklow.mapper.QuestionCategoryMapper;
+import com.example.inklow.mapper.CategoryQuestionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.UUID;
 
 @Repository
 public class CategoryQuestionDaoImp implements CategoryQuestionDao {
@@ -20,34 +19,34 @@ public class CategoryQuestionDaoImp implements CategoryQuestionDao {
     }
 
     @Override
-    public List<CategoryQuestion> getListOfQuestionCategory() {
+    public List<CategoryQuestion> getListOfCategoryQuestion() {
         String query = "SELECT * FROM category_support";
 
-        List<CategoryQuestion> listOfCategoryQuestion = jdbcTemplate.query(query, new QuestionCategoryMapper());
+        List<CategoryQuestion> listOfCategoryQuestion = jdbcTemplate.query(query, new CategoryQuestionMapper());
 
         return listOfCategoryQuestion;
     }
 
     @Override
-    public CategoryQuestion getQuestionCategoryById(UUID id) {
+    public CategoryQuestion getCategoryQuestionById(CategoryQuestion categoryQuestion) {
         String query = "SELECT * FROM category_support WHERE id = ?";
 
-        CategoryQuestion categoryQuestion = jdbcTemplate.queryForObject(query, new Object[] {id.toString()}, new QuestionCategoryMapper());
+        CategoryQuestion temp = jdbcTemplate.queryForObject(query, new Object[] { categoryQuestion.getId() }, new CategoryQuestionMapper());
 
-        return categoryQuestion;
+        return temp;
     }
 
     @Override
-    public CategoryQuestion getQuestionCategoryByName(String name) {
+    public CategoryQuestion getCategoryQuestionByName(CategoryQuestion categoryQuestion) {
         String query = "SELECT * FROM category_support WHERE name = ?";
 
-        CategoryQuestion categoryQuestion = jdbcTemplate.queryForObject(query, new Object[] { name }, new QuestionCategoryMapper());
+        CategoryQuestion temp = jdbcTemplate.queryForObject(query, new Object[] { categoryQuestion.getName() }, new CategoryQuestionMapper());
 
-        return categoryQuestion;
+        return temp;
     }
 
     @Override
-    public CategoryQuestion addQuestionCategory(CategoryQuestion categoryQuestion) {
+    public CategoryQuestion addCategoryQuestion(CategoryQuestion categoryQuestion) {
         String query = "INSERT INTO category_support(name) VALUES(?)";
 
         int statusCode = jdbcTemplate.update(query, categoryQuestion.getName());

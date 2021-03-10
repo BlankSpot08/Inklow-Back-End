@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.UUID;
 
 public interface CategoryQuestionDao {
-    List<CategoryQuestion> getListOfQuestionCategory();
+    List<CategoryQuestion> getListOfCategoryQuestion();
 
-    CategoryQuestion getQuestionCategoryById(UUID id);
-    CategoryQuestion getQuestionCategoryByName(String name);
+    CategoryQuestion getCategoryQuestionById(CategoryQuestion categoryQuestion);
+    CategoryQuestion getCategoryQuestionByName(CategoryQuestion categoryQuestion);
 
-    CategoryQuestion addQuestionCategory(CategoryQuestion categoryQuestion);
+    CategoryQuestion addCategoryQuestion(CategoryQuestion categoryQuestion);
 }

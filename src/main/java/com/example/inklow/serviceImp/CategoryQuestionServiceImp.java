@@ -15,28 +15,28 @@ public class CategoryQuestionServiceImp implements CategoryQuestionService {
 
     @Override
     public List<CategoryQuestion> getListOfCategoryService() {
-        List<CategoryQuestion> listOfCategoryQuestion = categoryQuestionDao.getListOfQuestionCategory();
+        List<CategoryQuestion> listOfCategoryQuestion = categoryQuestionDao.getListOfCategoryQuestion();
 
         return listOfCategoryQuestion;
     }
 
     @Override
     public CategoryQuestion handleQuestionCategoryRegistration(CategoryQuestion categoryQuestion) {
-        CategoryQuestion temp = categoryQuestionDao.addQuestionCategory(categoryQuestion);
+        CategoryQuestion temp = categoryQuestionDao.addCategoryQuestion(categoryQuestion);
 
         return temp;
     }
 
     @Override
-    public CategoryQuestion findQuestionCategoryByName(String name) {
-        CategoryQuestion categoryQuestion = categoryQuestionDao.getQuestionCategoryByName(name);
+    public CategoryQuestion findQuestionCategoryByName(CategoryQuestion categoryQuestion) {
+        CategoryQuestion temp = categoryQuestionDao.getCategoryQuestionByName(categoryQuestion);
 
-        return categoryQuestion;
+        return temp;
     }
 
     @Override
     public int questionCategoryCount() {
-        List<CategoryQuestion> listOfCategoryQuestion = categoryQuestionDao.getListOfQuestionCategory();
+        List<CategoryQuestion> listOfCategoryQuestion = categoryQuestionDao.getListOfCategoryQuestion();
 
         return listOfCategoryQuestion.size();
     }

@@ -1,8 +1,10 @@
 package com.example.inklow.dataSeeds;
 
+import com.example.inklow.entities.CategoryQuestion;
 import com.example.inklow.entities.Question;
 import com.example.inklow.service.CategoryQuestionService;
 import com.example.inklow.service.QuestionService;
+import jdk.jfr.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -25,34 +27,49 @@ public class QuestionDataSeeds implements ApplicationRunner {
     public void run(ApplicationArguments args) throws Exception {
         if (questionService.questionCount() == 0) {
 
-            String question1Category = "Id/Sign-up";
-            String question1CategoryId = categoryQuestionService.findQuestionCategoryByName(question1Category).getName();
+            String categoryQuestion1 = "Id/Sign-up";
 
-            System.out.println(question1CategoryId);
+            CategoryQuestion categoryQuestion1Object = new CategoryQuestion.Builder()
+                    .name(categoryQuestion1)
+                    .build();
+
+            String categoryQuestion1Id = categoryQuestionService.findQuestionCategoryByName(categoryQuestion1Object).getName();
+
+            System.out.println(categoryQuestion1Id);
             Question question1 = new Question.Builder()
-                    .category(question1CategoryId)
+                    .category(categoryQuestion1Id)
                     .question("I lost my account password. How do I find my password?")
                     .answer("If you lose your account password, please try using the Find/Recover Password service.")
                     .build();
 
-            String question2Category = "Website";
-            String question2CategoryId = categoryQuestionService.findQuestionCategoryByName(question2Category).getName();
+            String categoryQuestion2 = "Website";
 
-            System.out.println(question2CategoryId);
+            CategoryQuestion categoryQuestion2Object = new CategoryQuestion.Builder()
+                    .name(categoryQuestion2)
+                    .build();
+
+            String categoryQuestion2Id = categoryQuestionService.findQuestionCategoryByName(categoryQuestion2Object).getName();
+
+            System.out.println(categoryQuestion2Id);
             Question question2 = new Question.Builder()
-                    .category(question2CategoryId)
+                    .category(categoryQuestion2Id)
                     .question("I can't leave comments on the website.")
                     .answer("Your ability to leave comments may be restricted if your previous comments/actions resulted in violations." +
                             " If you believe you did not engage in bad behavior and are still restricted, please contact us via Customer Support." +
                             " Follow the link below for more information regarding our Operational Policy.")
                     .build();
 
-            String question3Category = "Bugs/Errors";
-            String question3CategoryId = categoryQuestionService.findQuestionCategoryByName(question3Category).getName();
+            String categoryQuestion3 = "Bugs/Errors";
 
-            System.out.println(question3CategoryId);
+            CategoryQuestion categoryQuestion3Object = new CategoryQuestion.Builder()
+                    .name(categoryQuestion3)
+                    .build();
+
+            String categoryQuestion3Id = categoryQuestionService.findQuestionCategoryByName(categoryQuestion3Object).getName();
+
+            System.out.println(categoryQuestion3Id);
             Question question3 = new Question.Builder()
-                    .category(question3CategoryId)
+                    .category(categoryQuestion3Id)
                     .question("What should I do if I find a bug within the website?")
                     .answer("If you find a bug within the game, please submit a ticket under the Bug/Error category." +
                             " We ask that you include a screenshot of the issue and provide as many details as possible for us to resolve this issue.")
