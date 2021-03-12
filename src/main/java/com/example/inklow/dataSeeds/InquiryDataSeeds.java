@@ -39,11 +39,31 @@ public class InquiryDataSeeds implements ApplicationRunner {
                     .name("Other")
                     .build();
 
+            Inquiry inquiry6 = new Inquiry.Builder()
+                    .name("Game")
+                    .build();
+
+            Inquiry inquiry7 = new Inquiry.Builder()
+                    .name("In-Game Recovery")
+                    .build();
+
+            Inquiry inquiry8 = new Inquiry.Builder()
+                    .name("Billing")
+                    .build();
+
+            Inquiry inquiry9 = new Inquiry.Builder()
+                    .name("Event/Coupon")
+                    .build();
+
             inquiryService.handleInquiryRegistration(inquiry1);
             inquiryService.handleInquiryRegistration(inquiry2);
             inquiryService.handleInquiryRegistration(inquiry3);
             inquiryService.handleInquiryRegistration(inquiry4);
             inquiryService.handleInquiryRegistration(inquiry5);
+            inquiryService.handleInquiryRegistration(inquiry6);
+            inquiryService.handleInquiryRegistration(inquiry7);
+            inquiryService.handleInquiryRegistration(inquiry8);
+            inquiryService.handleInquiryRegistration(inquiry9);
         }
     }
 }

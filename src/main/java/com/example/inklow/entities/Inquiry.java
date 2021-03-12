@@ -21,6 +21,10 @@ public class Inquiry {
         return categories;
     }
 
+    public void setCategories(List<CategoryInquiry> categories) {
+        this.categories = categories;
+    }
+
     public Inquiry(UUID id, String name, List<CategoryInquiry> categories) {
         this.id = id;
         this.name = name;

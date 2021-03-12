@@ -1,6 +1,9 @@
 package com.example.inklow.configuration;
 
+import com.example.inklow.dao.CategoryInquiryDao;
+import com.example.inklow.dao.InquiryCategoryDao;
 import com.example.inklow.dao.InquiryDao;
+import com.example.inklow.entities.CategoryInquiry;
 import com.example.inklow.entities.Inquiry;
 import com.example.inklow.service.InquiryService;
 import com.example.inklow.serviceImp.InquiryServiceImp;
@@ -18,7 +21,7 @@ public class InquiryServiceConfig {
     }
 
     @Bean
-    public InquiryService inquiryService(InquiryDao inquiryDao) {
+    public InquiryService inquiryService() {
         return new InquiryServiceImp(inquiryDao);
     }
 }

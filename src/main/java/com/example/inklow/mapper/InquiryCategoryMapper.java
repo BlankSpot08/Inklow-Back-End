@@ -12,7 +12,7 @@ public final class InquiryCategoryMapper implements RowMapper<InquiryCategory> {
     public InquiryCategory mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new InquiryCategory.Builder()
                 .inquiryId(UUID.fromString(rs.getString("inquiryId")))
-                .categoryId(UUID.fromString(rs.getString("categoryId")))
+                .categoryId(UUID.fromString(rs.getString("inquiry_categoryId")))
                 .build();
     }
 }

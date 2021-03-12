@@ -31,7 +31,7 @@ public class CategoryInquiryDaoImp implements CategoryInquiryDao {
 
     @Override
     public CategoryInquiry getCategoryInquiryById(CategoryInquiry categoryInquiry) {
-        String query = "SELECT * FROM category_inquiry";
+        String query = "SELECT * FROM category_inquiry WHERE id = ?";
 
         CategoryInquiry temp = jdbcTemplate.queryForObject(query, new Object[] { categoryInquiry.getId() }, new CategoryInquiryMapper());
 

@@ -2,6 +2,8 @@ package com.example.inklow.serviceImp;
 
 import com.example.inklow.configuration.InquiryCategoryDaoConfig;
 import com.example.inklow.dao.InquiryCategoryDao;
+import com.example.inklow.entities.CategoryInquiry;
+import com.example.inklow.entities.Inquiry;
 import com.example.inklow.entities.InquiryCategory;
 import com.example.inklow.service.InquiryCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +26,8 @@ public class InquiryCategoryServiceImp implements InquiryCategoryService {
     }
 
     @Override
-    public List<InquiryCategory> getInquiryCategoriesById(InquiryCategory inquiryCategory) {
-        List<InquiryCategory> listOfInquiryCategory = inquiryCategoryDao.getInquiryCategoriesById(inquiryCategory);
+    public List<CategoryInquiry> getInquiryCategoriesById(Inquiry inquiry) {
+        List<CategoryInquiry> listOfInquiryCategory = inquiryCategoryDao.getInquiryCategoriesById(inquiry);
 
         return listOfInquiryCategory;
     }

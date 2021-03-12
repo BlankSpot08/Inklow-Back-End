@@ -1,6 +1,13 @@
 package com.example.inklow.controller;
 
+import com.example.inklow.dao.CategoryInquiryDao;
+import com.example.inklow.dao.InquiryCategoryDao;
+import com.example.inklow.dao.InquiryDao;
+import com.example.inklow.entities.CategoryInquiry;
+import com.example.inklow.entities.Inquiry;
+import com.example.inklow.entities.InquiryCategory;
 import com.example.inklow.entities.Question;
+import com.example.inklow.service.InquiryService;
 import com.example.inklow.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,10 +22,24 @@ import java.util.List;
 @RequestMapping(value = "/api" + SupportController.SUPPORT_ENDPOINTS.SUPPORT)
 public class SupportController {
     private final QuestionService questionService;
+    private final InquiryService inquiryService;
+
+    private final InquiryDao inquiryDao;
+    private final CategoryInquiryDao categoryInquiryDao;
+    private final InquiryCategoryDao inquiryCategoryDao;
 
     @Autowired
-    public SupportController(QuestionService questionService) {
+    public SupportController(QuestionService questionService,
+                             InquiryService inquiryService,
+                             InquiryDao inquiryDao,
+                             CategoryInquiryDao categoryInquiryDao,
+                             InquiryCategoryDao inquiryCategoryDao) {
         this.questionService = questionService;
+        this.inquiryService = inquiryService;
+
+        this.inquiryDao = inquiryDao;
+        this.categoryInquiryDao = categoryInquiryDao;
+        this.inquiryCategoryDao = inquiryCategoryDao;
     }
 
     @RequestMapping(value = SUPPORT_ENDPOINTS.QUESTION_ENDPOINTS.GET_ALL, method = RequestMethod.GET)
@@ -49,6 +70,27 @@ public class SupportController {
         return ResponseEntity.status(HttpStatus.OK).body(listOfQuestions);
     }
 
+    @RequestMapping(value = SUPPORT_ENDPOINTS.INQUIRY_ENDPOINTS.GET, method = RequestMethod.POST)
+    public ResponseEntity<?> getInquiryByName(@RequestParam String name) {
+        Inquiry inquiry = new Inquiry.Builder()
+                .name(name)
+                .build();
+
+        Inquiry temp = inquiryService.getInquiryByName(inquiry);
+
+        return ResponseEntity.status(HttpStatus.OK).body(temp);
+    }
+
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public ResponseEntity<?> test(@RequestParam String param) {
+        Inquiry inquiry = new Inquiry.Builder()
+                .name(param)
+                .build();
+
+        Inquiry temp = inquiryDao.findInquiryByName(inquiry);
+
+        return ResponseEntity.status(HttpStatus.OK).body(inquiryDao.listOfInquiries());
+    }
 
     protected static final class SUPPORT_ENDPOINTS {
         protected static final String SUPPORT = "/support";
@@ -67,6 +109,8 @@ public class SupportController {
 
         protected static final class INQUIRY_ENDPOINTS {
             private static final String INQUIRY = "/inquiry";
+
+            protected static final String GET = INQUIRY + "/get";
 
             protected static final String GET_ALL = INQUIRY + "/getAll";
 

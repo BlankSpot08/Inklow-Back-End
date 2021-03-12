@@ -2,9 +2,12 @@ package com.example.inklow.daoImp;
 
 import com.example.inklow.dao.InquiryCategoryDao;
 import com.example.inklow.dao.InquiryDao;
+import com.example.inklow.entities.CategoryInquiry;
 import com.example.inklow.entities.Inquiry;
 import com.example.inklow.entities.InquiryCategory;
+import com.example.inklow.mapper.CategoryInquiryMapper;
 import com.example.inklow.mapper.InquiryCategoryMapper;
+import com.example.inklow.mapper.InquiryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -32,28 +35,28 @@ public class InquiryCategoryDaoImp implements InquiryCategoryDao {
     }
 
     @Override
-    public List<InquiryCategory> getInquiryCategoriesById(InquiryCategory inquiryCategory) {
+    public List<CategoryInquiry> getInquiryCategoriesById(Inquiry inquiry) {
         String query = "" +
                 "SELECT * FROM inquiry_categories AS ic " +
                 "JOIN category_inquiry AS ci " +
                 "ON ci.id = ic.inquiry_categoryId " +
                 "WHERE ic.inquiryId = ?;";
 
-        List<InquiryCategory> listOfInquiryCategory = jdbcTemplate.query(query, new InquiryCategoryMapper());
+        List<CategoryInquiry> listOfInquiryCategory = jdbcTemplate.query(query, new Object[] { inquiry.getId() }, new CategoryInquiryMapper());
 
         return listOfInquiryCategory;
     }
 
     @Override
-    public InquiryCategory getInquiryCategoryById(InquiryCategory inquiryCategory) {
+    public CategoryInquiry getInquiryCategoryById(InquiryCategory inquiryCategory) {
         String query = "" +
                 "SELECT * FROM inquiry_categories AS ic " +
                 "WHERE ic.inquiryId = ? AND ic.inquiry_categoryId = ?;";
 
-        InquiryCategory temp = jdbcTemplate.queryForObject(
+        CategoryInquiry temp = jdbcTemplate.queryForObject(
                 query,
                 new Object[] {inquiryCategory.getInquiryId(), inquiryCategory.getCategoryId()},
-                new InquiryCategoryMapper());
+                new CategoryInquiryMapper());
 
         return temp;
     }

@@ -1,6 +1,8 @@
 package com.example.inklow.daoImp;
 
+import com.example.inklow.dao.InquiryCategoryDao;
 import com.example.inklow.dao.InquiryDao;
+import com.example.inklow.entities.CategoryInquiry;
 import com.example.inklow.entities.Inquiry;
 import com.example.inklow.mapper.InquiryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,12 @@ import java.util.List;
 @Repository
 public class InquiryDaoImp implements InquiryDao {
     private final JdbcTemplate jdbcTemplate;
+    private final InquiryCategoryDao inquiryCategoryDao;
 
     @Autowired
-    public InquiryDaoImp(JdbcTemplate jdbcTemplate) {
+    public InquiryDaoImp(JdbcTemplate jdbcTemplate, InquiryCategoryDao inquiryCategoryDao) {
         this.jdbcTemplate = jdbcTemplate;
+        this.inquiryCategoryDao = inquiryCategoryDao;
     }
 
     @Override
@@ -23,6 +27,11 @@ public class InquiryDaoImp implements InquiryDao {
         String query = "SELECT * FROM inquiries;";
 
         List<Inquiry> listOfInquiry = jdbcTemplate.query(query, new InquiryMapper());
+
+        for (Inquiry inquiry : listOfInquiry) {
+            List<CategoryInquiry> categoryInquiries = inquiryCategoryDao.getInquiryCategoriesById(inquiry);
+            inquiry.setCategories(categoryInquiries);
+        }
 
         return listOfInquiry;
     }
@@ -37,6 +46,9 @@ public class InquiryDaoImp implements InquiryDao {
             return null;
         }
 
+        List<CategoryInquiry> categoryInquiries = inquiryCategoryDao.getInquiryCategoriesById(temp);
+        temp.setCategories(categoryInquiries);
+
         return temp;
     }
 
@@ -50,6 +62,9 @@ public class InquiryDaoImp implements InquiryDao {
         if (temp == null) {
             return null;
         }
+
+        List<CategoryInquiry> categoryInquiries = inquiryCategoryDao.getInquiryCategoriesById(temp);
+        temp.setCategories(categoryInquiries);
 
         return temp;
     }
