@@ -81,15 +81,15 @@ public class SupportController {
         return ResponseEntity.status(HttpStatus.OK).body(temp);
     }
 
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
-    public ResponseEntity<?> test(@RequestParam String param) {
+    @RequestMapping(value = SUPPORT_ENDPOINTS.INQUIRY_ENDPOINTS.GET, method = RequestMethod.POST)
+    public ResponseEntity<?> getInquiryCategoriesByName(@RequestParam String name) {
         Inquiry inquiry = new Inquiry.Builder()
-                .name(param)
+                .name(name)
                 .build();
 
-        Inquiry temp = inquiryDao.findInquiryByName(inquiry);
+        Inquiry temp = inquiryService.getInquiryByName(inquiry);
 
-        return ResponseEntity.status(HttpStatus.OK).body(inquiryDao.listOfInquiries());
+        return ResponseEntity.status(HttpStatus.OK).body(temp.getCategories());
     }
 
     protected static final class SUPPORT_ENDPOINTS {
