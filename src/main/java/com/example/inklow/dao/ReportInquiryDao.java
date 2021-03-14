@@ -8,7 +8,7 @@ public interface ReportInquiryDao {
     List<ReportInquiry> getListOfReportInquiry();
 
     ReportInquiry getReportInquiryById(ReportInquiry reportInquiry);
-    ReportInquiry getReportInquiryByName(ReportInquiry reportInquiry);
+    ReportInquiry getReportInquiryByTitle(ReportInquiry reportInquiry);
 
     ReportInquiry addReportInquiry(ReportInquiry reportInquiry);
     ReportInquiry removeReportInquiry(ReportInquiry reportInquiry);
