@@ -3,14 +3,18 @@ package com.example.inklow.daoImp;
 import com.example.inklow.dao.ReportInquiryDao;
 import com.example.inklow.entities.ReportInquiry;
 import com.example.inklow.mapper.ReportInquiryMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public class ReportInquiryDaoImp implements ReportInquiryDao {
     private final JdbcTemplate jdbcTemplate;
 
-    public ReportInquiryDaoImp(JdbcTemplate jdbcTemplate) {
+    @Autowired
+    public ReportInquiryDaoImp(final JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

@@ -20,19 +20,19 @@ import org.springframework.security.crypto.password.PasswordEncoder;
         UserRoleConfigurationTest.class,
         PasswordEncoderConfig.class})
 public class UserConfigurationTest {
-    private final JdbcTemplate jdbcTemplate;
-    private final UserRoleDao userRoleDao;
-
-    @Autowired
-    public UserConfigurationTest(final @Qualifier("testJdbc") JdbcTemplate jdbcTemplate,
-                                 final @Qualifier("testUserRoleConfig") UserRoleDao userRoleDao) {
-        this.jdbcTemplate = jdbcTemplate;
-        this.userRoleDao = userRoleDao;
-    }
-
-    @Bean(name = "testUserConfig")
-    @Primary
-    public UserDao userDao() {
-        return new UserDaoImp(jdbcTemplate, userRoleDao);
-    }
+//    private final JdbcTemplate jdbcTemplate;
+//    private final UserRoleDao userRoleDao;
+//
+//    @Autowired
+//    public UserConfigurationTest(final @Qualifier("testJdbc") JdbcTemplate jdbcTemplate,
+//                                 final @Qualifier("testUserRoleConfig") UserRoleDao userRoleDao) {
+//        this.jdbcTemplate = jdbcTemplate;
+//        this.userRoleDao = userRoleDao;
+//    }
+//
+//    @Bean(name = "testUserConfig")
+//    @Primary
+//    public UserDao userDao() {
+//        return new UserDaoImp(jdbcTemplate, userRoleDao);
+//    }
 }

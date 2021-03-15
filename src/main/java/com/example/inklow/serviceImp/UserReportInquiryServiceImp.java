@@ -2,13 +2,12 @@ package com.example.inklow.serviceImp;
 
 import com.example.inklow.dao.UserReportInquiryDao;
 import com.example.inklow.entities.ReportInquiry;
-import com.example.inklow.entities.Role;
-import com.example.inklow.entities.UserRole;
+import com.example.inklow.entities.User;
+import com.example.inklow.entities.UserReportInquiry;
 import com.example.inklow.service.UserReportInquiryService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
-import java.util.UUID;
 
 public class UserReportInquiryServiceImp implements UserReportInquiryService {
     private final UserReportInquiryDao userReportInquiryDao;
@@ -19,36 +18,36 @@ public class UserReportInquiryServiceImp implements UserReportInquiryService {
     }
 
     @Override
-    public List<ReportInquiry> getListOfReportInquiry() {
+    public List<ReportInquiry> getListOfUserReportInquiries() {
         List<ReportInquiry> listOfReportInquiry = userReportInquiryDao.getListOfUserReportInquiries();
 
         return listOfReportInquiry;
     }
 
     @Override
-    public List<ReportInquiry> getReportInquiryById(ReportInquiry reportInquiry) {
-        List<ReportInquiry> temp = userReportInquiryDao.getUserReportInquiriesById(reportInquiry);
+    public List<ReportInquiry> getUserReportInquiriesById(User user) {
+        List<ReportInquiry> temp = userReportInquiryDao.getUserReportInquiriesById(user);
 
         return temp;
     }
 
     @Override
-    public ReportInquiry handleReportInquiryRegistration(ReportInquiry reportInquiry) {
-        ReportInquiry temp = userReportInquiryDao.addReportInquiry(reportInquiry);
+    public UserReportInquiry handleUserReportInquiryRegistration(UserReportInquiry userReportInquiry) {
+        UserReportInquiry temp = userReportInquiryDao.addUserReportInquiry(userReportInquiry);
 
         return temp;
     }
 
     @Override
-    public ReportInquiry handleReportInquiryDeletion(ReportInquiry reportInquiry) {
-        ReportInquiry temp = userReportInquiryDao.removeReportInquiry(reportInquiry);
+    public UserReportInquiry handleUserReportInquiryDeletion(UserReportInquiry userReportInquiry) {
+        UserReportInquiry temp = userReportInquiryDao.removeUserReportInquiry(userReportInquiry);
 
         return temp;
     }
 
     @Override
-    public Boolean handleAllReportInquiryDeletion() {
-        Boolean temp = userReportInquiryDao.removeAllReportInquiry();
+    public Boolean handleAllUserReportInquiryDeletion() {
+        Boolean temp = userReportInquiryDao.removeUserAllReportInquiry();
 
         return temp;
     }

@@ -1,21 +1,19 @@
 package com.example.inklow.service;
 
-import com.example.inklow.entities.ReportInquiry;
-import com.example.inklow.entities.Role;
-import com.example.inklow.entities.UserRole;
+import com.example.inklow.entities.*;
 
 import java.util.List;
 import java.util.UUID;
 
 public interface UserReportInquiryService {
-    List<ReportInquiry> getListOfReportInquiry();
+    List<ReportInquiry> getListOfUserReportInquiries();
 
-    List<ReportInquiry> getReportInquiryById(ReportInquiry reportInquiry);
+    List<ReportInquiry> getUserReportInquiriesById(User user);
 
-    ReportInquiry handleReportInquiryRegistration(ReportInquiry reportInquiry);
+    UserReportInquiry handleUserReportInquiryRegistration(UserReportInquiry userReportInquiry);
 
-    ReportInquiry handleReportInquiryDeletion(ReportInquiry reportInquiry);
-    Boolean handleAllReportInquiryDeletion();
+    UserReportInquiry handleUserReportInquiryDeletion(UserReportInquiry userReportInquiry);
+    Boolean handleAllUserReportInquiryDeletion();
 
     int reportInquiryCount();
 }

@@ -27,8 +27,7 @@ public class UserRoleDaoImp implements UserRoleDao {
     @Override
     public List<Role> getUserRolesByUserId(UUID id) {
         String query = "" +
-                "SELECT * " +
-                "FROM user_roles " +
+                "SELECT * FROM user_roles " +
                 "JOIN roles r ON r.id = user_roles.roleId " +
                 "WHERE user_roles.userId = ?";
 

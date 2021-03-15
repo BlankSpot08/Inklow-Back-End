@@ -2,7 +2,7 @@ package com.example.inklow.entities;
 
 import java.util.UUID;
 
-public class UserInquiry {
+public class UserReportInquiry {
     private final UUID userId;
     private final UUID reportQuiry;
 
@@ -14,7 +14,7 @@ public class UserInquiry {
         return reportQuiry;
     }
 
-    public UserInquiry(UUID userId, UUID reportQuiry) {
+    public UserReportInquiry(UUID userId, UUID reportQuiry) {
         this.userId = userId;
         this.reportQuiry = reportQuiry;
     }

@@ -1,7 +1,7 @@
 package com.example.inklow.daoImp;
 
-import com.example.inklow.dao.ReportInquiryDao;
 import com.example.inklow.dao.UserDao;
+import com.example.inklow.dao.UserReportInquiryDao;
 import com.example.inklow.dao.UserRoleDao;
 import com.example.inklow.entities.ReportInquiry;
 import com.example.inklow.entities.Role;
@@ -9,7 +9,6 @@ import com.example.inklow.entities.User;
 import com.example.inklow.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,13 +18,16 @@ import java.util.UUID;
 public class UserDaoImp implements UserDao {
     private final JdbcTemplate jdbcTemplate;
     private final UserRoleDao userRoles;
-//    private final ReportInquiryDao reportInquiryDao;
+    private final UserReportInquiryDao userReportInquiryDao;
 
     @Autowired
-    public UserDaoImp(final JdbcTemplate jdbcTemplate, final UserRoleDao userRoles) {
+    public UserDaoImp(
+            final JdbcTemplate jdbcTemplate,
+            final UserRoleDao userRoles,
+            final UserReportInquiryDao userReportInquiryDao) {
         this.jdbcTemplate = jdbcTemplate;
         this.userRoles = userRoles;
-//        this.reportInquiryDao = reportInquiryDao;
+        this.userReportInquiryDao = userReportInquiryDao;
     }
 
     @Override
@@ -40,6 +42,9 @@ public class UserDaoImp implements UserDao {
 
         List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
         user.setRoles(roles);
+
+        List<ReportInquiry> reportInquiries = userReportInquiryDao.getUserReportInquiriesById(user);
+        user.setReportInquiries(reportInquiries);
 
         return user;
     }
