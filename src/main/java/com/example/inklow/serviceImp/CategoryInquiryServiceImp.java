@@ -19,7 +19,7 @@ public class CategoryInquiryServiceImp implements CategoryInquiryService {
     @Override
     public List<CategoryInquiry> getListOfCategoryService() {
         List<CategoryInquiry> listOfCategoryInquiry  = categoryInquiryDao.getListOfCategoryInquiry();
-
+        
         return listOfCategoryInquiry;
     }
 

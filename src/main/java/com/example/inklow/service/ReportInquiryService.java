@@ -10,7 +10,7 @@ public interface ReportInquiryService {
     List<ReportInquiry> getListOfReportInquiry();
 
     ReportInquiry getReportInquiryById(ReportInquiry reportInquiry);
-    ReportInquiry getReportInquiryByName(ReportInquiry reportInquiry);
+    ReportInquiry getReportInquiryByTitle(ReportInquiry reportInquiry);
 
     ReportInquiry handleReportInquiryRegistration(ReportInquiry reportInquiry);
 

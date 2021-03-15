@@ -15,36 +15,38 @@ public class ReportInquiryServiceImp implements ReportInquiryService {
 
     @Override
     public List<ReportInquiry> getListOfReportInquiry() {
-        return null;
+        return reportInquiryDao.getListOfReportInquiry();
     }
 
     @Override
     public ReportInquiry getReportInquiryById(ReportInquiry reportInquiry) {
-        return null;
+        return reportInquiryDao.getReportInquiryById(reportInquiry);
     }
 
     @Override
-    public ReportInquiry getReportInquiryByName(ReportInquiry reportInquiry) {
-        return null;
+    public ReportInquiry getReportInquiryByTitle(ReportInquiry reportInquiry) {
+        return reportInquiryDao.getReportInquiryByTitle(reportInquiry);
     }
 
     @Override
     public ReportInquiry handleReportInquiryRegistration(ReportInquiry reportInquiry) {
-        return null;
+        return reportInquiryDao.addReportInquiry(reportInquiry);
     }
 
     @Override
     public ReportInquiry handleReportInquiryDeletion(ReportInquiry reportInquiry) {
-        return null;
+        return reportInquiryDao.removeReportInquiry(reportInquiry);
     }
 
     @Override
     public Boolean handleAllReportInquiryDeletion() {
-        return null;
+        return reportInquiryDao.removeAllReportInquiry();
     }
 
     @Override
     public int reportInquiryCount() {
-        return 0;
+        List<ReportInquiry> listOfReportInquiry = reportInquiryDao.getListOfReportInquiry();
+
+        return listOfReportInquiry.size();
     }
 }
