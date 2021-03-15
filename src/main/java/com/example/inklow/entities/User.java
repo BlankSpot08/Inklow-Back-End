@@ -1,5 +1,6 @@
 package com.example.inklow.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -16,8 +17,9 @@ public class User {
     private String phoneNumber;
 
     private List<Role> roles;
+    private List<ReportInquiry> reportInquiries;
 
-    public User(UUID id, String firstName, String lastName, String gender, Date birthDate, String username, String password, String email,  String phoneNumber, List<Role> roles) {
+    public User(UUID id, String firstName, String lastName, String gender, Date birthDate, String username, String password, String email,  String phoneNumber, List<Role> roles, List<ReportInquiry> reportInquiries) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,6 +30,7 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.roles = roles;
+        this.reportInquiries = reportInquiries;
     }
 
     public UUID getId() {
@@ -98,6 +101,14 @@ public class User {
         this.roles = roles;
     }
 
+    public List<ReportInquiry> getReportInquiries() {
+        return reportInquiries;
+    }
+
+    public void setReportInquiries(List<ReportInquiry> reportInquiries) {
+        this.reportInquiries = reportInquiries;
+    }
+
     public final static class Builder {
         private UUID id;
         private String firstName = "";
@@ -109,7 +120,8 @@ public class User {
         private String email = "";
         private String phoneNumber = "";
 
-        private List<Role> roles;
+        private List<Role> roles = new ArrayList<>();
+        private List<ReportInquiry> reportInquiries = new ArrayList<>();
 
         public Builder() { }
 
@@ -117,7 +129,16 @@ public class User {
             this.id = id;
         }
 
-        public Builder(UUID id, String firstName, String lastName, String gender, Date birthDate, String username, String password, String email, String phoneNumber, List<Role> roles) {
+        public Builder(UUID id, String firstName,
+                       String lastName,
+                       String gender,
+                       Date birthDate,
+                       String username,
+                       String password,
+                       String email,
+                       String phoneNumber,
+                       List<Role> roles,
+                       List<ReportInquiry> reportInquiries) {
             this.id = id;
             this.firstName = firstName;
             this.lastName = lastName;
@@ -128,6 +149,7 @@ public class User {
             this.email = email;
             this.phoneNumber = phoneNumber;
             this.roles = roles;
+            this.reportInquiries = reportInquiries;
         }
 
         public Builder id(UUID id) {
@@ -180,8 +202,13 @@ public class User {
             return this;
         }
 
+        public Builder reportInquiries(List<ReportInquiry> reportInquiries) {
+            this.reportInquiries = reportInquiries;
+            return this;
+        }
+
         public User build() {
-            return new User(id, firstName, lastName, gender, birthDate, username, password, email, phoneNumber, roles);
+            return new User(id, firstName, lastName, gender, birthDate, username, password, email, phoneNumber, roles, reportInquiries);
         }
 
     }

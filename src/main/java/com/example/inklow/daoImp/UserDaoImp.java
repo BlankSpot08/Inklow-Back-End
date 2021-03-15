@@ -1,7 +1,9 @@
 package com.example.inklow.daoImp;
 
+import com.example.inklow.dao.ReportInquiryDao;
 import com.example.inklow.dao.UserDao;
 import com.example.inklow.dao.UserRoleDao;
+import com.example.inklow.entities.ReportInquiry;
 import com.example.inklow.entities.Role;
 import com.example.inklow.entities.User;
 import com.example.inklow.mapper.UserMapper;
@@ -17,11 +19,13 @@ import java.util.UUID;
 public class UserDaoImp implements UserDao {
     private final JdbcTemplate jdbcTemplate;
     private final UserRoleDao userRoles;
+//    private final ReportInquiryDao reportInquiryDao;
 
     @Autowired
     public UserDaoImp(final JdbcTemplate jdbcTemplate, final UserRoleDao userRoles) {
         this.jdbcTemplate = jdbcTemplate;
         this.userRoles = userRoles;
+//        this.reportInquiryDao = reportInquiryDao;
     }
 
     @Override
@@ -52,6 +56,8 @@ public class UserDaoImp implements UserDao {
 
         List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
         user.setRoles(roles);
+
+//        List<ReportInquiry> reportInquiries =
 
         return user;
     }
