@@ -50,6 +50,7 @@ public class PermissionServiceImp implements PermissionService {
 
     @Override
     public int permissionCount() {
-        return getListOfPermission().size();
+        List<Permission> listOfPermission = permissionDao.getListOfPermission();
+        return listOfPermission.size();
     }
 }

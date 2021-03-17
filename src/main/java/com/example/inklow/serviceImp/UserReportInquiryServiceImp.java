@@ -18,8 +18,8 @@ public class UserReportInquiryServiceImp implements UserReportInquiryService {
     }
 
     @Override
-    public List<ReportInquiry> getListOfUserReportInquiries() {
-        List<ReportInquiry> listOfReportInquiry = userReportInquiryDao.getListOfUserReportInquiries();
+    public List<UserReportInquiry> getListOfUserReportInquiries() {
+        List<UserReportInquiry> listOfReportInquiry = userReportInquiryDao.getListOfUserReportInquiries();
 
         return listOfReportInquiry;
     }
@@ -54,7 +54,7 @@ public class UserReportInquiryServiceImp implements UserReportInquiryService {
 
     @Override
     public int reportInquiryCount() {
-        List<ReportInquiry> listOfReportInquiry = userReportInquiryDao.getListOfUserReportInquiries();
+        List<UserReportInquiry> listOfReportInquiry = userReportInquiryDao.getListOfUserReportInquiries();
 
         return listOfReportInquiry.size();
     }

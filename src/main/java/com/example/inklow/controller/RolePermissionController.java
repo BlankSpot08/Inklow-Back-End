@@ -66,12 +66,12 @@ public class RolePermissionController {
     protected static final class ROLE_PERMISSION_ENDPOINTS {
         protected static final String ROLE_PERMISSION = "/role_permission";
 
-        protected static final String ADD = ROLE_PERMISSION + "/add";
+        protected static final String ADD = "/add";
 
-        protected static final String GET = ROLE_PERMISSION + "/get";
+        protected static final String GET = "/get";
 
-        protected static final String GET_ALL = ROLE_PERMISSION + "/getAll";
+        protected static final String GET_ALL = "/getAll";
 
-        protected static final String DELETE = ROLE_PERMISSION + "/delete";
+        protected static final String DELETE = "/delete";
     }
 }

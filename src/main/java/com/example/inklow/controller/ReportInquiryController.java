@@ -41,7 +41,7 @@ public class ReportInquiryController {
     }
 
     @RequestMapping(value = REPORT_INQUIRY_ENDPOINTS.ADD, method = RequestMethod.POST)
-    public ResponseEntity<?> getReportInquiry(@RequestBody ReportInquiry reportInquiry) {
+    public ResponseEntity<?> addReportInquiry(@RequestBody ReportInquiry reportInquiry) {
         ReportInquiry temp = reportInquiryService.handleReportInquiryRegistration(reportInquiry);
 
         return ResponseEntity.status(HttpStatus.OK).body(temp);

@@ -1,6 +1,7 @@
 package com.example.inklow.serviceImp;
 
 import com.example.inklow.dao.ReportInquiryDao;
+import com.example.inklow.dao.UserReportInquiryDao;
 import com.example.inklow.entities.ReportInquiry;
 import com.example.inklow.service.ReportInquiryService;
 

@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface UserReportInquiryService {
-    List<ReportInquiry> getListOfUserReportInquiries();
+    List<UserReportInquiry> getListOfUserReportInquiries();
 
     List<ReportInquiry> getUserReportInquiriesById(User user);
 

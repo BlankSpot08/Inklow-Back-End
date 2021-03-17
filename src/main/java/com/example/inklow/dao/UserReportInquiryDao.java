@@ -7,7 +7,7 @@ import com.example.inklow.entities.UserReportInquiry;
 import java.util.List;
 
 public interface UserReportInquiryDao {
-    List<ReportInquiry> getListOfUserReportInquiries();
+    List<UserReportInquiry> getListOfUserReportInquiries();
 
     List<ReportInquiry> getUserReportInquiriesById(User user);
 

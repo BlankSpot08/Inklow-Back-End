@@ -7,6 +7,7 @@ import com.example.inklow.entities.User;
 import com.example.inklow.entities.UserReportInquiry;
 import com.example.inklow.mapper.ReportInquiryMapper;
 import com.example.inklow.mapper.RoleMapper;
+import com.example.inklow.mapper.UserReportInquiryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -23,10 +24,10 @@ public class UserReportInquiryDaoImp implements UserReportInquiryDao {
     }
 
     @Override
-    public List<ReportInquiry> getListOfUserReportInquiries() {
+    public List<UserReportInquiry> getListOfUserReportInquiries() {
         String query = "SELECT * FROM user_inquiries";
 
-        List<ReportInquiry> reportInquiries = jdbcTemplate.query(query, new ReportInquiryMapper());
+        List<UserReportInquiry> reportInquiries = jdbcTemplate.query(query, new UserReportInquiryMapper());
 
         return reportInquiries;
     }
