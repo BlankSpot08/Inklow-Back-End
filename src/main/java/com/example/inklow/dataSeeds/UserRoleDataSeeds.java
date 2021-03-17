@@ -51,3 +51,4 @@ public class UserRoleDataSeeds implements ApplicationRunner {
         return userRole;
     }
 }
+

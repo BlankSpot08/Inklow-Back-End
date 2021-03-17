@@ -27,7 +27,8 @@ public class RoleDataSeeds implements ApplicationRunner {
         if (roleService.roleCount() == 0) {
             String[] roles = {
                     "Admin",
-                    "User"
+                    "User",
+                    "Support"
             };
 
             for (int i = 0; i < roles.length; i++) {
