@@ -25,8 +25,8 @@ public class ReportInquiryDetailsServiceImp implements ReportInquiryDetailsServi
     }
 
     @Override
-    public List<ReportInquiryDetails> getReportInquiryDetailsById(ReportInquiryDetails reportInquiryDetails) {
-        List<ReportInquiryDetails> temp = reportInquiryDetailsDao.getReportInquiryDetailsById(reportInquiryDetails);
+    public List<ReportInquiryDetails> getReportInquiryDetailsById(ReportInquiry reportInquiry) {
+        List<ReportInquiryDetails> temp = reportInquiryDetailsDao.getReportInquiryDetailsById(reportInquiry);
 
         return temp;
     }

@@ -4,7 +4,6 @@ import com.example.inklow.dao.ReportInquiryDetailsDao;
 import com.example.inklow.entities.ReportInquiry;
 import com.example.inklow.entities.ReportInquiryDetails;
 import com.example.inklow.mapper.ReportInquiryDetailsMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -28,28 +27,61 @@ public class ReportInquiryDetailsDaoImp implements ReportInquiryDetailsDao {
     }
 
     @Override
-    public List<ReportInquiryDetails> getReportInquiryDetailsById(ReportInquiryDetails reportInquiryDetails) {
+    public List<ReportInquiryDetails> getReportInquiryDetailsById(ReportInquiry reportInquiry) {
         String query = "" +
                 "SELECT * report_inquiry as ri" +
-                "JOIN report_inquiry_details AS rid ON ";
+                "JOIN report_inquiry_details AS rid ON rid.reportInquiryId = ri.id" +
+                "WHERE ri.id = ?";
 
-        List<ReportInquiryDetails> listOfReportInquiryDetails = jdbcTemplate.query(query, new ReportInquiryDetailsMapper());
+        List<ReportInquiryDetails> listOfReportInquiryDetails = jdbcTemplate.query(query, new Object[] { reportInquiry.getId() }, new ReportInquiryDetailsMapper());
 
         return listOfReportInquiryDetails;
     }
 
     @Override
     public ReportInquiryDetails addReportInquiryDetails(ReportInquiryDetails reportInquiryDetails) {
-        return null;
+        String query = "" +
+                "INSERT INTO report_inquiry_details(reportInquiryId, details, dateCreated)" +
+                "VALUES (?, ?, ?)";
+
+        int temp = jdbcTemplate.update(query,
+                reportInquiryDetails.getReportInquiryId(),
+                reportInquiryDetails.getDetails(),
+                reportInquiryDetails.getDateCreated());
+
+        if (temp == 0) {
+            return null;
+        }
+
+        return reportInquiryDetails;
     }
 
     @Override
     public ReportInquiryDetails removeReportInquiryDetails(ReportInquiryDetails reportInquiryDetails) {
-        return null;
+        String query = "" +
+                "DELETE FROM report_inquiry_details AS rid" +
+                "WHERE rid.id = ?";
+
+        int statusCode = jdbcTemplate.update(query, reportInquiryDetails.getId());
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return reportInquiryDetails;
     }
 
     @Override
     public Boolean removeAllReportInquiryDetails() {
-        return null;
+        String query = "" +
+                "DELETE FROM report_inquiry_details";
+
+        int statusCode = jdbcTemplate.update(query);
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return true;
     }
 }

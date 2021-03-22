@@ -8,7 +8,7 @@ import java.util.List;
 public interface ReportInquiryDetailsDao {
     List<ReportInquiryDetails> getListOfReportInquiryDetails();
 
-    List<ReportInquiryDetails> getReportInquiryDetailsById(ReportInquiryDetails reportInquiryDetails);
+    List<ReportInquiryDetails> getReportInquiryDetailsById(ReportInquiry reportInquiry);
 
     ReportInquiryDetails addReportInquiryDetails(ReportInquiryDetails reportInquiryDetails);
     ReportInquiryDetails removeReportInquiryDetails(ReportInquiryDetails reportInquiryDetails);

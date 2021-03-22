@@ -9,6 +9,8 @@ public class ReportInquiryDetails {
     private final String details;
     private final Date dateCreated;
 
+    private final ReportInquiryReply reply;
+
     public UUID getId() {
         return id;
     }
@@ -25,11 +27,21 @@ public class ReportInquiryDetails {
         return dateCreated;
     }
 
-    public ReportInquiryDetails(UUID id, UUID reportInquiryId, String details, Date dateCreated) {
+    public ReportInquiryReply getReply() {
+        return reply;
+    }
+
+    public ReportInquiryDetails(
+            UUID id,
+            UUID reportInquiryId,
+            String details,
+            Date dateCreated,
+            ReportInquiryReply reply) {
         this.id = id;
         this.reportInquiryId = reportInquiryId;
         this.details = details;
         this.dateCreated = dateCreated;
+        this.reply = reply;
     }
 
     public static final class Builder {
@@ -37,6 +49,8 @@ public class ReportInquiryDetails {
         private UUID reportInquiryId;
         private String details = "";
         private Date dateCreated = new Date();
+
+        private ReportInquiryReply reply;
 
         public Builder() {  }
 
@@ -60,12 +74,18 @@ public class ReportInquiryDetails {
             return this;
         }
 
+        public Builder reply(ReportInquiryReply reply) {
+            this.reply = reply;
+            return this;
+        }
+
         public ReportInquiryDetails build() {
             return new ReportInquiryDetails(
                     id,
                     reportInquiryId,
                     details,
-                    dateCreated);
+                    dateCreated,
+                    reply);
         }
     }
 }

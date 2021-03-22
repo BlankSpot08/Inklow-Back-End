@@ -4,13 +4,13 @@ import java.util.Date;
 import java.util.UUID;
 
 public class ReportInquiryReply {
-    private final UUID reportInquiryId;
+    private final UUID reportInquiryDetailsId;
     private final UUID userId;
     private final String details;
     private final Date dateCreated;
 
-    public UUID getReportInquiryId() {
-        return reportInquiryId;
+    public UUID getReportInquiryDetailsId() {
+        return reportInquiryDetailsId;
     }
 
     public UUID getUserId() {
@@ -25,23 +25,23 @@ public class ReportInquiryReply {
         return dateCreated;
     }
 
-    public ReportInquiryReply(UUID reportInquiryId, UUID userId, String details, Date dateCreated) {
-        this.reportInquiryId = reportInquiryId;
+    public ReportInquiryReply(UUID reportInquiryDetailsId, UUID userId, String details, Date dateCreated) {
+        this.reportInquiryDetailsId = reportInquiryDetailsId;
         this.userId = userId;
         this.details = details;
         this.dateCreated = dateCreated;
     }
 
     public static final class Builder {
-        private UUID reportInquiryId;
+        private UUID reportInquiryDetailsId;
         private UUID userId;
         private String details = "";
         private Date dateCreated;
 
-        public Builder() { }
+        public Builder() {  }
 
-        public Builder reportInquiryId(UUID reporyInquiryId) {
-            this.reportInquiryId =  reporyInquiryId;
+        public Builder reportInquiryDetailsId(UUID reportInquiryDetailsId) {
+            this.reportInquiryDetailsId =  reportInquiryDetailsId;
             return this;
         }
 
@@ -61,7 +61,7 @@ public class ReportInquiryReply {
         }
 
         public ReportInquiryReply build()  {
-            return new ReportInquiryReply(reportInquiryId, userId, details, dateCreated);
+            return new ReportInquiryReply(reportInquiryDetailsId, userId, details, dateCreated);
         }
     }
 }
