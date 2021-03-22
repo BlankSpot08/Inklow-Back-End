@@ -48,12 +48,11 @@ public class ReportInquiryDaoImp implements ReportInquiryDao {
     @Override
     public ReportInquiry addReportInquiry(ReportInquiry reportInquiry) {
         String query = "" +
-                "INSERT INTO report_inquiry(category, email, title, details) " +
-                "VALUES (?, ?, ?, ?)";
+                "INSERT INTO report_inquiry(category, email, title) " +
+                "VALUES (?, ?, ?)";
 
         int statusCode = jdbcTemplate.update(query,
-                reportInquiry.getCategory(), reportInquiry.getEmail(), reportInquiry.getTitle(),
-                reportInquiry.getDetails());
+                reportInquiry.getCategory(), reportInquiry.getEmail(), reportInquiry.getTitle());
 
         if (statusCode == 0) {
             return null;

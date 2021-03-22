@@ -62,8 +62,6 @@ public class UserDaoImp implements UserDao {
         List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
         user.setRoles(roles);
 
-//        List<ReportInquiry> reportInquiries =
-
         return user;
     }
 
@@ -83,7 +81,8 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public User addUser(User user) {
-        String query = "INSERT INTO users (firstName, lastName, gender, birthDate, username, password, email, phoneNumber) " +
+        String query = "" +
+                "INSERT INTO users (firstName, lastName, gender, birthDate, username, password, email, phoneNumber) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         int statusCode = jdbcTemplate.update(query,

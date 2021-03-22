@@ -2,11 +2,9 @@ package com.example.inklow.daoImp;
 
 import com.example.inklow.dao.UserReportInquiryDao;
 import com.example.inklow.entities.ReportInquiry;
-import com.example.inklow.entities.Role;
 import com.example.inklow.entities.User;
 import com.example.inklow.entities.UserReportInquiry;
 import com.example.inklow.mapper.ReportInquiryMapper;
-import com.example.inklow.mapper.RoleMapper;
 import com.example.inklow.mapper.UserReportInquiryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -50,7 +48,7 @@ public class UserReportInquiryDaoImp implements UserReportInquiryDao {
                 "INSERT INTO user_inquiries(userId, reportInquiryId)" +
                 "VALUES(?, ?)";
 
-        int statusCode = jdbcTemplate.update(query, userReportInquiry.getUserId(), userReportInquiry.getReportQuiry());
+        int statusCode = jdbcTemplate.update(query, userReportInquiry.getUserId(), userReportInquiry.getReportInquiryId());
 
         if (statusCode == 0) {
             return null;
@@ -65,7 +63,7 @@ public class UserReportInquiryDaoImp implements UserReportInquiryDao {
                 "DELETE FROM user_inquiries " +
                 "WHERE userId = ? AND reportInquiryId = ?";
 
-        int statusCode = jdbcTemplate.update(query, userReportInquiry.getUserId(), userReportInquiry.getReportQuiry());
+        int statusCode = jdbcTemplate.update(query, userReportInquiry.getUserId(), userReportInquiry.getReportInquiryId());
 
         if (statusCode == 0) {
             return null;

@@ -12,10 +12,12 @@ public final class ReportInquiryMapper implements RowMapper<ReportInquiry> {
     public ReportInquiry mapRow(ResultSet rs, int rowNum) throws SQLException {
         return new ReportInquiry.Builder()
                 .id(UUID.fromString(rs.getString("id")))
+                .userId(UUID.fromString(rs.getString("userId")))
                 .category(rs.getString("category"))
                 .email(rs.getString("email"))
                 .title(rs.getString("title"))
-                .details(rs.getString("details"))
+                .status(rs.getString("status"))
+                .dateCreated(rs.getDate("dateCreated"))
                 .build();
     }
 }

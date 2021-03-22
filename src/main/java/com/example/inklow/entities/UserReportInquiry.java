@@ -4,18 +4,18 @@ import java.util.UUID;
 
 public class UserReportInquiry {
     private final UUID userId;
-    private final UUID reportQuiry;
+    private final UUID reportInquiryId;
 
     public UUID getUserId() {
         return userId;
     }
 
-    public UUID getReportQuiry() {
-        return reportQuiry;
+    public UUID getReportInquiryId() {
+        return reportInquiryId;
     }
 
-    public UserReportInquiry(UUID userId, UUID reportQuiry) {
+    public UserReportInquiry(UUID userId, UUID reportInquiryId) {
         this.userId = userId;
-        this.reportQuiry = reportQuiry;
+        this.reportInquiryId = reportInquiryId;
     }
 }
