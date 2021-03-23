@@ -30,8 +30,8 @@ public class ReportInquiryReplyDaoImp implements ReportInquiryReplyDao {
     @Override
     public ReportInquiryReply getReportInquiryDetailsReplyById(ReportInquiryDetails reportInquiryDetails) {
         String query = "" +
-                "SELECT * FROM report_inquiry_details AS rid" +
-                "JOIN report_inquiry_reply AS rir ON rir.reportInquiryDetailsId = rid.id" +
+                "SELECT * FROM report_inquiry_details AS rid " +
+                "JOIN report_inquiry_reply AS rir ON rir.reportInquiryDetailsId = rid.id " +
                 "WHERE rid.id = ?";
 
         ReportInquiryReply reportInquiryReply = jdbcTemplate.queryForObject(query, new Object[] { reportInquiryDetails.getId() }, new ReportInquiryReplyMapper());

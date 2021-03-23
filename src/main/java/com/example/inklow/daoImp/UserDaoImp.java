@@ -62,6 +62,9 @@ public class UserDaoImp implements UserDao {
         List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
         user.setRoles(roles);
 
+        List<ReportInquiry> reportInquiries = userReportInquiryDao.getUserReportInquiriesById(user);
+        user.setReportInquiries(reportInquiries);
+
         return user;
     }
 
@@ -74,6 +77,9 @@ public class UserDaoImp implements UserDao {
         for (User user : users) {
             List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
             user.setRoles(roles);
+
+            List<ReportInquiry> reportInquiries = userReportInquiryDao.getUserReportInquiriesById(user);
+            user.setReportInquiries(reportInquiries);
         }
 
         return users;

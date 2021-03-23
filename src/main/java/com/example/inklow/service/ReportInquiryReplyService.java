@@ -10,5 +10,6 @@ public interface ReportInquiryReplyService {
 
     ReportInquiryReply getReportInquiryDetailsReplyById(ReportInquiryDetails reportInquiryDetails);
 
-
+    ReportInquiryReply handleReportInquiryReplyRegistration(ReportInquiryReply reportInquiryReply);
+    ReportInquiryReply handleReportInquiryReplyDeletion(ReportInquiryReply reportInquiryReply);
 }

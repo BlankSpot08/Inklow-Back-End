@@ -14,7 +14,7 @@ public class ReportInquiry {
     private final String status;
     private final Date dateCreated;
 
-    private final List<ReportInquiryDetails> listOfDetails;
+    private List<ReportInquiryDetails> listOfDetails;
 
     public UUID getId() {
         return id;
@@ -48,6 +48,10 @@ public class ReportInquiry {
         return listOfDetails;
     }
 
+    public void setListOfDetails(List<ReportInquiryDetails> listOfDetails) {
+        this.listOfDetails = listOfDetails;
+    }
+
     public ReportInquiry(UUID id,
                          UUID userId,
                          String category,
@@ -75,7 +79,6 @@ public class ReportInquiry {
         private String status = "";
         private Date dateCreated = new Date();
         private List<ReportInquiryDetails> listOfDetails = new ArrayList<>();
-        private ReportInquiryDetails reportInquiryDetails = new ReportInquiryDetails.Builder().build();
 
         public Builder() {   }
 

@@ -4,7 +4,6 @@ import com.example.inklow.dao.ReportInquiryDetailsDao;
 import com.example.inklow.entities.ReportInquiry;
 import com.example.inklow.entities.ReportInquiryDetails;
 import com.example.inklow.service.ReportInquiryDetailsService;
-import com.example.inklow.service.ReportInquiryService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

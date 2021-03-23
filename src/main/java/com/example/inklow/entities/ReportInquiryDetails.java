@@ -9,7 +9,7 @@ public class ReportInquiryDetails {
     private final String details;
     private final Date dateCreated;
 
-    private final ReportInquiryReply reply;
+    private ReportInquiryReply reply;
 
     public UUID getId() {
         return id;
@@ -29,6 +29,10 @@ public class ReportInquiryDetails {
 
     public ReportInquiryReply getReply() {
         return reply;
+    }
+
+    public void setReply(ReportInquiryReply reply) {
+        this.reply = reply;
     }
 
     public ReportInquiryDetails(
