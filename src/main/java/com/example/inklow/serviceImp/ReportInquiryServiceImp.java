@@ -1,8 +1,8 @@
 package com.example.inklow.serviceImp;
 
 import com.example.inklow.dao.ReportInquiryDao;
-import com.example.inklow.dao.UserReportInquiryDao;
 import com.example.inklow.entities.ReportInquiry;
+import com.example.inklow.entities.User;
 import com.example.inklow.service.ReportInquiryService;
 
 import java.util.List;
@@ -17,6 +17,13 @@ public class ReportInquiryServiceImp implements ReportInquiryService {
     @Override
     public List<ReportInquiry> getListOfReportInquiry() {
         return reportInquiryDao.getListOfReportInquiry();
+    }
+
+    @Override
+    public List<ReportInquiry> getUserListOfReportInquiry(User user) {
+        List<ReportInquiry> listOfReportInquiry = reportInquiryDao.getUserListOfReportInquiry(user);
+
+        return listOfReportInquiry;
     }
 
     @Override

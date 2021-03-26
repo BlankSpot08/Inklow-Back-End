@@ -2,7 +2,10 @@ package com.example.inklow.controller;
 
 import com.example.inklow.entities.Inquiry;
 import com.example.inklow.entities.ReportInquiry;
+import com.example.inklow.entities.User;
+import com.example.inklow.security.util.JwtUtil;
 import com.example.inklow.service.ReportInquiryService;
+import com.example.inklow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +19,16 @@ import java.util.List;
 @RequestMapping(value = "/api" + ReportInquiryController.REPORT_INQUIRY_ENDPOINTS.REPORT_INQUIRY)
 public class ReportInquiryController {
     private final ReportInquiryService reportInquiryService;
+    private final UserService userService;
+    private final JwtUtil jwtUtil;
 
     @Autowired
-    public ReportInquiryController(ReportInquiryService reportInquiryService) {
+    public ReportInquiryController(ReportInquiryService reportInquiryService,
+                                   JwtUtil jwtUtil,
+                                   UserService userService) {
         this.reportInquiryService = reportInquiryService;
+        this.userService = userService;
+        this.jwtUtil = jwtUtil;
     }
 
     @RequestMapping(value = REPORT_INQUIRY_ENDPOINTS.GET_ALL, method = RequestMethod.GET)
@@ -28,6 +37,20 @@ public class ReportInquiryController {
 
         return ResponseEntity.status(HttpStatus.OK).body(temp);
     }
+
+    @RequestMapping(value = REPORT_INQUIRY_ENDPOINTS.GET_ALL, method = RequestMethod.POST)
+    public ResponseEntity<?> getUserReportInquiries(@RequestHeader(name = "Authorization") String authorizationHeader) {
+        String jwt = authorizationHeader.split(" ")[1];
+
+        String username = jwtUtil.extractUsername(jwt);
+
+        User user = userService.findUserByUsername(username);
+
+        List<ReportInquiry> listOfReportInquiry = reportInquiryService.getUserListOfReportInquiry(user);
+
+        return ResponseEntity.status(HttpStatus.OK).body(listOfReportInquiry);
+    }
+    
 
     @RequestMapping(value = REPORT_INQUIRY_ENDPOINTS.GET, method = RequestMethod.GET)
     public ResponseEntity<?> getReportInquiry(@RequestParam String title) {

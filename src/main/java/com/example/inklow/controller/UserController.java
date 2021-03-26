@@ -37,7 +37,9 @@ public class UserController {
     public ResponseEntity<?> getUser(@RequestHeader(name = "Authorization") String authorizationHeader) {
         String jwt = authorizationHeader.split(" ")[1];
 
-        User user = userService.findUserByUsername(jwtUtil.extractUsername(jwt));
+        String username = jwtUtil.extractUsername(jwt);
+
+        User user = userService.findUserByUsername(username);
 
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }

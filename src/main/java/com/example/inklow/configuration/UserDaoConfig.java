@@ -1,7 +1,7 @@
 package com.example.inklow.configuration;
 
+import com.example.inklow.dao.ReportInquiryDao;
 import com.example.inklow.dao.UserDao;
-import com.example.inklow.dao.UserReportInquiryDao;
 import com.example.inklow.dao.UserRoleDao;
 import com.example.inklow.daoImp.UserDaoImp;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,21 +14,21 @@ import org.springframework.jdbc.core.JdbcTemplate;
 public class UserDaoConfig {
     private final JdbcTemplate jdbcTemplate;
     private final UserRoleDao userRoleDao;
-    private final UserReportInquiryDao userReportInquiryDao;
+    private final ReportInquiryDao reportInquiryDao;
 
     @Autowired
     public UserDaoConfig(
             final JdbcTemplate jdbcTemplate,
             final UserRoleDao userRoleDao,
-            final UserReportInquiryDao userReportInquiryDao) {
+            final ReportInquiryDao reportInquiryDao) {
         this.jdbcTemplate = jdbcTemplate;
         this.userRoleDao = userRoleDao;
-        this.userReportInquiryDao = userReportInquiryDao;
+        this.reportInquiryDao = reportInquiryDao;
     }
 
     @Bean
     @Primary
     public UserDao userDao() {
-        return new UserDaoImp(jdbcTemplate, userRoleDao, userReportInquiryDao);
+        return new UserDaoImp(jdbcTemplate, userRoleDao, reportInquiryDao);
     }
 }

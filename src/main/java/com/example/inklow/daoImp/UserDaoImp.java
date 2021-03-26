@@ -1,7 +1,7 @@
 package com.example.inklow.daoImp;
 
+import com.example.inklow.dao.ReportInquiryDao;
 import com.example.inklow.dao.UserDao;
-import com.example.inklow.dao.UserReportInquiryDao;
 import com.example.inklow.dao.UserRoleDao;
 import com.example.inklow.entities.ReportInquiry;
 import com.example.inklow.entities.Role;
@@ -18,16 +18,16 @@ import java.util.UUID;
 public class UserDaoImp implements UserDao {
     private final JdbcTemplate jdbcTemplate;
     private final UserRoleDao userRoles;
-    private final UserReportInquiryDao userReportInquiryDao;
+    private final ReportInquiryDao reportInquiryDao;
 
     @Autowired
     public UserDaoImp(
             final JdbcTemplate jdbcTemplate,
             final UserRoleDao userRoles,
-            final UserReportInquiryDao userReportInquiryDao) {
+            final ReportInquiryDao reportInquiryDao) {
         this.jdbcTemplate = jdbcTemplate;
         this.userRoles = userRoles;
-        this.userReportInquiryDao = userReportInquiryDao;
+        this.reportInquiryDao = reportInquiryDao;
     }
 
     @Override
@@ -43,17 +43,19 @@ public class UserDaoImp implements UserDao {
         List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
         user.setRoles(roles);
 
-        List<ReportInquiry> reportInquiries = userReportInquiryDao.getUserReportInquiriesById(user);
-        user.setReportInquiries(reportInquiries);
+        List<ReportInquiry> listOfReportInquiry = reportInquiryDao.getUserListOfReportInquiry(user);
+        user.setReportInquiries(listOfReportInquiry);
 
         return user;
     }
 
     @Override
     public User findUserByUsername(String username) {
-        String query = "SELECT * FROM users WHERE username = ?;";
+        String query = "" +
+                "SELECT * FROM users " +
+                "WHERE username = ?";
 
-        User user = jdbcTemplate.queryForObject(query, new Object[] {username}, new UserMapper());
+        User user = jdbcTemplate.queryForObject(query, new Object[] { username }, new UserMapper());
 
         if (user == null) {
             return null;
@@ -62,8 +64,8 @@ public class UserDaoImp implements UserDao {
         List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
         user.setRoles(roles);
 
-        List<ReportInquiry> reportInquiries = userReportInquiryDao.getUserReportInquiriesById(user);
-        user.setReportInquiries(reportInquiries);
+        List<ReportInquiry> listOfReportInquiry = reportInquiryDao.getUserListOfReportInquiry(user);
+        user.setReportInquiries(listOfReportInquiry);
 
         return user;
     }
@@ -78,8 +80,8 @@ public class UserDaoImp implements UserDao {
             List<Role> roles = userRoles.getUserRolesByUserId(user.getId());
             user.setRoles(roles);
 
-            List<ReportInquiry> reportInquiries = userReportInquiryDao.getUserReportInquiriesById(user);
-            user.setReportInquiries(reportInquiries);
+            List<ReportInquiry> listOfReportInquiry = reportInquiryDao.getUserListOfReportInquiry(user);
+            user.setReportInquiries(listOfReportInquiry);
         }
 
         return users;

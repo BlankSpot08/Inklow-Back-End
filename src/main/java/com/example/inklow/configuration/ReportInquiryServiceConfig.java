@@ -1,7 +1,6 @@
 package com.example.inklow.configuration;
 
 import com.example.inklow.dao.ReportInquiryDao;
-import com.example.inklow.dao.UserReportInquiryDao;
 import com.example.inklow.service.ReportInquiryService;
 import com.example.inklow.serviceImp.ReportInquiryServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;

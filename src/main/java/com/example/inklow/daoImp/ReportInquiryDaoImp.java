@@ -4,6 +4,7 @@ import com.example.inklow.dao.ReportInquiryDao;
 import com.example.inklow.dao.ReportInquiryDetailsDao;
 import com.example.inklow.entities.ReportInquiry;
 import com.example.inklow.entities.ReportInquiryDetails;
+import com.example.inklow.entities.User;
 import com.example.inklow.mapper.ReportInquiryMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -39,8 +40,29 @@ public class ReportInquiryDaoImp implements ReportInquiryDao {
     }
 
     @Override
+    public List<ReportInquiry> getUserListOfReportInquiry(User user) {
+        String query = "" +
+                "SELECT ri.id, ri.userId, ri.category, ri.email, ri.title, ri.status, ri.dateCreated FROM users AS u " +
+                "JOIN report_inquiry AS ri ON ri.userId = u.id " +
+                "WHERE u.id = ?";
+
+        List<ReportInquiry> listOfReportInquiry = jdbcTemplate.query(query,
+                new Object[] { user.getId() }, new ReportInquiryMapper());
+
+        for (ReportInquiry reportInquiry : listOfReportInquiry) {
+            List<ReportInquiryDetails> listOfReportInquiryDetails = reportInquiryDetailsDao.getReportInquiryDetailsById(reportInquiry);
+
+            reportInquiry.setListOfDetails(listOfReportInquiryDetails);
+        }
+
+        return listOfReportInquiry;
+    }
+
+    @Override
     public ReportInquiry getReportInquiryById(ReportInquiry reportInquiry) {
-        String query = "SELECT * FROM report_inquiry WHERE id = ?";
+        String query = "" +
+                "SELECT * FROM report_inquiry" +
+                " WHERE id = ?";
 
         ReportInquiry temp = jdbcTemplate.queryForObject(query, new Object[] { reportInquiry.getId() }, new ReportInquiryMapper());
 
@@ -52,13 +74,14 @@ public class ReportInquiryDaoImp implements ReportInquiryDao {
 
     @Override
     public ReportInquiry getReportInquiryByTitle(ReportInquiry reportInquiry) {
-        String query = "SELECT * FROM report_inquiry WHERE title = ?";
+        String query = "" +
+                "SELECT * FROM report_inquiry " +
+                "WHERE title = ?";
 
         ReportInquiry temp = jdbcTemplate.queryForObject(query, new Object[] { reportInquiry.getTitle() }, new ReportInquiryMapper());
 
         List<ReportInquiryDetails> listOfReportInquiryDetails = reportInquiryDetailsDao.getReportInquiryDetailsById(temp);
         temp.setListOfDetails(listOfReportInquiryDetails);
-
 
         return temp;
     }
