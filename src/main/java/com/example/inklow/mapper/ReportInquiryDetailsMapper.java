@@ -14,6 +14,7 @@ public class ReportInquiryDetailsMapper implements RowMapper<ReportInquiryDetail
                 .id(UUID.fromString(rs.getString("id")))
                 .reportInquiryId(UUID.fromString(rs.getString("reportInquiryId")))
                 .details(rs.getString("details"))
+                .status(rs.getString("status"))
                 .dateCreated(rs.getDate("dateCreated"))
                 .build();
     }

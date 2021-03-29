@@ -34,11 +34,14 @@ public class ReportInquiryDetailsController {
 
     @RequestMapping(value = REPORT_INQUIRY_DETAILS_ENDPOINTS.ADD, method = RequestMethod.POST)
     public ResponseEntity<?> addReportInquiryDetails(@RequestBody ReportInquiryDetails reportInquiryDetails) {
-        System.out.println(reportInquiryDetails.getId());
-        System.out.println(reportInquiryDetails.getReportInquiryId());
-        System.out.println(reportInquiryDetails.getDetails());
-        System.out.println(reportInquiryDetails.getDateCreated());
         ReportInquiryDetails temp = reportInquiryDetailsService.handleReportInquiryDetailsRegistration(reportInquiryDetails);
+
+        return ResponseEntity.status(HttpStatus.OK).body(temp);
+    }
+
+    @RequestMapping(value = REPORT_INQUIRY_DETAILS_ENDPOINTS.CANCEL, method = RequestMethod.PATCH)
+    public ResponseEntity<?> cancelReportInquiryDetails(@RequestBody ReportInquiryDetails reportInquiryDetails) {
+        ReportInquiryDetails temp = reportInquiryDetailsService.handleReportInquiryDetailsCancellation(reportInquiryDetails);
 
         return ResponseEntity.status(HttpStatus.OK).body(temp);
     }
@@ -51,6 +54,8 @@ public class ReportInquiryDetailsController {
         protected static final String GET_ALL = "/getAll";
 
         protected static final String ADD = "/add";
+        protected static final String CANCEL = "/cancel";
+
         protected static final String DELETE = "/delete";
     }
 }

@@ -13,5 +13,7 @@ public interface ReportInquiryDetailsDao {
     ReportInquiryDetails addReportInquiryDetails(ReportInquiryDetails reportInquiryDetails);
     ReportInquiryDetails removeReportInquiryDetails(ReportInquiryDetails reportInquiryDetails);
 
+    ReportInquiryDetails cancelReportInquiryDetails(ReportInquiryDetails reportInquiryDetails);
+
     Boolean removeAllReportInquiryDetails();
 }

@@ -1,9 +1,10 @@
 package com.example.inklow.controller;
 
-import com.example.inklow.entities.Inquiry;
 import com.example.inklow.entities.ReportInquiry;
+import com.example.inklow.entities.ReportInquiryDetails;
 import com.example.inklow.entities.User;
 import com.example.inklow.security.util.JwtUtil;
+import com.example.inklow.service.ReportInquiryDetailsService;
 import com.example.inklow.service.ReportInquiryService;
 import com.example.inklow.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +20,16 @@ import java.util.List;
 @RequestMapping(value = "/api" + ReportInquiryController.REPORT_INQUIRY_ENDPOINTS.REPORT_INQUIRY)
 public class ReportInquiryController {
     private final ReportInquiryService reportInquiryService;
+    private final ReportInquiryDetailsService reportInquiryDetailService;
     private final UserService userService;
     private final JwtUtil jwtUtil;
 
     @Autowired
     public ReportInquiryController(ReportInquiryService reportInquiryService,
                                    JwtUtil jwtUtil,
-                                   UserService userService) {
+                                   UserService userService,
+                                   ReportInquiryDetailsService reportInquiryDetailsService) {
+        this.reportInquiryDetailService = reportInquiryDetailsService;
         this.reportInquiryService = reportInquiryService;
         this.userService = userService;
         this.jwtUtil = jwtUtil;
@@ -38,7 +42,7 @@ public class ReportInquiryController {
         return ResponseEntity.status(HttpStatus.OK).body(temp);
     }
 
-    @RequestMapping(value = REPORT_INQUIRY_ENDPOINTS.GET_ALL, method = RequestMethod.POST)
+    @RequestMapping(value = REPORT_INQUIRY_ENDPOINTS.GET_WITH_USER, method = RequestMethod.POST)
     public ResponseEntity<?> getUserReportInquiries(@RequestHeader(name = "Authorization") String authorizationHeader) {
         String jwt = authorizationHeader.split(" ")[1];
 
@@ -70,6 +74,17 @@ public class ReportInquiryController {
         return ResponseEntity.status(HttpStatus.OK).body(temp);
     }
 
+    @RequestMapping(value = REPORT_INQUIRY_ENDPOINTS.CANCEL, method = RequestMethod.PATCH)
+    public ResponseEntity<?> cancelReportInquiry(@RequestParam String title) {
+        ReportInquiry reportInquiry = new ReportInquiry.Builder()
+                .title(title)
+                .build();
+
+        ReportInquiry temp = reportInquiryService.handleReportInquiryCancellation(reportInquiry);
+
+        return ResponseEntity.status(HttpStatus.OK).body(temp);
+    }
+
     @RequestMapping(value = REPORT_INQUIRY_ENDPOINTS.DELETE, method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteReportInquiry(@RequestParam String title) {
         ReportInquiry reportInquiry = new ReportInquiry.Builder()
@@ -92,6 +107,10 @@ public class ReportInquiryController {
         protected static final String REPORT_INQUIRY = "/report_inquiry";
 
         protected static final String GET = "/get";
+
+        protected static final String GET_WITH_USER = "/get_with_user";
+        protected static final String CANCEL = "/cancel";
+
         protected static final String GET_ALL = "/getAll";
 
         protected static final String ADD = "/add";

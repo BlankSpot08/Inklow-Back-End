@@ -38,6 +38,13 @@ public class ReportInquiryDetailsServiceImp implements ReportInquiryDetailsServi
     }
 
     @Override
+    public ReportInquiryDetails handleReportInquiryDetailsCancellation(ReportInquiryDetails reportInquiryDetails) {
+        ReportInquiryDetails temp = reportInquiryDetailsDao.cancelReportInquiryDetails(reportInquiryDetails);
+
+        return temp;
+    }
+
+    @Override
     public ReportInquiryDetails handleReportInquiryDetailsDeletion(ReportInquiryDetails reportInquiryDetails) {
         ReportInquiryDetails temp = reportInquiryDetailsDao.removeReportInquiryDetails(reportInquiryDetails);
 

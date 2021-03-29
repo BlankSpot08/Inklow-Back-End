@@ -16,6 +16,7 @@ public interface ReportInquiryService {
     ReportInquiry getReportInquiryByTitle(ReportInquiry reportInquiry);
 
     ReportInquiry handleReportInquiryRegistration(ReportInquiry reportInquiry);
+    ReportInquiry handleReportInquiryCancellation(ReportInquiry reportInquiry);
 
     ReportInquiry handleReportInquiryDeletion(ReportInquiry reportInquiry);
     Boolean handleAllReportInquiryDeletion();

@@ -7,6 +7,7 @@ public class ReportInquiryDetails {
     private final UUID id;
     private final UUID reportInquiryId;
     private final String details;
+    private final String status;
     private final Date dateCreated;
 
     private ReportInquiryReply reply;
@@ -31,6 +32,10 @@ public class ReportInquiryDetails {
         return reply;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
     public void setReply(ReportInquiryReply reply) {
         this.reply = reply;
     }
@@ -40,18 +45,21 @@ public class ReportInquiryDetails {
             UUID reportInquiryId,
             String details,
             Date dateCreated,
-            ReportInquiryReply reply) {
+            ReportInquiryReply reply,
+            String status) {
         this.id = id;
         this.reportInquiryId = reportInquiryId;
         this.details = details;
         this.dateCreated = dateCreated;
         this.reply = reply;
+        this.status = status;
     }
 
     public static final class Builder {
         private UUID id;
         private UUID reportInquiryId;
         private String details = "";
+        private String status = "";
         private Date dateCreated = new Date();
 
         private ReportInquiryReply reply;
@@ -73,6 +81,11 @@ public class ReportInquiryDetails {
             return this;
         }
 
+        public Builder status(String status) {
+            this.status = status;
+            return this;
+        }
+
         public Builder dateCreated(Date dateCreated) {
             this.dateCreated = dateCreated;
             return this;
@@ -89,7 +102,8 @@ public class ReportInquiryDetails {
                     reportInquiryId,
                     details,
                     dateCreated,
-                    reply);
+                    reply,
+                    status);
         }
     }
 }

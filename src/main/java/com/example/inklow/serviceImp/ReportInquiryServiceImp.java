@@ -42,6 +42,11 @@ public class ReportInquiryServiceImp implements ReportInquiryService {
     }
 
     @Override
+    public ReportInquiry handleReportInquiryCancellation(ReportInquiry reportInquiry) {
+        return null;
+    }
+
+    @Override
     public ReportInquiry handleReportInquiryDeletion(ReportInquiry reportInquiry) {
         return reportInquiryDao.removeReportInquiry(reportInquiry);
     }

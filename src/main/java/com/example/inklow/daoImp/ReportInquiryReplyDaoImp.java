@@ -4,6 +4,8 @@ import com.example.inklow.dao.ReportInquiryReplyDao;
 import com.example.inklow.entities.ReportInquiryDetails;
 import com.example.inklow.entities.ReportInquiryReply;
 import com.example.inklow.mapper.ReportInquiryReplyMapper;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -34,13 +36,17 @@ public class ReportInquiryReplyDaoImp implements ReportInquiryReplyDao {
                 "JOIN report_inquiry_reply AS rir ON rir.reportInquiryDetailsId = rid.id " +
                 "WHERE rid.id = ?";
 
-        ReportInquiryReply reportInquiryReply = jdbcTemplate.queryForObject(query, new Object[] { reportInquiryDetails.getId() }, new ReportInquiryReplyMapper());
+        try {
+            ReportInquiryReply reportInquiryReply = jdbcTemplate.queryForObject(query, new Object[] { reportInquiryDetails.getId() }, new ReportInquiryReplyMapper());
 
-        return reportInquiryReply;
+            return reportInquiryReply;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
-    public ReportInquiryReply addReportInquiryDetailsReply(ReportInquiryReply replyInquiryReply) {
+    public ReportInquiryReply addReportInquiryDetailsReply(ReportInquiryReply replyInquiryReply)  {
         String query = "" +
                 "INSERT INTO report_inquiry_reply(reportInquiryDetailsId, userId, details, dateCreated)" +
                 "VALUES(?, ?, ?, ?)";

@@ -6,8 +6,6 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class DateUtil {
-    public DateUtil(Date date) { }
-
     public static Date toDateFromISODateString(String date) {
         Date tempDate = null;
 

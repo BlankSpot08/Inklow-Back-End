@@ -6,10 +6,13 @@ import com.example.inklow.entities.ReportInquiry;
 import com.example.inklow.entities.ReportInquiryDetails;
 import com.example.inklow.entities.User;
 import com.example.inklow.mapper.ReportInquiryMapper;
+import com.example.inklow.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -42,7 +45,7 @@ public class ReportInquiryDaoImp implements ReportInquiryDao {
     @Override
     public List<ReportInquiry> getUserListOfReportInquiry(User user) {
         String query = "" +
-                "SELECT ri.id, ri.userId, ri.category, ri.email, ri.title, ri.status, ri.dateCreated FROM users AS u " +
+                "SELECT ri.id, ri.userId, ri.category, ri.email, ri.title, ri.status, ri.dateCreated, ri.lastUpdated FROM users AS u " +
                 "JOIN report_inquiry AS ri ON ri.userId = u.id " +
                 "WHERE u.id = ?";
 
@@ -89,12 +92,13 @@ public class ReportInquiryDaoImp implements ReportInquiryDao {
     @Override
     public ReportInquiry addReportInquiry(ReportInquiry reportInquiry) {
         String query = "" +
-                "INSERT INTO report_inquiry(userId, category, email, title, status, dateCreated) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+                "INSERT INTO report_inquiry(userId, category, email, title, status, dateCreated, lastUpdated) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         int statusCode = jdbcTemplate.update(query,
                 reportInquiry.getUserId(), reportInquiry.getCategory(), reportInquiry.getEmail(),
-                reportInquiry.getTitle(), reportInquiry.getStatus(), reportInquiry.getDateCreated());
+                reportInquiry.getTitle(), reportInquiry.getStatus(), reportInquiry.getDateCreated(),
+                reportInquiry.getLastUpdated());
 
         if (statusCode == 0) {
             return null;

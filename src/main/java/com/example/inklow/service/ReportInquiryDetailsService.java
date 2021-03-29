@@ -11,6 +11,7 @@ public interface ReportInquiryDetailsService {
     List<ReportInquiryDetails> getReportInquiryDetailsById(ReportInquiry reportInquiry);
 
     ReportInquiryDetails handleReportInquiryDetailsRegistration(ReportInquiryDetails reportInquiryDetails);
+    ReportInquiryDetails handleReportInquiryDetailsCancellation(ReportInquiryDetails reportInquiryDetails);
 
     ReportInquiryDetails handleReportInquiryDetailsDeletion(ReportInquiryDetails reportInquiryDetails);
 

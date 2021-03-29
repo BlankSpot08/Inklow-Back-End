@@ -40,7 +40,7 @@ public class ReportInquiryDetailsDaoImp implements ReportInquiryDetailsDao {
     @Override
     public List<ReportInquiryDetails> getReportInquiryDetailsById(ReportInquiry reportInquiry) {
         String query = "" +
-                "SELECT rid.id, rid.reportInquiryId, rid.details, rid.dateCreated FROM report_inquiry AS ri " +
+                "SELECT rid.id, rid.reportInquiryId, rid.details, rid.status, rid.dateCreated FROM report_inquiry AS ri " +
                 "JOIN report_inquiry_details AS rid ON rid.reportInquiryId = ri.id " +
                 "WHERE ri.id = ?";
 
@@ -58,12 +58,13 @@ public class ReportInquiryDetailsDaoImp implements ReportInquiryDetailsDao {
     @Override
     public ReportInquiryDetails addReportInquiryDetails(ReportInquiryDetails reportInquiryDetails) {
         String query = "" +
-                "INSERT INTO report_inquiry_details(reportInquiryId, details, dateCreated) " +
-                "VALUES (?, ?, ?)";
+                "INSERT INTO report_inquiry_details(reportInquiryId, details, status, dateCreated) " +
+                "VALUES (?, ?, ?, ?)";
 
         int temp = jdbcTemplate.update(query,
                 reportInquiryDetails.getReportInquiryId(),
                 reportInquiryDetails.getDetails(),
+                reportInquiryDetails.getStatus(),
                 reportInquiryDetails.getDateCreated());
 
         if (temp == 0) {
@@ -78,6 +79,22 @@ public class ReportInquiryDetailsDaoImp implements ReportInquiryDetailsDao {
         String query = "" +
                 "DELETE FROM report_inquiry_details AS rid" +
                 "WHERE rid.id = ?";
+
+        int statusCode = jdbcTemplate.update(query, reportInquiryDetails.getId());
+
+        if (statusCode == 0) {
+            return null;
+        }
+
+        return reportInquiryDetails;
+    }
+
+    @Override
+    public ReportInquiryDetails cancelReportInquiryDetails(ReportInquiryDetails reportInquiryDetails) {
+        String query = "" +
+                "UPDATE report_inquiry_details " +
+                "SET status = 'Cancel Inquiry' " +
+                "WHERE id = ?";
 
         int statusCode = jdbcTemplate.update(query, reportInquiryDetails.getId());
 

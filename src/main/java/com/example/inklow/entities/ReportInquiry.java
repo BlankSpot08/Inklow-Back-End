@@ -7,12 +7,13 @@ import java.util.UUID;
 
 public class ReportInquiry {
     private final UUID id;
-    private final UUID userId;
+    private UUID userId;
     private final String category;
     private final String title;
     private final String email;
-    private final String status;
-    private final Date dateCreated;
+    private String status;
+    private Date dateCreated;
+    private Date lastUpdated;
 
     private List<ReportInquiryDetails> listOfDetails;
 
@@ -44,12 +45,32 @@ public class ReportInquiry {
         return dateCreated;
     }
 
+    public Date getLastUpdated() {
+        return lastUpdated;
+    }
+
     public List<ReportInquiryDetails> getListOfDetails() {
         return listOfDetails;
     }
 
     public void setListOfDetails(List<ReportInquiryDetails> listOfDetails) {
         this.listOfDetails = listOfDetails;
+    }
+
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public void setLastUpdated(Date lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public ReportInquiry(UUID id,
@@ -59,6 +80,7 @@ public class ReportInquiry {
                          String email,
                          String status,
                          Date dateCreated,
+                         Date lastUpdated,
                          List<ReportInquiryDetails> listOfReportInquiryDetails) {
         this.id = id;
         this.userId = userId;
@@ -67,6 +89,7 @@ public class ReportInquiry {
         this.email = email;
         this.status = status;
         this.dateCreated = dateCreated;
+        this.lastUpdated = lastUpdated;
         this.listOfDetails = listOfReportInquiryDetails;
     }
 
@@ -78,6 +101,7 @@ public class ReportInquiry {
         private String email = "";
         private String status = "";
         private Date dateCreated = new Date();
+        private Date lastUpdated = new Date();
         private List<ReportInquiryDetails> listOfDetails = new ArrayList<>();
 
         public Builder() {   }
@@ -117,6 +141,11 @@ public class ReportInquiry {
             return this;
         }
 
+        public Builder lastUpdated(Date lastUpdated) {
+            this.lastUpdated = lastUpdated;
+            return this;
+        }
+
         public Builder listOfDetails(List<ReportInquiryDetails> listOfDetails) {
             this.listOfDetails = listOfDetails;
             return this;
@@ -131,6 +160,7 @@ public class ReportInquiry {
                     email,
                     status,
                     dateCreated,
+                    lastUpdated,
                     listOfDetails);
         }
     }
