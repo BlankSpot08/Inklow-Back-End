@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -24,7 +25,9 @@ public class RoleDataSeeds implements ApplicationRunner {
     }
 
     private void loadRoleDatabaseData() {
-        if (roleService.roleCount() == 0) {
+        try {
+            roleService.roleCount();
+        } catch (BadSqlGrammarException e) {
             String[] roles = {
                     "Admin",
                     "User",

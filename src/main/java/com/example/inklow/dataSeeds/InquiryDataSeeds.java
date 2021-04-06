@@ -5,6 +5,7 @@ import com.example.inklow.service.InquiryService;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,7 +19,9 @@ public class InquiryDataSeeds implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        if (inquiryService.inquiryCount() == 0) {
+        try {
+            inquiryService.inquiryCount();
+        } catch (BadSqlGrammarException e) {
             Inquiry inquiry1 = new Inquiry.Builder()
                     .name("Report/Restriction")
                     .build();

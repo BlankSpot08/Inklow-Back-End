@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -27,7 +28,9 @@ public class UserDataSeeds implements ApplicationRunner {
     }
 
     private void loadUserDatabaseData() {
-        if (userService.userCount() == 0) {
+        try {
+            userService.userCount();
+        } catch (BadSqlGrammarException e) {
             User defaultUser = new User.Builder()
                     .firstName("Arvin")
                     .lastName("Chu")
@@ -50,7 +53,6 @@ public class UserDataSeeds implements ApplicationRunner {
                     .email("arvinchu21@gmail.com")
                     .build();
 
-            userService.handleAccountRegistration(anotherUser);
-        }
+            userService.handleAccountRegistration(anotherUser); }
     }
 }

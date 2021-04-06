@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,7 +32,9 @@ public class RolePermissionDataSeeds implements ApplicationRunner {
     }
 
     private void loadRolePermissionDatabaseData() {
-        if (rolePermissionService.rolePermissionCount() == 0) {
+        try {
+            rolePermissionService.rolePermissionCount();
+        } catch (BadSqlGrammarException e) {
             String[] userRoles = {
                     "CAN_VIEW_USER_PROFILE",
                     "CAN_DELETE_USER_PROFILE",

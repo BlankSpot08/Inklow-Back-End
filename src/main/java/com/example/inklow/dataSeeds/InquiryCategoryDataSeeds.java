@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,7 +31,9 @@ public class InquiryCategoryDataSeeds implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        if (inquiryCategoryService.inquiryCategoryCount() == 0) {
+        try {
+            inquiryCategoryService.inquiryCategoryCount();
+        } catch (BadSqlGrammarException e) {
             String name1 = "Report/Restriction";
 
             Inquiry nameInquiry1 = new Inquiry.Builder()

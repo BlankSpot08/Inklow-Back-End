@@ -49,7 +49,7 @@ public class PermissionDaoImp implements PermissionDao {
 
     @Override
     public Permission addPermission(Permission permission) {
-        String query = "INSERT INTO permissions" +
+        String query = "INSERT INTO permissions " +
                 "(name, description) " +
                 "VALUES (?, ?)";
 

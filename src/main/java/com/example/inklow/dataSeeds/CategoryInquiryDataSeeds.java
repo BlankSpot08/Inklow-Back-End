@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,7 +21,9 @@ public class CategoryInquiryDataSeeds implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        if (categoryInquiryService.questionCategoryCount() == 0) {
+        try {
+            categoryInquiryService.questionCategoryCount();
+        } catch (BadSqlGrammarException e) {
             CategoryInquiry categoryInquiry1 = new CategoryInquiry.Builder()
                     .name("Compromised Account")
                     .build();

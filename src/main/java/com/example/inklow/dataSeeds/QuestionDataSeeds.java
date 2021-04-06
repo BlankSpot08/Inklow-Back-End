@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -25,8 +26,9 @@ public class QuestionDataSeeds implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        if (questionService.questionCount() == 0) {
-
+        try {
+            questionService.questionCount();
+        } catch (BadSqlGrammarException e) {
             String categoryQuestion1 = "Id/Sign-up";
 
             CategoryQuestion categoryQuestion1Object = new CategoryQuestion.Builder()

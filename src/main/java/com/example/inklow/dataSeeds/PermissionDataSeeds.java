@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -24,7 +25,9 @@ public class PermissionDataSeeds implements ApplicationRunner {
     }
 
     private void loadPermissionDatabaseData() {
-        if (permissionService.permissionCount() == 0) {
+        try {
+            permissionService.permissionCount();
+        } catch(BadSqlGrammarException e) {
             String[] permissions = {
                     // User
                     "CAN_VIEW_ALL_USER_PROFILE",

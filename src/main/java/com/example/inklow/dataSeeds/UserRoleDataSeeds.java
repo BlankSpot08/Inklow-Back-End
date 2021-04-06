@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.jdbc.BadSqlGrammarException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -32,7 +33,9 @@ public class UserRoleDataSeeds implements ApplicationRunner {
     }
 
     private void loadUserRoleDatabaseData() {
-        if (userRoleService.userRoleCount() == 0) {
+        try {
+            userRoleService.userRoleCount();
+        } catch (BadSqlGrammarException e) {
             UserRole userRole = loadUserRole("BlankSpot08", "Admin");
         }
     }
